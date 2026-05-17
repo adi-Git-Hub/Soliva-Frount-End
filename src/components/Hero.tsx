@@ -15,24 +15,21 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
   const opacity = useTransform(scrollYProgress, [0.7, 1], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative h-[120vh] w-full overflow-hidden bg-[#F9F6F0]">
+    <section ref={containerRef} className="relative h-[120vh] w-full overflow-hidden bg-transparent">
       {/* Sticky Wrapper for the Cinematic Scene */}
       <div className="sticky top-0 h-screen w-full overflow-hidden z-10">
         
         {/* Fullscreen Cinematic Visual */}
         <div className="absolute inset-0 z-0">
-          <motion.div 
-            style={{ scale: bgScale }}
+          <motion.div
             initial={{ scale: 1.1, filter: "blur(20px)" }}
             animate={{ scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/hero-image.png')" }}
+            style={{ scale: bgScale, backgroundImage: "url('/hero-image.jpg')" }}
           />
-          {/* Atmospheric Layers */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#F9F6F0]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
-          <div className="absolute inset-0 opacity-[0.04] grain pointer-events-none mix-blend-overlay" />
+          {/* Atmospheric overlay — single layer instead of three to cut compositing cost */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent pointer-events-none" />
         </div>
 
         {/* Floating Navbar */}
@@ -67,8 +64,73 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
           </motion.button>
         </nav>
 
+        {/* LEFT EDITORIAL RAIL — dossier metadata, vertical anchor */}
+        <motion.aside
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.4, delay: 1.8 }}
+          className="hidden md:flex absolute left-10 lg:left-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-10 pointer-events-none"
+        >
+          <div className="flex items-center gap-3">
+            <span className="block h-px w-8 bg-[#3A2A1F]/25" />
+            <span className="font-mono text-[8px] tracking-[0.45em] text-[#3A2A1F]/45 uppercase">Dossier 26.01</span>
+          </div>
+          <div className="space-y-6 max-w-[180px]">
+            <div className="space-y-1">
+              <span className="block font-mono text-[7px] tracking-[0.5em] text-[#3A2A1F]/30 uppercase">Edition</span>
+              <span className="block font-display text-base text-[#3A2A1F]/70 italic">Sunwrap 01</span>
+            </div>
+            <div className="space-y-1">
+              <span className="block font-mono text-[7px] tracking-[0.5em] text-[#3A2A1F]/30 uppercase">Origin</span>
+              <span className="block font-mono text-[10px] tracking-[0.2em] text-[#3A2A1F]/55">Delhi · IN</span>
+            </div>
+            <div className="space-y-1">
+              <span className="block font-mono text-[7px] tracking-[0.5em] text-[#3A2A1F]/30 uppercase">Calibrated</span>
+              <span className="block font-mono text-[10px] tracking-[0.2em] text-[#3A2A1F]/55">28.6°N · 77.2°E</span>
+            </div>
+            <div className="pt-2 flex items-center gap-2">
+              <span className="block h-1.5 w-1.5 rounded-full bg-[#F5820D] animate-premium-pulse" />
+              <span className="font-mono text-[8px] tracking-[0.4em] text-[#3A2A1F]/45 uppercase">In Atelier</span>
+            </div>
+          </div>
+        </motion.aside>
+
+        {/* RIGHT EDITORIAL RAIL — live environmental readout */}
+        <motion.aside
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.4, delay: 2 }}
+          className="hidden md:flex absolute right-10 lg:right-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-10 items-end pointer-events-none"
+        >
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[8px] tracking-[0.45em] text-[#3A2A1F]/45 uppercase">Environ · Live</span>
+            <span className="block h-px w-8 bg-[#3A2A1F]/25" />
+          </div>
+          <div className="space-y-6 text-right max-w-[200px]">
+            <div className="space-y-1">
+              <span className="block font-mono text-[7px] tracking-[0.5em] text-[#3A2A1F]/30 uppercase">UV Index</span>
+              <div className="flex items-baseline justify-end gap-2">
+                <span className="font-display text-2xl text-[#3A2A1F]/75 leading-none">09</span>
+                <span className="font-mono text-[8px] tracking-[0.3em] text-[#F5820D]/80 uppercase">Extreme</span>
+              </div>
+            </div>
+            <div className="space-y-1">
+              <span className="block font-mono text-[7px] tracking-[0.5em] text-[#3A2A1F]/30 uppercase">Particulate</span>
+              <span className="block font-mono text-[10px] tracking-[0.2em] text-[#3A2A1F]/55">142 μg/m³ · PM2.5</span>
+            </div>
+            <div className="space-y-1">
+              <span className="block font-mono text-[7px] tracking-[0.5em] text-[#3A2A1F]/30 uppercase">Ambient</span>
+              <span className="block font-mono text-[10px] tracking-[0.2em] text-[#3A2A1F]/55">41°C · 18% RH</span>
+            </div>
+            <div className="pt-2 flex justify-end items-center gap-2">
+              <span className="font-mono text-[8px] tracking-[0.4em] text-[#3A2A1F]/45 uppercase">Threshold</span>
+              <span className="block h-px w-10 bg-gradient-to-r from-transparent via-[#F5820D]/40 to-[#F5820D]/80" />
+            </div>
+          </div>
+        </motion.aside>
+
         {/* Central Cinematic Composition */}
-        <motion.div 
+        <motion.div
           style={{ y: contentY, opacity }}
           className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center"
         >
@@ -87,9 +149,21 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
               <SolivaLogo height={80} />
             </motion.div>
 
+            {/* Pre-title editorial marker */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.4, delay: 0.6 }}
+              className="mb-8 flex items-center gap-4"
+            >
+              <span className="block h-px w-10 bg-[#3A2A1F]/20" />
+              <span className="font-mono text-[8px] tracking-[0.6em] text-[#3A2A1F]/40 uppercase">SS / 26 — Volume 01</span>
+              <span className="block h-px w-10 bg-[#3A2A1F]/20" />
+            </motion.div>
+
             {/* Brand Title with Cinematic Reveal */}
             <div className="mb-10 overflow-hidden">
-              <motion.h1 
+              <motion.h1
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -98,6 +172,20 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
                 SOLIVA
               </motion.h1>
             </div>
+
+            {/* Sub-title editorial counterweight */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.4, delay: 1.4 }}
+              className="mb-2 flex items-center justify-center gap-6 font-mono text-[8px] tracking-[0.5em] text-[#3A2A1F]/35 uppercase"
+            >
+              <span>Sunwrap</span>
+              <span className="block h-1 w-1 rounded-full bg-[#F5820D]/50" />
+              <span>UPF 50+</span>
+              <span className="block h-1 w-1 rounded-full bg-[#F5820D]/50" />
+              <span>Engineered in India</span>
+            </motion.div>
 
             {/* Subtitle / Coming Soon */}
             <motion.div 
@@ -148,28 +236,6 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        .grain::after {
-          content: "";
-          position: absolute;
-          inset: -100%;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-          animation: noise 0.5s infinite steps(2);
-        }
-        @keyframes noise {
-          0% { transform: translate(0,0) }
-          10% { transform: translate(-5%,-5%) }
-          20% { transform: translate(-10%,5%) }
-          30% { transform: translate(5%,-10%) }
-          40% { transform: translate(-5%,15%) }
-          50% { transform: translate(-10%,5%) }
-          60% { transform: translate(15%,0) }
-          70% { transform: translate(0,10%) }
-          80% { transform: translate(-15%,0) }
-          90% { transform: translate(10%,5%) }
-          100% { transform: translate(5%,0) }
-        }
-      `}} />
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -8,6 +8,34 @@ export function VideoSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
+  // Lazy-load the 3.4 MB video. Only attach <source> once the section is
+  // about to enter the viewport, so first-paint never waits for it.
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setShouldLoadVideo(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShouldLoadVideo(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "400px 0px" },
+    );
+    io.observe(sectionRef.current);
+    return () => io.disconnect();
+  }, []);
+
+  // Tell the <video> to actually fetch once we've attached the <source>.
+  useEffect(() => {
+    if (shouldLoadVideo) videoRef.current?.load();
+  }, [shouldLoadVideo]);
   
   const trustItems = [
     "UPF 50+ PROTECTION", "DUAL-LAYER COMFORT", "FULL COVERAGE DESIGN",
@@ -50,15 +78,23 @@ export function VideoSection() {
 
   return (
     <>
-      <section ref={sectionRef} className="relative w-full h-screen overflow-hidden bg-[#F9F6F0] z-0">
+      <section ref={sectionRef} className="relative w-full h-screen overflow-hidden bg-transparent z-0">
         <div ref={textContentRef} className="absolute top-24 left-1/2 -translate-x-1/2 z-20 text-center w-full max-w-2xl px-6 pointer-events-none">
           <span className="text-[10px] tracking-[0.6em] text-[#3A2A1F]/40 uppercase font-medium">— SYSTEM CORE 01</span>
           <h2 className="heading-luxury text-sculpted font-display mt-4 text-4xl md:text-5xl lg:text-7xl text-[#3A2A1F] leading-tight">Built For Real <span className="italic">Daily Protection.</span></h2>
         </div>
 
         <div ref={videoContainerRef} className="absolute inset-0 z-10 w-full h-full overflow-hidden bg-black" style={{ willChange: "transform, border-radius" }}>
-          <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-            <source src="/soliva-logo-anim.mp4" type="video/mp4" />
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            className="w-full h-full object-cover"
+          >
+            {shouldLoadVideo && <source src="/soliva-logo-anim.mp4" type="video/mp4" />}
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
         </div>
@@ -72,8 +108,9 @@ export function VideoSection() {
         </div>
       </section>
       
-      {/* Manual Spacer for VideoSection to ensure background continuity */}
-      <div className="h-[200vh] w-full pointer-events-none bg-[#F9F6F0]" />
+      {/* Manual Spacer for VideoSection — transparent so the global luxury
+          image continues unbroken behind the pinned scroll area. */}
+      <div className="h-[200vh] w-full pointer-events-none bg-transparent" />
     </>
   );
 }

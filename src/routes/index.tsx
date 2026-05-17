@@ -7,7 +7,8 @@ import { CompareSection } from "@/components/CompareSection";
 import { VideoSection } from "@/components/VideoSection";
 import { FinalCTA } from "@/components/FinalCTA";
 import { LoadingPage } from "@/components/LoadingPage";
-import { useEffect, useState, useRef } from "react";
+import { Header } from "@/components/layout/Header";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -25,9 +26,26 @@ export const Route = createFileRoute("/")({
   }),
 });
 
+// Skip the brand loader if the user has already seen it this tab session,
+// so navigating back to "/" doesn't replay the 1.4s reveal.
+const LOADER_SEEN_KEY = "soliva:loader-seen";
+
+function getInitialLoading(): boolean {
+  if (typeof window === "undefined") return true;
+  try {
+    return sessionStorage.getItem(LOADER_SEEN_KEY) !== "1";
+  } catch {
+    return true;
+  }
+}
+
 function Index() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(getInitialLoading);
   const mainRef = useRef<HTMLDivElement>(null);
+  const handleLoadingComplete = useCallback(() => {
+    try { sessionStorage.setItem(LOADER_SEEN_KEY, "1"); } catch { /* ignore */ }
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -82,12 +100,12 @@ function Index() {
 
   return (
     <>
-      {loading && <LoadingPage onComplete={() => setLoading(false)} />}
-      
-      {/* Cinematic Ambient Background - Standardized to Luxury Editorial Canvas */}
-      <div className="fixed inset-0 bg-luxury-editorial mesh-gradient ambient-glow z-[-1]">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none grain" />
-      </div>
+      {loading && <LoadingPage onComplete={handleLoadingComplete} />}
+
+      {/* The global luxury image is rendered on body::before. No additional
+          ambient overlay needed here — fewer composite layers, faster paints. */}
+
+      {!loading && <Header />}
 
       <main
         ref={mainRef}

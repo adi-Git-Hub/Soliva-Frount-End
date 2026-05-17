@@ -8,31 +8,44 @@ export function LoadingPage({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     setMounted(true);
-    const duration = 3000;
+
+    // Short, fixed brand reveal — keep simple to avoid any race-condition
+    // edge cases. Critical images are already preloaded via <link rel=preload>
+    // in __root.tsx, so the page is ready immediately after this fade.
+    const totalReveal = 450;
+    const exitDuration = 300;
+
+    let cancelled = false;
     const startTime = Date.now();
 
-    const updateProgress = () => {
+    const tick = () => {
+      if (cancelled) return;
       const elapsed = Date.now() - startTime;
-      const pct = Math.min(100, (elapsed / duration) * 100);
+      const pct = Math.min(100, (elapsed / totalReveal) * 100);
       setProgress(pct);
-
-      if (pct < 100) {
-        requestAnimationFrame(updateProgress);
-      } else {
-        setTimeout(() => {
-          setExiting(true);
-          setTimeout(onComplete, 1200);
-        }, 500);
-      }
+      if (pct < 100) requestAnimationFrame(tick);
     };
+    requestAnimationFrame(tick);
 
-    requestAnimationFrame(updateProgress);
+    const revealTimer = setTimeout(() => {
+      if (cancelled) return;
+      setProgress(100);
+      setExiting(true);
+      setTimeout(() => {
+        if (!cancelled) onComplete();
+      }, exitDuration);
+    }, totalReveal);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(revealTimer);
+    };
   }, [onComplete]);
 
   return (
     <div
-      className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#F9F6F0] overflow-hidden transition-all duration-[1200ms] cubic-bezier(0.2, 0.8, 0.2, 1) ${
-        exiting ? "opacity-0 scale-[1.05] pointer-events-none" : "opacity-100"
+      className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#F9F6F0] overflow-hidden transition-all duration-300 ease-out ${
+        exiting ? "opacity-0 scale-[1.02] pointer-events-none" : "opacity-100"
       }`}
     >
       {/* Matte Premium Background */}

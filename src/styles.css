@@ -96,14 +96,33 @@
   * {
     border-color: var(--color-border);
   }
-  html,
+  html {
+    min-height: 100%;
+    background-color: var(--luxury-beige);
+  }
   body {
-    background-color: var(--color-background);
+    background: transparent;
     color: var(--color-foreground);
     font-family: var(--font-body);
     overflow-x: hidden;
     width: 100%;
+    min-height: 100vh;
     position: relative;
+  }
+  /* Global luxury background image — rendered ONCE on its own GPU layer via
+     position: fixed + translateZ(0). Avoids background-attachment: fixed,
+     which forces a full-page repaint on every scroll frame. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background-image: url("/luxury-bg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transform: translateZ(0);
+    pointer-events: none;
   }
 }
 
@@ -134,14 +153,78 @@
     linear-gradient(180deg, #3A2A22 0%, #2A1E17 100%);
 }
 
-@utility bg-luxury-editorial {
-  background: 
-    radial-gradient(circle at 5% 5%, #f9f5f0 0%, transparent 45%),
-    radial-gradient(circle at 95% 5%, #f6e9e1 0%, transparent 45%),
-    radial-gradient(circle at 95% 95%, #f4e1d7 0%, transparent 45%),
-    radial-gradient(circle at 5% 95%, #f2d8cc 0%, transparent 45%),
-    #f8f1eb;
+/* Translucent dark veil — lets the global luxury image bleed through faintly
+   while preserving readability for light text designed for dark sections.
+   No backdrop-filter — that forces a separate composite layer for the entire
+   section, which is one of the biggest GPU costs on the page. */
+@utility bg-cinematic-veil {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(123, 106, 95, 0.15), transparent 75%),
+    linear-gradient(180deg, rgba(58, 42, 34, 0.82) 0%, rgba(42, 30, 23, 0.86) 100%);
+}
+
+/* Soft section transition — used between adjacent sections to avoid hard edges. */
+@utility section-blend-top {
   position: relative;
+}
+.section-blend-top::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(255, 245, 240, 0.35), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.section-blend-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, rgba(255, 245, 240, 0.35), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@utility bg-luxury-editorial {
+  position: relative;
+  isolation: isolate;
+  background:
+    /* Warm champagne glow — top-left corner */
+    radial-gradient(ellipse 55% 50% at 0% 0%, rgba(255, 240, 228, 0.55) 0%, transparent 60%),
+    /* Soft blush peach — top-right corner */
+    radial-gradient(ellipse 50% 45% at 100% 5%, rgba(244, 210, 198, 0.42) 0%, transparent 65%),
+    /* Warm peach atmospheric — bottom-right corner */
+    radial-gradient(ellipse 60% 55% at 100% 100%, rgba(237, 199, 174, 0.50) 0%, transparent 65%),
+    /* Champagne cream — bottom-left corner */
+    radial-gradient(ellipse 50% 45% at 0% 100%, rgba(247, 232, 218, 0.45) 0%, transparent 65%),
+    /* Subtle warm center bloom */
+    radial-gradient(ellipse 75% 55% at 50% 50%, rgba(245, 235, 227, 0.30) 0%, transparent 75%),
+    /* Base luxury cream linear gradient */
+    linear-gradient(160deg, #f7f0ea 0%, #f5ebe3 35%, #f3e4da 70%, #efe1d5 100%),
+    #f5ebe3;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      /* Soft curved ribbon — flowing from upper area across */
+      radial-gradient(ellipse 75% 16% at 28% 24%, rgba(255, 240, 228, 0.40) 0%, transparent 78%),
+      /* Diagonal champagne light streak */
+      linear-gradient(118deg, transparent 28%, rgba(255, 242, 230, 0.28) 45%, rgba(244, 210, 198, 0.14) 55%, transparent 72%),
+      /* Warm peach edge curve — right side */
+      radial-gradient(ellipse 22% 55% at 100% 55%, rgba(217, 162, 127, 0.16) 0%, transparent 75%),
+      /* Subtle champagne ribbon — across bottom-right */
+      linear-gradient(252deg, transparent 32%, rgba(237, 199, 174, 0.18) 52%, rgba(255, 240, 228, 0.16) 62%, transparent 80%);
+    filter: blur(60px);
+  }
 }
 
 @utility cinematic-sphere {
@@ -243,24 +326,36 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: 
-      radial-gradient(800px circle at 50% -100px, rgba(245, 130, 13, 0.05), transparent),
-      radial-gradient(600px circle at 100% 80%, rgba(240, 199, 177, 0.1), transparent);
+    background:
+      /* Soft champagne halo — drifting in from the top */
+      radial-gradient(900px circle at 50% -120px, rgba(255, 240, 228, 0.32), transparent),
+      /* Warm peach atmosphere — lower-right accent */
+      radial-gradient(720px circle at 100% 88%, rgba(237, 199, 174, 0.18), transparent),
+      /* Subtle cream wash — lower-left edge */
+      radial-gradient(620px circle at 0% 100%, rgba(247, 232, 218, 0.22), transparent);
     pointer-events: none;
     z-index: 0;
   }
 }
 
 @utility mesh-gradient {
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(20, 40%, 94%, 1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(25, 45%, 92%, 1) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(15, 50%, 95%, 1) 0, transparent 50%), 
-    radial-gradient(at 0% 50%, hsla(25, 30%, 93%, 1) 0, transparent 50%), 
-    radial-gradient(at 100% 50%, hsla(10, 40%, 94%, 1) 0, transparent 50%), 
-    radial-gradient(at 0% 100%, hsla(20, 35%, 92%, 1) 0, transparent 50%), 
-    radial-gradient(at 50% 100%, hsla(30, 40%, 94%, 1) 0, transparent 50%), 
-    radial-gradient(at 100% 100%, hsla(20, 40%, 95%, 1) 0, transparent 50%);
+  background-image:
+    /* Warm ivory wash — top-left */
+    radial-gradient(at 0% 0%, rgba(247, 240, 234, 0.90) 0, transparent 55%),
+    /* Champagne glow — top center */
+    radial-gradient(at 50% 0%, rgba(255, 240, 228, 0.55) 0, transparent 55%),
+    /* Soft blush peach — top-right */
+    radial-gradient(at 100% 0%, rgba(244, 210, 198, 0.42) 0, transparent 55%),
+    /* Cream wash — mid-left */
+    radial-gradient(at 0% 50%, rgba(247, 232, 218, 0.45) 0, transparent 55%),
+    /* Warm peach edge — mid-right */
+    radial-gradient(at 100% 50%, rgba(237, 199, 174, 0.32) 0, transparent 55%),
+    /* Soft ivory — bottom-left */
+    radial-gradient(at 0% 100%, rgba(245, 235, 227, 0.50) 0, transparent 55%),
+    /* Cream center — bottom */
+    radial-gradient(at 50% 100%, rgba(239, 225, 213, 0.55) 0, transparent 55%),
+    /* Warm brown tint — bottom-right accent */
+    radial-gradient(at 100% 100%, rgba(217, 162, 127, 0.22) 0, transparent 55%);
 }
 
 @utility cinematic-vignette {

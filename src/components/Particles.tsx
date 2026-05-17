@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface ParticlesProps {
   count?: number;
@@ -6,18 +6,33 @@ interface ParticlesProps {
 }
 
 export function Particles({ count = 20, className = "" }: ParticlesProps) {
+  // Render nothing on the server and on first client paint. Math.random() in
+  // useMemo produced different values on server vs client, triggering a React
+  // hydration mismatch warning and replacing the entire subtree.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const particles = useMemo(
     () =>
       Array.from({ length: count }).map((_, i) => ({
         id: i,
         left: Math.random() * 100,
-        size: Math.random() * 2 + 1, // Slightly smaller
-        duration: Math.random() * 15 + 10, // Faster duration for less simultaneous particles on screen
+        size: Math.random() * 2 + 1,
+        duration: Math.random() * 15 + 10,
         delay: Math.random() * 10,
         opacity: Math.random() * 0.4 + 0.1,
       })),
     [count],
   );
+
+  if (!mounted) {
+    return (
+      <div
+        className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>

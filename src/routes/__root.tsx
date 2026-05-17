@@ -7,6 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
 
@@ -88,6 +89,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap",
       },
+      // Preload the global luxury background and hero image so the first paint
+      // doesn't wait for them. Served from Cloudflare's edge in production via
+      // the static /public assets.
+      { rel: "preload", as: "image", href: "/luxury-bg.jpg" },
+      { rel: "preload", as: "image", href: "/hero-image.jpg" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -120,6 +126,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <Toaster position="top-center" richColors closeButton />
     </QueryClientProvider>
   );
 }

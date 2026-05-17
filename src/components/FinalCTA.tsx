@@ -11,16 +11,15 @@ export function FinalCTA() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-cinematic-dark grain py-24 md:py-32 perspective-2000"
+      className="relative w-full overflow-hidden bg-cinematic-veil grain py-24 md:py-32 perspective-2000"
     >
-      <Particles count={60} />
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-glow/20 blur-[150px]" />
-        <div className="absolute -bottom-40 left-1/2 h-[400px] w-[1000px] -translate-x-1/2 rounded-[50%] bg-brown/40 blur-[120px]" />
-      </div>
+      <Particles count={24} />
+      {/* Soft orange glow via a single radial gradient instead of two
+          GPU-expensive blurred discs. */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(245,130,13,0.18),transparent_70%)]" />
 
       <div className="relative mx-auto max-w-5xl px-6 text-center">
-        <div className="relative z-10 bg-black/10 backdrop-blur-sm rounded-[3rem] p-12 md:p-20 border border-luxury-beige/10">
+        <div className="relative z-10 bg-black/20 rounded-[3rem] p-12 md:p-20 border border-luxury-beige/10">
           <div className="reveal-on-scroll mx-auto inline-flex text-cream logo-glow">
             <SolivaLogo size={140} />
           </div>
@@ -60,7 +59,7 @@ export function FinalCTA() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="flex-1 rounded-full border border-cream/30 bg-white/5 px-8 py-4 text-sm text-cream placeholder:text-cream/40 outline-none focus:border-orange-glow transition-all backdrop-blur-sm shadow-inner"
+                className="flex-1 rounded-full border border-cream/30 bg-white/10 px-8 py-4 text-sm text-cream placeholder:text-cream/40 outline-none focus:border-orange-glow transition-all shadow-inner"
               />
               <button
                 type="submit"
@@ -70,14 +69,32 @@ export function FinalCTA() {
               </button>
             </form>
           ) : (
-            <div className="reveal-on-scroll mx-auto mt-12 max-w-md rounded-full border border-orange-glow/30 bg-orange-glow/10 px-8 py-4 text-sm tracking-[0.1em] text-cream backdrop-blur-md">
+            <div className="reveal-on-scroll mx-auto mt-12 max-w-md rounded-full border border-orange-glow/30 bg-orange-glow/15 px-8 py-4 text-sm tracking-[0.1em] text-cream">
               You're on the list. Welcome to SOLIVA.
             </div>
           )}
         </div>
 
+        {/* Release dossier — editorial micro-anchor */}
         <div
-          className="reveal-on-scroll mt-24 flex flex-col items-center gap-10 text-[9px] tracking-[0.3em] text-cream/60"
+          className="reveal-on-scroll mx-auto mt-20 grid w-full max-w-3xl grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-8 border-t border-cream/10 pt-10 text-left"
+          style={{ transitionDelay: "700ms" }}
+        >
+          {[
+            { k: "Edition", v: "Sunwrap 01" },
+            { k: "Serial", v: "SLV / 26.001" },
+            { k: "Release", v: "Spring · 2026" },
+            { k: "Atelier", v: "Delhi · IN" },
+          ].map((item) => (
+            <div key={item.k} className="space-y-1.5">
+              <span className="block font-mono text-[7px] tracking-[0.5em] text-cream/35 uppercase">{item.k}</span>
+              <span className="block font-display text-base text-cream/85 italic">{item.v}</span>
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="reveal-on-scroll mt-16 flex flex-col items-center gap-10 text-[9px] tracking-[0.3em] text-cream/60"
           style={{ transitionDelay: "800ms" }}
         >
           <div className="flex gap-10 font-light items-center uppercase font-bold text-shadow-sm">
