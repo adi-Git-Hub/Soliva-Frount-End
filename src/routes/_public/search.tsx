@@ -33,9 +33,7 @@ function SearchRoute() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <header className="mb-10">
-        <h1 className="font-display text-4xl text-foreground md:text-5xl">
-          Search
-        </h1>
+        <h1 className="font-display text-4xl text-foreground md:text-5xl">Search</h1>
         <form onSubmit={submit} className="mt-6 flex max-w-xl gap-2">
           <Input
             placeholder="Search products, categories…"

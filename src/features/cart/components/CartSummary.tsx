@@ -27,18 +27,11 @@ export function CartSummary({ onCheckout }: Props) {
       <div className="border-t border-border/40 pt-3">
         <div className="flex items-baseline justify-between">
           <span className="text-sm text-muted-foreground">Total</span>
-          <span className="font-display text-2xl text-foreground">
-            {formatMoney(subtotal)}
-          </span>
+          <span className="font-display text-2xl text-foreground">{formatMoney(subtotal)}</span>
         </div>
       </div>
 
-      <Button
-        size="lg"
-        className="w-full"
-        onClick={onCheckout}
-        disabled={subtotal === 0}
-      >
+      <Button size="lg" className="w-full" onClick={onCheckout} disabled={subtotal === 0}>
         Checkout
       </Button>
     </div>

@@ -29,9 +29,7 @@ function CartRoute() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <header className="mb-10">
-        <h1 className="font-display text-4xl text-foreground md:text-5xl">
-          Cart
-        </h1>
+        <h1 className="font-display text-4xl text-foreground md:text-5xl">Cart</h1>
       </header>
 
       {lines.length === 0 ? (
@@ -41,7 +39,9 @@ function CartRoute() {
           description="Browse the collection and add a piece you love."
           action={
             <Button asChild>
-              <Link to="/products">Shop all</Link>
+              <Link to="/products" search={{ sort: "newest" }}>
+                Shop all
+              </Link>
             </Button>
           }
         />

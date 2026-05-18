@@ -13,6 +13,7 @@ import { Route as PublicRouteRouteImport } from './routes/_public/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PublicSearchRouteImport } from './routes/_public/search'
+import { Route as PublicProfileRouteImport } from './routes/_public/profile'
 import { Route as PublicCartRouteImport } from './routes/_public/cart'
 import { Route as AuthVerifyEmailRouteImport } from './routes/_auth/verify-email'
 import { Route as AuthResetPasswordRouteImport } from './routes/_auth/reset-password'
@@ -40,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
 const PublicSearchRoute = PublicSearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => PublicRouteRoute,
+} as any)
+const PublicProfileRoute = PublicProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => PublicRouteRoute,
 } as any)
 const PublicCartRoute = PublicCartRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof AuthResetPasswordRoute
   '/verify-email': typeof AuthVerifyEmailRoute
   '/cart': typeof PublicCartRoute
+  '/profile': typeof PublicProfileRoute
   '/search': typeof PublicSearchRoute
   '/categories/$slug': typeof PublicCategoriesSlugRoute
   '/products/$slug': typeof PublicProductsSlugRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof AuthResetPasswordRoute
   '/verify-email': typeof AuthVerifyEmailRoute
   '/cart': typeof PublicCartRoute
+  '/profile': typeof PublicProfileRoute
   '/search': typeof PublicSearchRoute
   '/categories/$slug': typeof PublicCategoriesSlugRoute
   '/products/$slug': typeof PublicProductsSlugRoute
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_auth/verify-email': typeof AuthVerifyEmailRoute
   '/_public/cart': typeof PublicCartRoute
+  '/_public/profile': typeof PublicProfileRoute
   '/_public/search': typeof PublicSearchRoute
   '/_public/categories/$slug': typeof PublicCategoriesSlugRoute
   '/_public/products/$slug': typeof PublicProductsSlugRoute
@@ -148,6 +157,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/verify-email'
     | '/cart'
+    | '/profile'
     | '/search'
     | '/categories/$slug'
     | '/products/$slug'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/verify-email'
     | '/cart'
+    | '/profile'
     | '/search'
     | '/categories/$slug'
     | '/products/$slug'
@@ -178,6 +189,7 @@ export interface FileRouteTypes {
     | '/_auth/reset-password'
     | '/_auth/verify-email'
     | '/_public/cart'
+    | '/_public/profile'
     | '/_public/search'
     | '/_public/categories/$slug'
     | '/_public/products/$slug'
@@ -219,6 +231,13 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof PublicSearchRouteImport
+      parentRoute: typeof PublicRouteRoute
+    }
+    '/_public/profile': {
+      id: '/_public/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof PublicProfileRouteImport
       parentRoute: typeof PublicRouteRoute
     }
     '/_public/cart': {
@@ -316,6 +335,7 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 
 interface PublicRouteRouteChildren {
   PublicCartRoute: typeof PublicCartRoute
+  PublicProfileRoute: typeof PublicProfileRoute
   PublicSearchRoute: typeof PublicSearchRoute
   PublicCategoriesSlugRoute: typeof PublicCategoriesSlugRoute
   PublicProductsSlugRoute: typeof PublicProductsSlugRoute
@@ -325,6 +345,7 @@ interface PublicRouteRouteChildren {
 
 const PublicRouteRouteChildren: PublicRouteRouteChildren = {
   PublicCartRoute: PublicCartRoute,
+  PublicProfileRoute: PublicProfileRoute,
   PublicSearchRoute: PublicSearchRoute,
   PublicCategoriesSlugRoute: PublicCategoriesSlugRoute,
   PublicProductsSlugRoute: PublicProductsSlugRoute,

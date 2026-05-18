@@ -10,13 +10,7 @@ type Props = {
   className?: string;
 };
 
-export function EmptyState({
-  title,
-  description,
-  action,
-  icon,
-  className,
-}: Props) {
+export function EmptyState({ title, description, action, icon, className }: Props) {
   return (
     <div
       className={cn(
@@ -26,9 +20,7 @@ export function EmptyState({
     >
       {icon && <div className="text-muted-foreground">{icon}</div>}
       <h3 className="font-display text-2xl text-foreground">{title}</h3>
-      {description && (
-        <p className="max-w-sm text-sm text-muted-foreground">{description}</p>
-      )}
+      {description && <p className="max-w-sm text-sm text-muted-foreground">{description}</p>}
       {action && <div className="pt-2">{action}</div>}
     </div>
   );

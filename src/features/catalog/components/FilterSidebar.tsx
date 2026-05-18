@@ -10,21 +10,11 @@ type Props = {
   category?: string;
   minPrice?: number;
   maxPrice?: number;
-  onChange: (next: {
-    category?: string;
-    minPrice?: number;
-    maxPrice?: number;
-  }) => void;
+  onChange: (next: { category?: string; minPrice?: number; maxPrice?: number }) => void;
   onClear: () => void;
 };
 
-export function FilterSidebar({
-  category,
-  minPrice,
-  maxPrice,
-  onChange,
-  onClear,
-}: Props) {
+export function FilterSidebar({ category, minPrice, maxPrice, onChange, onClear }: Props) {
   const { data: categories = [] } = useCategories();
 
   return (
@@ -40,9 +30,7 @@ export function FilterSidebar({
               onClick={() => onChange({ category: undefined })}
               className={
                 "text-left text-sm transition-colors " +
-                (!category
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground")
+                (!category ? "text-foreground" : "text-muted-foreground hover:text-foreground")
               }
             >
               All

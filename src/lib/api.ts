@@ -30,11 +30,7 @@ async function request<T>(path: string, init: RequestInit_ = {}): Promise<T> {
 
   if (!res.ok) {
     const payload = await res.json().catch(() => ({}));
-    throw new ApiError(
-      res.status,
-      payload.code ?? "UNKNOWN",
-      payload.message ?? res.statusText,
-    );
+    throw new ApiError(res.status, payload.code ?? "UNKNOWN", payload.message ?? res.statusText);
   }
 
   if (res.status === 204) return undefined as T;
@@ -43,9 +39,7 @@ async function request<T>(path: string, init: RequestInit_ = {}): Promise<T> {
 
 export const api = {
   get: <T>(path: string) => request<T>(path),
-  post: <T>(path: string, body?: unknown) =>
-    request<T>(path, { method: "POST", body }),
-  patch: <T>(path: string, body?: unknown) =>
-    request<T>(path, { method: "PATCH", body }),
+  post: <T>(path: string, body?: unknown) => request<T>(path, { method: "POST", body }),
+  patch: <T>(path: string, body?: unknown) => request<T>(path, { method: "PATCH", body }),
   delete: <T>(path: string) => request<T>(path, { method: "DELETE" }),
 };

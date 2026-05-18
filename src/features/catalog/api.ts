@@ -11,25 +11,17 @@ import {
   searchProducts,
 } from "@/lib/mock-data";
 
-import type {
-  Category,
-  Product,
-  ProductListQuery,
-} from "./schema";
+import type { Category, Product, ProductListQuery } from "./schema";
 
 // ---- Fetchers ----
 
 async function fetchProducts(query: ProductListQuery): Promise<Product[]> {
   if (env.VITE_USE_MOCK_API) {
     await delay();
-    let list = query.category
-      ? productsByCategory(query.category)
-      : [...mockProducts];
+    let list = query.category ? productsByCategory(query.category) : [...mockProducts];
 
-    if (query.minPrice != null)
-      list = list.filter((p) => p.priceCents >= query.minPrice! * 100);
-    if (query.maxPrice != null)
-      list = list.filter((p) => p.priceCents <= query.maxPrice! * 100);
+    if (query.minPrice != null) list = list.filter((p) => p.priceCents >= query.minPrice! * 100);
+    if (query.maxPrice != null) list = list.filter((p) => p.priceCents <= query.maxPrice! * 100);
 
     switch (query.sort) {
       case "price-asc":
@@ -95,8 +87,7 @@ function delay() {
 
 export const catalogKeys = {
   all: ["catalog"] as const,
-  products: (query: ProductListQuery) =>
-    ["catalog", "products", query] as const,
+  products: (query: ProductListQuery) => ["catalog", "products", query] as const,
   product: (slug: string) => ["catalog", "product", slug] as const,
   categories: () => ["catalog", "categories"] as const,
   category: (slug: string) => ["catalog", "category", slug] as const,

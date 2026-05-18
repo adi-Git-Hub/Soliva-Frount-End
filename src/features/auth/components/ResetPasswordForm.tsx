@@ -7,10 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useResetPassword } from "../api";
-import {
-  resetPasswordSchema,
-  type ResetPasswordInput,
-} from "../schema";
+import { resetPasswordSchema, type ResetPasswordInput } from "../schema";
 
 type Props = {
   token: string;
@@ -48,22 +45,13 @@ export function ResetPasswordForm({ token }: Props) {
           autoComplete="new-password"
           {...register("password")}
         />
-        {errors.password && (
-          <p className="text-xs text-destructive">{errors.password.message}</p>
-        )}
+        {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
       </div>
 
       <div className="space-y-1.5">
         <Label htmlFor="confirm">Confirm password</Label>
-        <Input
-          id="confirm"
-          type="password"
-          autoComplete="new-password"
-          {...register("confirm")}
-        />
-        {errors.confirm && (
-          <p className="text-xs text-destructive">{errors.confirm.message}</p>
-        )}
+        <Input id="confirm" type="password" autoComplete="new-password" {...register("confirm")} />
+        {errors.confirm && <p className="text-xs text-destructive">{errors.confirm.message}</p>}
       </div>
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>

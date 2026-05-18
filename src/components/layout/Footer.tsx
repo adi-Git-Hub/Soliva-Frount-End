@@ -30,10 +30,7 @@ export function Footer() {
     <footer className="mt-24 border-t border-border/40 bg-background/60">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-4 md:px-8">
         <div>
-          <Link
-            to="/"
-            className="font-display text-2xl tracking-tight text-foreground"
-          >
+          <Link to="/" className="font-display text-2xl tracking-tight text-foreground">
             Soliva
           </Link>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">

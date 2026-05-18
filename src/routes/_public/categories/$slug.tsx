@@ -41,12 +41,8 @@ function CategoryRoute() {
       <header className="mb-10">
         {category ? (
           <>
-            <h1 className="font-display text-4xl text-foreground md:text-5xl">
-              {category.name}
-            </h1>
-            <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-              {category.description}
-            </p>
+            <h1 className="font-display text-4xl text-foreground md:text-5xl">{category.name}</h1>
+            <p className="mt-2 max-w-xl text-sm text-muted-foreground">{category.description}</p>
           </>
         ) : (
           <Skeleton className="h-12 w-64" />

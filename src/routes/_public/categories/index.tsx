@@ -14,12 +14,8 @@ function CategoriesRoute() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
       <header className="mb-10">
-        <h1 className="font-display text-4xl text-foreground md:text-5xl">
-          Categories
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Browse the collection by category.
-        </p>
+        <h1 className="font-display text-4xl text-foreground md:text-5xl">Categories</h1>
+        <p className="mt-2 text-sm text-muted-foreground">Browse the collection by category.</p>
       </header>
 
       {isLoading ? (

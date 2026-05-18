@@ -43,7 +43,11 @@ function Index() {
   const [loading, setLoading] = useState<boolean>(getInitialLoading);
   const mainRef = useRef<HTMLDivElement>(null);
   const handleLoadingComplete = useCallback(() => {
-    try { sessionStorage.setItem(LOADER_SEEN_KEY, "1"); } catch { /* ignore */ }
+    try {
+      sessionStorage.setItem(LOADER_SEEN_KEY, "1");
+    } catch {
+      /* ignore */
+    }
     setLoading(false);
   }, []);
 
@@ -72,7 +76,7 @@ function Index() {
 
     // Ensure scroll locking is completely disabled
     ScrollTrigger.normalizeScroll(false);
-    
+
     gsap.config({
       force3D: true,
       nullTargetWarn: false,
@@ -93,7 +97,7 @@ function Index() {
         opacity: 1,
         visibility: "visible",
         duration: 1.5,
-        ease: "power2.out"
+        ease: "power2.out",
       });
     }
   }, [loading]);
@@ -110,7 +114,7 @@ function Index() {
       <main
         ref={mainRef}
         className="relative min-h-screen bg-transparent w-full"
-        style={{ opacity: 0, visibility: 'hidden' }}
+        style={{ opacity: 0, visibility: "hidden" }}
       >
         <Hero isRevealed={!loading} />
         <VideoSection />

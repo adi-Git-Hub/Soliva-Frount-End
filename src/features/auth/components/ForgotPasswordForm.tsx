@@ -6,10 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForgotPassword } from "../api";
-import {
-  forgotPasswordSchema,
-  type ForgotPasswordInput,
-} from "../schema";
+import { forgotPasswordSchema, type ForgotPasswordInput } from "../schema";
 
 export function ForgotPasswordForm() {
   const [sent, setSent] = useState(false);
@@ -41,15 +38,8 @@ export function ForgotPasswordForm() {
     <form onSubmit={onSubmit} className="space-y-4" noValidate>
       <div className="space-y-1.5">
         <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          autoComplete="email"
-          {...register("email")}
-        />
-        {errors.email && (
-          <p className="text-xs text-destructive">{errors.email.message}</p>
-        )}
+        <Input id="email" type="email" autoComplete="email" {...register("email")} />
+        {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
       </div>
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>

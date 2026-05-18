@@ -42,36 +42,48 @@ export function TechSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-cinematic-dark grain py-24 md:py-32 perspective-2000"
+      className="relative w-full overflow-hidden bg-luxury-beige py-24 md:py-32 perspective-2000 z-20"
     >
-      <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute left-1/4 top-1/3 h-[500px] w-[500px] rounded-full bg-orange-glow/15 blur-[120px] will-change-transform"
-          style={{ transform: `translate3d(0, ${scrollY * 0.1}px, 0)` }}
+      {/* LUXURY EDITORIAL BACKGROUND SYSTEM */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Drifting Mesh Gradients */}
+        <div 
+          className="absolute top-0 left-[-10%] w-[120%] h-[120%] bg-[radial-gradient(circle_at_20%_30%,rgba(245,130,13,0.04),transparent_50%),radial-gradient(circle_at_80%_20%,rgba(252,231,243,0.5),transparent_60%)] opacity-80 transition-transform duration-1000" 
+          style={{ transform: `translate3d(0, ${scrollY * 0.05}px, 0)` }}
         />
+        <div 
+          className="absolute bottom-[-10%] right-[-10%] w-[120%] h-[120%] bg-[radial-gradient(circle_at_70%_80%,rgba(243,236,226,1),transparent_50%),radial-gradient(circle_at_30%_90%,rgba(245,130,13,0.06),transparent_40%)] opacity-70 transition-transform duration-1000" 
+          style={{ transform: `translate3d(0, ${scrollY * -0.05}px, 0)` }}
+        />
+        <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12 z-10">
         <div className="flex flex-col items-center text-center reveal-on-scroll mb-20">
-          <span className="text-[10px] tracking-[0.3em] text-orange-glow uppercase font-medium text-shadow-sm">
-            — FABRIC TECHNOLOGY
-          </span>
-          <h2 className="font-display mt-6 text-4xl md:text-6xl text-cream leading-[1.2] text-shadow-sm">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-px w-8 bg-brown/20" />
+            <span className="text-[10px] tracking-[0.6em] text-orange-glow uppercase font-black">
+              FABRIC TECHNOLOGY
+            </span>
+            <div className="h-px w-8 bg-brown/20" />
+          </div>
+          
+          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-brown-deep leading-[1.05] tracking-tight">
             Engineered as a
             <br />
-            <span className="italic text-orange-glow">single layer of relief.</span>
+            <span className="italic font-serif text-orange-glow drop-shadow-[0_2px_10px_rgba(245,130,13,0.2)]">single layer of relief.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 items-center">
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 items-center bg-white/10 border border-brown/10 rounded-[3rem] p-8 md:p-16 backdrop-blur-md shadow-[0_40px_100px_-40px_rgba(58,42,34,0.08),inset_0_0_60px_rgba(58,42,34,0.02)]">
           {/* 3D scarf object */}
           <div className="reveal-on-scroll relative flex items-center justify-center min-h-[400px] transform-gpu">
             <div className="absolute inset-0 flex items-center justify-center rotate-slow scale-110 opacity-60">
               <svg viewBox="0 0 400 400" className="h-full w-full max-w-sm">
                 <defs>
                   <linearGradient id="scarf" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#ff7c00" stopOpacity="0.9" />
-                    <stop offset="100%" stopColor="#7a4900" stopOpacity="0.4" />
+                    <stop offset="0%" stopColor="#f5820d" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="#a55300" stopOpacity="0.2" />
                   </linearGradient>
                 </defs>
                 {Array.from({ length: 24 }).map((_, i) => {
@@ -100,9 +112,9 @@ export function TechSection() {
                 transform: `translate3d(0, ${scrollY * -0.05}px, 0) rotateY(${scrollY * 0.05}deg)`,
               }}
             >
-              <div className="h-40 w-40 rounded-full bg-orange-glow/30 blur-3xl animate-pulse" />
+              <div className="h-40 w-40 rounded-full bg-orange-glow/20 blur-[60px] animate-premium-pulse" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-28 w-28 rounded-full border border-orange-glow/20 backdrop-blur-sm" />
+                <div className="h-28 w-28 rounded-full border border-orange-glow/30 bg-white/20 backdrop-blur-md shadow-[0_10px_30px_rgba(245,130,13,0.1)]" />
               </div>
             </div>
 
@@ -115,11 +127,11 @@ export function TechSection() {
                 <path
                   key={i}
                   d={`M ${50 + i * 30} 50 Q 200 ${200 + i * 20} ${350 - i * 30} 450`}
-                  stroke="#ff7c00"
+                  stroke="#f5820d"
                   strokeWidth="0.6"
                   fill="none"
                   strokeDasharray="2 8"
-                  opacity="0.4"
+                  opacity="0.3"
                 >
                   <animate
                     attributeName="stroke-dashoffset"
@@ -133,27 +145,27 @@ export function TechSection() {
           </div>
 
           {/* Tech features */}
-          <div className="flex flex-col space-y-0">
+          <div className="flex flex-col">
             {features.map((f, i) => (
               <div
                 key={f.tag}
-                className="reveal-on-scroll group flex gap-8 border-t border-luxury-beige/10 bg-white/[0.02] hover:bg-white/[0.05] py-8 px-4 transition-all duration-500 light-sweep cursor-default"
+                className="reveal-on-scroll group flex gap-6 border-t border-brown/10 bg-transparent hover:bg-white/40 py-8 px-6 transition-all duration-500 rounded-2xl cursor-default"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                <span className="font-mono text-[10px] text-orange-glow tracking-[0.2em] opacity-80 group-hover:opacity-100 transition-opacity mt-1 text-shadow-sm font-bold">
+                <span className="font-mono text-[10px] text-orange-glow tracking-[0.2em] font-bold mt-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
                   {f.tag}
                 </span>
                 <div className="flex-1">
-                  <h4 className="font-display text-2xl text-cream group-hover:text-orange-glow transition-all duration-500 text-shadow-sm">
+                  <h4 className="font-display text-2xl text-brown-deep group-hover:text-orange-glow transition-all duration-500 tracking-tight">
                     {f.title}
                   </h4>
-                  <p className="mt-3 text-sm text-cream/70 leading-relaxed font-light group-hover:text-cream transition-colors text-shadow-sm">
+                  <p className="mt-2 text-sm text-brown/80 leading-relaxed font-light transition-colors">
                     {f.desc}
                   </p>
                 </div>
               </div>
             ))}
-            <div className="border-t border-luxury-beige/10 w-full" />
+            <div className="border-t border-brown/10 w-full" />
           </div>
         </div>
       </div>

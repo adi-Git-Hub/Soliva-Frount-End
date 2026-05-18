@@ -10,8 +10,7 @@ type Props = {
 };
 
 export function ProductCard({ product, priority }: Props) {
-  const onSale =
-    product.compareAtCents != null && product.compareAtCents > product.priceCents;
+  const onSale = product.compareAtCents != null && product.compareAtCents > product.priceCents;
 
   return (
     <Link
@@ -32,16 +31,12 @@ export function ProductCard({ product, priority }: Props) {
         />
         <div className="absolute left-3 top-3 flex flex-col gap-1.5">
           {onSale && <Badge variant="default">Sale</Badge>}
-          {!product.inStock && (
-            <Badge variant="secondary">Out of stock</Badge>
-          )}
+          {!product.inStock && <Badge variant="secondary">Out of stock</Badge>}
         </div>
       </div>
 
       <div className="mt-3 space-y-1">
-        <h3 className="font-display text-lg leading-tight text-foreground">
-          {product.name}
-        </h3>
+        <h3 className="font-display text-lg leading-tight text-foreground">{product.name}</h3>
         <PriceDisplay
           priceCents={product.priceCents}
           compareAtCents={product.compareAtCents}

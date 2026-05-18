@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // Preload the global luxury background and hero image so the first paint
       // doesn't wait for them. Served from Cloudflare's edge in production via
       // the static /public assets.
-      { rel: "preload", as: "image", href: "/luxury-bg.jpg" },
+      { rel: "preload", as: "image", href: "/new_BG.png" },
       { rel: "preload", as: "image", href: "/hero-image.jpg" },
       {
         rel: "stylesheet",

@@ -21,9 +21,7 @@ export const useCartStore = create<CartState>()(
         if (existing) {
           set({
             lines: get().lines.map((l) =>
-              l.productId === input.productId
-                ? { ...l, quantity: l.quantity + quantity }
-                : l,
+              l.productId === input.productId ? { ...l, quantity: l.quantity + quantity } : l,
             ),
           });
           return;
@@ -31,17 +29,14 @@ export const useCartStore = create<CartState>()(
         const { quantity: _omit, ...rest } = input;
         set({ lines: [...get().lines, { ...rest, quantity }] });
       },
-      remove: (productId) =>
-        set({ lines: get().lines.filter((l) => l.productId !== productId) }),
+      remove: (productId) => set({ lines: get().lines.filter((l) => l.productId !== productId) }),
       setQuantity: (productId, quantity) => {
         if (quantity <= 0) {
           set({ lines: get().lines.filter((l) => l.productId !== productId) });
           return;
         }
         set({
-          lines: get().lines.map((l) =>
-            l.productId === productId ? { ...l, quantity } : l,
-          ),
+          lines: get().lines.map((l) => (l.productId === productId ? { ...l, quantity } : l)),
         });
       },
       clear: () => set({ lines: [] }),
@@ -54,8 +49,7 @@ export const useCartStore = create<CartState>()(
 );
 
 // Selectors
-export const selectCartCount = (s: CartState) =>
-  s.lines.reduce((sum, l) => sum + l.quantity, 0);
+export const selectCartCount = (s: CartState) => s.lines.reduce((sum, l) => sum + l.quantity, 0);
 
 export const selectCartSubtotalCents = (s: CartState) =>
   s.lines.reduce((sum, l) => sum + l.priceCents * l.quantity, 0);

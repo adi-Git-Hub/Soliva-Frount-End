@@ -11,9 +11,7 @@ function RegisterRoute() {
     <div className="space-y-6">
       <header className="space-y-2">
         <h1 className="font-display text-3xl text-foreground">Create account</h1>
-        <p className="text-sm text-muted-foreground">
-          Start your collection. Just a few details.
-        </p>
+        <p className="text-sm text-muted-foreground">Start your collection. Just a few details.</p>
       </header>
 
       <RegisterForm />

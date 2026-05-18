@@ -1,12 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { authClient } from "@/lib/auth-client";
-import type {
-  ForgotPasswordInput,
-  LoginInput,
-  RegisterInput,
-  ResetPasswordInput,
-} from "./schema";
+import type { ForgotPasswordInput, LoginInput, RegisterInput, ResetPasswordInput } from "./schema";
 
 export function useLogin() {
   return useMutation({
@@ -28,8 +23,7 @@ export function useLogout() {
 
 export function useForgotPassword() {
   return useMutation({
-    mutationFn: (input: ForgotPasswordInput) =>
-      authClient.forgotPassword(input.email),
+    mutationFn: (input: ForgotPasswordInput) => authClient.forgotPassword(input.email),
   });
 }
 

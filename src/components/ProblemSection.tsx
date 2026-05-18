@@ -70,16 +70,22 @@ export function ProblemSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full bg-[#F5EFE4] flex items-center justify-center py-32 md:py-48 overflow-hidden"
+      className="relative min-h-screen w-full bg-luxury-beige flex items-center justify-center py-32 md:py-48 overflow-hidden z-10"
     >
+      {/* Background Mesh (Global Consistency) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-0 w-[80%] h-[80%] bg-[radial-gradient(circle_at_70%_20%,rgba(243,236,226,0.8),transparent_70%)] opacity-80" />
+        <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
+      </div>
+
       {/* Editorial Grid Container */}
-      <div className="container mx-auto px-8 md:px-16 lg:px-24 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-24 lg:gap-40 items-center">
+      <div className="container relative mx-auto px-8 md:px-16 lg:px-24 max-w-[90rem] z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 lg:gap-32 items-center">
           {/* LEFT: Large vertical rounded image card */}
           <div className="relative flex justify-center md:justify-end order-2 md:order-1">
             <div
               ref={imageRef}
-              className="relative w-full max-w-[480px] aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-[0_30px_70px_rgba(58,42,31,0.12)] bg-[#E8DED1] will-change-transform"
+              className="relative w-full max-w-[480px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(58,42,34,0.15)] bg-cream will-change-transform border border-brown/10"
             >
               <img
                 src="https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=2000&auto=format&fit=crop"
@@ -87,44 +93,49 @@ export function ProblemSection() {
                 className="h-full w-full object-cover grayscale-[0.3] contrast-[1.05] brightness-[0.95]"
               />
               {/* Subtle Atmospheric Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#3A2A1F]/20 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brown-deep/30 via-transparent to-transparent opacity-60" />
               <div className="absolute inset-0 grain opacity-[0.03] pointer-events-none" />
             </div>
           </div>
 
-          {/* RIGHT: Editorial typography content */}
+          {/* RIGHT: Editorial typography content in a premium translucent panel */}
           <div
-            ref={textContentRef}
-            className="flex flex-col space-y-14 md:space-y-16 order-1 md:order-2"
+            className="flex flex-col space-y-12 md:space-y-14 order-1 md:order-2 bg-white/10 border border-brown/5 rounded-[3rem] p-10 md:p-16 backdrop-blur-md shadow-sm relative overflow-hidden"
           >
-            {/* Small uppercase label */}
-            <div className="overflow-hidden">
-              <span className="block font-mono text-[10px] tracking-[0.6em] text-[#3A2A1F]/40 uppercase">
-                STORYLINE 01 — THE CONTEXT
-              </span>
-            </div>
+            {/* Inner ambient glow for the text panel */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(245,130,13,0.02),transparent_40%),radial-gradient(circle_at_100%_100%,rgba(252,231,243,0.1),transparent_50%)] pointer-events-none" />
 
-            {/* Large serif headline */}
-            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] text-[#3A2A1F] tracking-tight">
-              The city is <br />
-              <span className="italic font-normal">designed</span> to <br />
-              test you.
-            </h2>
+            <div ref={textContentRef} className="relative z-10 space-y-12">
+              {/* Small uppercase label */}
+              <div className="overflow-hidden flex items-center gap-4">
+                <span className="block h-px w-6 bg-brown/20" />
+                <span className="block font-mono text-[10px] tracking-[0.6em] text-orange-glow uppercase font-bold">
+                  STORYLINE 01 — THE CONTEXT
+                </span>
+              </div>
 
-            {/* Supporting paragraph */}
-            <div className="space-y-8 max-w-lg">
-              <p className="font-light text-xl md:text-2xl text-[#3A2A1F]/70 leading-relaxed">
-                Daily exposure to pollution, UV radiation, and trapped heat affects urban comfort
-                more than we realize.
-              </p>
-            </div>
+              {/* Large serif headline */}
+              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-[5rem] leading-[1.05] text-brown-deep tracking-tight">
+                The city is <br />
+                <span className="italic font-normal text-orange-glow opacity-90 drop-shadow-[0_2px_10px_rgba(245,130,13,0.1)]">designed</span> to <br />
+                test you.
+              </h2>
 
-            {/* Bottom faded statement */}
-            <div className="pt-10 md:pt-12 border-t border-[#3A2A1F]/10">
-              <p className="font-mono text-[11px] tracking-[0.25em] uppercase text-[#3A2A1F]/30 italic leading-loose max-w-md">
-                Traditional fabrics were never designed <br />
-                for modern urban conditions.
-              </p>
+              {/* Supporting paragraph */}
+              <div className="space-y-8 max-w-lg">
+                <p className="font-light text-xl md:text-2xl text-brown/80 leading-relaxed">
+                  Daily exposure to pollution, UV radiation, and trapped heat affects urban comfort
+                  more than we realize.
+                </p>
+              </div>
+
+              {/* Bottom faded statement */}
+              <div className="pt-10 md:pt-12 border-t border-brown/10">
+                <p className="font-mono text-[11px] tracking-[0.25em] uppercase text-brown/40 italic leading-loose max-w-md font-bold">
+                  Traditional fabrics were never designed <br />
+                  for modern urban conditions.
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -29,16 +29,14 @@ function VerifyEmailRoute() {
 
       {!token ? (
         <p className="text-sm text-muted-foreground">
-          We've sent a verification link to your inbox. Click it to confirm your
-          email — then come back here to sign in.
+          We've sent a verification link to your inbox. Click it to confirm your email — then come
+          back here to sign in.
         </p>
       ) : verify.isPending ? (
         <p className="text-sm text-muted-foreground">Verifying your email…</p>
       ) : verify.isSuccess ? (
         <>
-          <p className="text-sm text-muted-foreground">
-            Email verified. You can now sign in.
-          </p>
+          <p className="text-sm text-muted-foreground">Email verified. You can now sign in.</p>
           <Button asChild>
             <Link to="/login">Sign in</Link>
           </Button>

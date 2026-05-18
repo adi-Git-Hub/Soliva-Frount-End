@@ -42,7 +42,7 @@ export function StorytellingSection() {
   const panel2ImageScale = useTransform(smoothProgress, [0.5, 1], [0.9, 1]);
 
   return (
-    <section ref={containerRef} className="relative h-[400vh] bg-[#F5EFE4]">
+    <section ref={containerRef} className="relative h-[400vh] bg-luxury-beige">
       <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden">
         <motion.div style={{ x }} className="flex h-full w-[200%]">
           {/* PANEL 1: THE PROBLEM */}
@@ -51,10 +51,10 @@ export function StorytellingSection() {
               {/* Left: Cinematic Urban Visuals */}
               <motion.div
                 style={{ scale: panel1ImageScale }}
-                className="relative h-full w-full overflow-hidden rounded-2xl bg-[#E8DED1] md:h-[80%] shadow-2xl"
+                className="relative h-full w-full overflow-hidden rounded-[3rem] bg-[#E8DED1] md:h-[80%] shadow-[0_40px_100px_-20px_rgba(58,42,34,0.15)] border border-brown/10"
               >
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply opacity-40" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#3A2A1F]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-brown-deep/40 to-transparent" />
 
                 {/* Dust/Atmosphere particles effect */}
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -91,15 +91,18 @@ export function StorytellingSection() {
               {/* Right: Text Content */}
               <motion.div
                 style={{ y: panel1TextY }}
-                className="flex flex-col justify-center max-w-xl"
+                className="flex flex-col justify-center max-w-xl bg-white/10 border border-brown/10 rounded-[3rem] p-10 backdrop-blur-md shadow-sm"
               >
-                <motion.span className="font-mono text-[10px] tracking-[0.3em] text-[#3A2A1F]/60 uppercase mb-6">
-                  THE PROBLEM
-                </motion.span>
-                <motion.h2 className="font-display text-4xl md:text-7xl text-[#3A2A1F] leading-[1.05] mb-8">
-                  Your daily environment is <span className="italic">harsher than you think.</span>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="block h-px w-6 bg-brown/20" />
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-brown/60 uppercase font-bold">
+                    THE PROBLEM
+                  </span>
+                </div>
+                <motion.h2 className="font-display text-4xl md:text-6xl text-brown-deep leading-[1.05] mb-8 tracking-tight">
+                  Your daily environment is <span className="italic text-orange-glow">harsher than you think.</span>
                 </motion.h2>
-                <motion.p className="text-lg text-[#3A2A1F]/70 font-light leading-relaxed mb-12">
+                <motion.p className="text-lg text-brown/80 font-light leading-relaxed mb-12">
                   Daily exposure to pollution, UV rays, dust, and trapped heat affects comfort far
                   more than most people realize.
                 </motion.p>
@@ -108,10 +111,10 @@ export function StorytellingSection() {
                   {PROBLEM_CARDS.map((card, i) => (
                     <motion.div
                       key={card.id}
-                      className="group p-6 rounded-xl border border-[#3A2A1F]/5 bg-white/30 backdrop-blur-sm transition-all hover:bg-white/50"
+                      className="group p-6 rounded-2xl border border-brown/10 bg-white/30 backdrop-blur-sm transition-all hover:bg-white/50 cursor-default"
                     >
-                      <p className="text-xs font-mono text-[#3A2A1F]/40 mb-2">0{card.id}</p>
-                      <h4 className="text-sm font-medium text-[#3A2A1F] tracking-wide uppercase">
+                      <p className="text-xs font-mono text-brown/50 mb-2 font-bold group-hover:text-orange-glow transition-colors">0{card.id}</p>
+                      <h4 className="text-sm font-medium text-brown-deep tracking-wide uppercase">
                         {card.title}
                       </h4>
                     </motion.div>
@@ -122,29 +125,35 @@ export function StorytellingSection() {
           </div>
 
           {/* PANEL 2: WHY SOLIVA */}
-          <div className="relative flex h-full w-1/2 items-center px-6 md:px-24 bg-[#FDFBF7]">
-            <div className="grid h-full w-full grid-cols-1 md:grid-cols-2 items-center gap-12 py-20">
+          <div className="relative flex h-full w-1/2 items-center px-6 md:px-24 bg-transparent">
+            {/* Soft transitioning background gradient connecting panels */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/30 pointer-events-none" />
+            
+            <div className="grid h-full w-full grid-cols-1 md:grid-cols-2 items-center gap-12 py-20 relative z-10">
               {/* Left: Content */}
               <motion.div
                 style={{ y: panel2TextY }}
-                className="flex flex-col justify-center max-w-xl md:order-1 order-2"
+                className="flex flex-col justify-center max-w-xl md:order-1 order-2 bg-white/20 border border-brown/10 rounded-[3rem] p-10 backdrop-blur-xl shadow-sm"
               >
-                <motion.span className="font-mono text-[10px] tracking-[0.3em] text-[#3A2A1F]/60 uppercase mb-6">
-                  WHY SOLIVA
-                </motion.span>
-                <motion.h2 className="font-display text-4xl md:text-7xl text-[#3A2A1F] leading-[1.05] mb-8">
-                  Protection should never <span className="italic">compromise comfort.</span>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="block h-px w-6 bg-brown/20" />
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-brown/60 uppercase font-bold">
+                    WHY SOLIVA
+                  </span>
+                </div>
+                <motion.h2 className="font-display text-4xl md:text-6xl text-brown-deep leading-[1.05] mb-8 tracking-tight">
+                  Protection should never <span className="italic text-orange-glow">compromise comfort.</span>
                 </motion.h2>
-                <motion.p className="text-lg text-[#3A2A1F]/70 font-light leading-relaxed mb-12">
+                <motion.p className="text-lg text-brown/80 font-light leading-relaxed mb-12">
                   SOLIVA is designed to bridge the gap between breathable comfort, lightweight
                   protection, and everyday movement.
                 </motion.p>
 
                 <div className="grid grid-cols-2 gap-6">
                   {WHY_SOLIVA_FEATURES.map((feature, i) => (
-                    <motion.div key={feature.id} className="flex flex-col gap-2">
-                      <div className="h-[1px] w-full bg-[#3A2A1F]/10 mb-2" />
-                      <h4 className="text-sm font-medium text-[#3A2A1F] tracking-wide uppercase">
+                    <motion.div key={feature.id} className="flex flex-col gap-3 group cursor-default">
+                      <div className="h-[2px] w-full bg-brown/10 mb-1 group-hover:bg-orange-glow transition-colors duration-500" />
+                      <h4 className="text-[13px] font-bold text-brown-deep tracking-wide uppercase">
                         {feature.title}
                       </h4>
                     </motion.div>
@@ -159,16 +168,16 @@ export function StorytellingSection() {
                     scale: panel2ImageScale,
                     rotate: useTransform(smoothProgress, [0.5, 1], [-10, 0]),
                   }}
-                  className="relative aspect-square w-full max-w-lg"
+                  className="relative aspect-square w-full max-w-lg bg-white/40 border border-brown/5 rounded-[4rem] shadow-[0_40px_100px_-20px_rgba(58,42,34,0.1)] backdrop-blur-md p-10"
                 >
                   {/* Abstract scarf shape */}
-                  <div className="absolute inset-0 bg-[#3A2A1F]/5 rounded-full blur-3xl animate-premium-pulse" />
+                  <div className="absolute inset-0 bg-orange-glow/5 rounded-full blur-[80px] animate-premium-pulse pointer-events-none" />
 
                   <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-2xl">
                     <defs>
                       <linearGradient id="premium-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#F5EFE4" />
-                        <stop offset="100%" stopColor="#E8DED1" />
+                        <stop offset="0%" stopColor="#f7f3ee" />
+                        <stop offset="100%" stopColor="#e8ded1" />
                       </linearGradient>
                     </defs>
                     <motion.path
@@ -177,9 +186,9 @@ export function StorytellingSection() {
                       transition={{ duration: 2, ease: "easeInOut" }}
                       d="M40,60 C40,60 80,40 120,60 C160,80 160,140 120,160 C80,180 40,160 40,100 Z"
                       fill="url(#premium-gradient)"
-                      stroke="#3A2A1F"
+                      stroke="#3a2a22"
                       strokeWidth="0.2"
-                      opacity="0.8"
+                      opacity="0.9"
                     />
                     {/* Airflow lines */}
                     {[...Array(5)].map((_, i) => (
@@ -187,9 +196,9 @@ export function StorytellingSection() {
                         key={i}
                         d={`M ${60 + i * 15} 40 Q ${100 + i * 10} ${100} ${60 + i * 15} 160`}
                         fill="none"
-                        stroke="#3A2A1F"
-                        strokeWidth="0.1"
-                        opacity="0.2"
+                        stroke="#f5820d"
+                        strokeWidth="0.3"
+                        opacity="0.3"
                         initial={{ pathLength: 0 }}
                         animate={{ pathLength: [0, 1, 0] }}
                         transition={{
@@ -207,9 +216,9 @@ export function StorytellingSection() {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: 1 }}
-                    className="absolute top-0 right-0 p-4 border border-[#3A2A1F]/10 bg-white/40 backdrop-blur-md rounded-full"
+                    className="absolute top-8 right-8 px-5 py-2.5 border border-brown/10 bg-white/60 backdrop-blur-md rounded-full shadow-sm"
                   >
-                    <span className="text-[8px] font-mono tracking-widest text-[#3A2A1F]">
+                    <span className="text-[9px] font-mono tracking-[0.2em] text-brown-deep font-bold">
                       90g WEIGHT
                     </span>
                   </motion.div>
@@ -221,14 +230,14 @@ export function StorytellingSection() {
       </div>
 
       {/* Progress Indicator */}
-      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4">
-        <div className="h-[1px] w-24 bg-[#3A2A1F]/10 relative overflow-hidden">
+      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full border border-brown/10 shadow-sm">
+        <div className="h-[2px] w-24 bg-brown/10 relative overflow-hidden rounded-full">
           <motion.div
             style={{ scaleX: smoothProgress }}
-            className="absolute inset-0 bg-[#3A2A1F] origin-left"
+            className="absolute inset-0 bg-orange-glow origin-left"
           />
         </div>
-        <span className="font-mono text-[9px] tracking-widest text-[#3A2A1F]/60">STORYLINE</span>
+        <span className="font-mono text-[9px] tracking-[0.3em] text-brown-deep font-bold">STORYLINE</span>
       </div>
     </section>
   );

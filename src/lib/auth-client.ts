@@ -85,11 +85,7 @@ class AuthClient {
     return session;
   }
 
-  async register(input: {
-    email: string;
-    password: string;
-    name: string;
-  }): Promise<Session> {
+  async register(input: { email: string; password: string; name: string }): Promise<Session> {
     await sleep(500);
     const session: Session = {
       user: {
@@ -113,10 +109,7 @@ class AuthClient {
     await sleep(400);
   }
 
-  async resetPassword(_input: {
-    token: string;
-    password: string;
-  }): Promise<void> {
+  async resetPassword(_input: { token: string; password: string }): Promise<void> {
     await sleep(400);
   }
 

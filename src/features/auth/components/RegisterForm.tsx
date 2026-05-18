@@ -36,22 +36,13 @@ export function RegisterForm({ redirectTo }: { redirectTo?: string }) {
       <div className="space-y-1.5">
         <Label htmlFor="name">Name</Label>
         <Input id="name" autoComplete="name" {...register("name")} />
-        {errors.name && (
-          <p className="text-xs text-destructive">{errors.name.message}</p>
-        )}
+        {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
       </div>
 
       <div className="space-y-1.5">
         <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          autoComplete="email"
-          {...register("email")}
-        />
-        {errors.email && (
-          <p className="text-xs text-destructive">{errors.email.message}</p>
-        )}
+        <Input id="email" type="email" autoComplete="email" {...register("email")} />
+        {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
       </div>
 
       <div className="space-y-1.5">
@@ -62,9 +53,7 @@ export function RegisterForm({ redirectTo }: { redirectTo?: string }) {
           autoComplete="new-password"
           {...register("password")}
         />
-        {errors.password && (
-          <p className="text-xs text-destructive">{errors.password.message}</p>
-        )}
+        {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
       </div>
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>

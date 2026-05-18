@@ -55,9 +55,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
             >
               <Minus className="h-3 w-3" />
             </Button>
-            <span className="w-8 text-center text-sm tabular-nums">
-              {line.quantity}
-            </span>
+            <span className="w-8 text-center text-sm tabular-nums">{line.quantity}</span>
             <Button
               size="icon"
               variant="ghost"
