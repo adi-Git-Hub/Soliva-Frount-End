@@ -6,7 +6,7 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"],
+    offset: ["start start", "end start"],
   });
 
   // Cinematic parallax transforms
@@ -17,18 +17,18 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
   return (
     <section
       ref={containerRef}
-      className="relative h-[120vh] w-full overflow-hidden bg-luxury-beige"
+      className="relative h-screen w-full overflow-hidden bg-transparent"
     >
       {/* Sticky Wrapper for the Cinematic Scene */}
       <div className="sticky top-0 h-screen w-full overflow-hidden z-10">
         {/* Fullscreen Cinematic Visual */}
-        <div className="absolute inset-0 z-0 bg-cream">
+        <div className="absolute inset-0 z-0 bg-transparent">
           <motion.div
             initial={{ scale: 1.1, filter: "blur(20px)" }}
             animate={{ scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-80"
-            style={{ scale: bgScale, backgroundImage: "url('/hero-image.jpg')" }}
+            className="absolute inset-0 bg-top bg-no-repeat mix-blend-multiply opacity-80"
+            style={{ scale: bgScale, backgroundImage: "url('/hero-image.jpg')", backgroundSize: "165% auto" }}
           />
           {/* Atmospheric overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-luxury-beige/40 via-transparent to-transparent pointer-events-none" />
@@ -46,29 +46,6 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
           >
             <SolivaLogo height={38} />
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.7 }}
-            className="hidden gap-16 text-[9px] tracking-[0.5em] text-brown/60 md:flex font-bold uppercase"
-          >
-            {["Experience", "Technology", "Journal"].map((item) => (
-              <span
-                key={item}
-                className="hover:text-brown-deep transition-colors duration-500 cursor-pointer"
-              >
-                {item}
-              </span>
-            ))}
-          </motion.div>
-          <motion.button
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="rounded-full border border-brown/20 px-8 py-2.5 text-[9px] tracking-[0.4em] text-brown-deep hover:bg-brown hover:text-white transition-all duration-700 uppercase font-bold backdrop-blur-md bg-white/10"
-          >
-            Notify Me
-          </motion.button>
         </nav>
 
         {/* LEFT EDITORIAL RAIL — dossier metadata, vertical anchor */}
@@ -183,7 +160,7 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="mb-16"
+              className="mb-8"
             >
               <SolivaLogo height={80} />
             </motion.div>
@@ -233,14 +210,14 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 2, delay: 1.6 }}
-              className="space-y-16"
+              className="space-y-10"
             >
               <p className="font-body text-[10px] md:text-[11px] font-bold tracking-[1.4em] text-orange-glow uppercase italic">
                 Coming Soon
               </p>
 
               {/* Mission Statement */}
-              <div className="max-w-2xl mx-auto border-t border-brown/20 pt-16">
+              <div className="max-w-2xl mx-auto border-t border-brown/20 pt-10">
                 <p className="font-body text-[11px] md:text-sm font-light tracking-[0.25em] text-brown-deep leading-relaxed uppercase italic drop-shadow-sm">
                   Redefining urban movement <br className="hidden md:block" /> through advanced
                   textile architecture.

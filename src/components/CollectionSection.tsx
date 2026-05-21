@@ -58,7 +58,7 @@ export function CollectionSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-luxury-beige py-24 md:py-32 z-20"
+      className="relative w-full overflow-hidden bg-luxury-beige pt-2 md:pt-3 pb-8 md:pb-10 z-20"
     >
       {/* Background Decorative Elements (Global Consistency) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -69,12 +69,12 @@ export function CollectionSection() {
 
       <div className="relative mx-auto max-w-[90rem] px-6 md:px-12 z-10">
         {/* Header Section */}
-        <div className="flex flex-col items-center text-center mb-20 bg-white/10 border border-brown/5 rounded-[3rem] p-10 backdrop-blur-md shadow-sm">
+        <div className="flex flex-col items-center text-center mb-6 md:mb-8 bg-white/10 border border-brown/5 rounded-[2.5rem] px-8 py-2 md:py-3 backdrop-blur-md shadow-sm">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 mb-6"
+            className="flex items-center gap-4 mb-3"
           >
             <div className="h-px w-8 bg-brown/20" />
             <span className="text-[10px] tracking-[0.6em] text-orange-glow uppercase font-bold">
@@ -88,10 +88,9 @@ export function CollectionSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-display text-5xl md:text-7xl text-brown-deep leading-[1.05] tracking-tight"
+            className="font-display text-2xl md:text-[2.6rem] text-brown-deep leading-[1.1] tracking-tight whitespace-nowrap"
           >
-            Five editions.
-            <br />
+            Five editions.{" "}
             <span className="italic font-serif text-orange-glow drop-shadow-sm">One philosophy.</span>
           </motion.h2>
 
@@ -100,7 +99,7 @@ export function CollectionSection() {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-8 h-[2px] w-24 bg-gradient-to-r from-transparent via-brown/20 to-transparent"
+            className="mt-3 h-[2px] w-16 bg-gradient-to-r from-transparent via-brown/20 to-transparent"
           />
 
           <motion.p
@@ -108,16 +107,14 @@ export function CollectionSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="mt-8 max-w-xl text-sm md:text-lg text-brown/70 leading-relaxed font-light italic"
+            className="mt-3 max-w-md text-xs md:text-sm text-brown/60 leading-relaxed font-light italic"
           >
-            A curated lineup of protective essentials designed for real Indian conditions.
-            <br className="hidden md:block" />
-            Breathable comfort, complete coverage, and elevated everyday wear.
+            Protective essentials, engineered for everyday Indian conditions.
           </motion.p>
         </div>
 
         {/* Collection Cards Grid */}
-        <div className="flex overflow-x-auto pb-12 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:pb-0">
+        <div className="flex overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-5 md:gap-4 md:overflow-visible md:pb-0 md:-mt-4 md:items-end">
           {products.map((p, i) => (
             <motion.article
               key={p.id}
@@ -129,7 +126,7 @@ export function CollectionSection() {
             >
               <div className="relative flex flex-col h-full">
                 {/* Image Container */}
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-brown/10 bg-white/30 backdrop-blur-md transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(58,42,34,0.15)] group-hover:-translate-y-2">
+                <div className="relative aspect-[4/5.2] overflow-hidden rounded-[2.5rem] border border-brown/10 bg-white/30 backdrop-blur-md transition-all duration-700 group-hover:-translate-y-1 group-hover:shadow-[0_20px_50px_-15px_rgba(58,42,34,0.14)] group-hover:ring-1 group-hover:ring-orange-glow/15">
                   {/* Subtle Background Glow */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${p.tone} opacity-40 transition-opacity duration-700 group-hover:opacity-60`}
@@ -137,11 +134,14 @@ export function CollectionSection() {
 
                   {/* Mesh Gradient / Ambient Light */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+                    className="absolute inset-0 opacity-0 transition-opacity duration-1000 group-hover:opacity-100"
                     style={{
                       background: `radial-gradient(circle at 50% 50%, ${p.glow}, transparent 70%)`,
                     }}
                   />
+
+                  {/* Cinematic Ground Shadow — grounds the product, removes floating-PNG feel */}
+                  <div className="absolute left-1/2 -translate-x-1/2 rounded-[50%] bg-brown-deep/30 blur-2xl pointer-events-none bottom-[14%] w-[52%] h-2.5" />
 
                   {/* Edition Badge */}
                   <div className="absolute top-6 left-6 z-20 bg-white/40 border border-white/50 backdrop-blur-sm rounded-2xl p-2.5 shadow-sm">
@@ -156,15 +156,15 @@ export function CollectionSection() {
                   </div>
 
                   {/* Product Image */}
-                  <div className="absolute inset-0 flex items-center justify-center p-8 z-10">
+                  <div className="absolute inset-0 flex items-center justify-center p-3 md:p-4 z-10">
                     <motion.img
                       src={p.image}
                       alt={p.name}
-                      className="w-full h-full object-contain drop-shadow-[0_20px_40px_rgba(58,42,34,0.15)]"
+                      className="w-full h-full object-contain drop-shadow-[0_20px_40px_rgba(58,42,34,0.18)]"
                       initial={{ scale: 0.9, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
                       animate={{
-                        y: [0, -10, 0],
+                        y: [0, -5, 0],
                       }}
                       transition={{
                         duration: 1,
@@ -189,11 +189,11 @@ export function CollectionSection() {
                 </div>
 
                 {/* Content */}
-                <div className="mt-8 text-center md:text-left px-2 bg-white/10 border border-brown/5 rounded-3xl p-6 backdrop-blur-sm">
-                  <h3 className="font-display text-2xl text-brown-deep tracking-tight mb-3 transition-colors duration-500 group-hover:text-orange-glow font-bold">
+                <div className="mt-5 text-center md:text-left px-2 bg-white/10 border border-brown/5 rounded-2xl p-4 backdrop-blur-sm">
+                  <h3 className="font-display text-xl text-brown-deep tracking-tight mb-1.5 transition-colors duration-500 group-hover:text-orange-glow font-bold">
                     {p.name}
                   </h3>
-                  <p className="text-[11px] leading-relaxed text-brown/80 font-medium tracking-wide">
+                  <p className="text-[10.5px] leading-relaxed text-brown/70 font-medium tracking-wide line-clamp-2">
                     {p.desc}
                   </p>
                 </div>
@@ -203,12 +203,12 @@ export function CollectionSection() {
         </div>
 
         {/* Bottom CTA Text */}
-        <div className="mt-24 text-center">
+        <div className="mt-10 text-center">
           <motion.h4
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="font-display text-3xl md:text-4xl text-brown-deep"
+            className="font-display text-3xl md:text-4xl text-brown-deep leading-[1.1] tracking-tight"
           >
             Thoughtfully layered.
             <br />
@@ -218,7 +218,7 @@ export function CollectionSection() {
       </div>
 
       {/* Infinite Marquee Strip */}
-      <div className="mt-20 border-y border-brown/10 bg-white/20 backdrop-blur-md py-10 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+      <div className="mt-8 border-y border-brown/10 bg-white/20 backdrop-blur-md py-6 md:py-8 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
         <div className="flex whitespace-nowrap overflow-hidden">
           <motion.div
             animate={{ x: ["0%", "-50%"] }}

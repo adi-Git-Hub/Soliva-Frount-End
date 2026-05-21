@@ -62,7 +62,7 @@ export function CompareSection() {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-luxury-beige py-24 md:py-32 z-20"
+      className="relative w-full overflow-hidden bg-luxury-beige pt-8 md:pt-10 pb-16 md:pb-20 z-20"
     >
       {/* PREMIUM ATMOSPHERIC TRANSITION ZONE */}
       <div className="absolute top-0 inset-x-0 h-64 pointer-events-none z-30">
@@ -98,13 +98,13 @@ export function CompareSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative bg-white/10 border border-brown/10 rounded-[4rem] p-12 md:px-20 md:py-24 backdrop-blur-md shadow-[0_40px_100px_-40px_rgba(58,42,34,0.1),inset_0_0_80px_rgba(243,236,226,0.3)] overflow-hidden"
+          className="relative bg-white/10 border border-brown/10 rounded-[4rem] p-12 md:px-20 md:pt-10 md:pb-16 backdrop-blur-md shadow-[0_40px_100px_-40px_rgba(58,42,34,0.1),inset_0_0_80px_rgba(243,236,226,0.3)] overflow-hidden"
         >
           {/* Ambient Inset Lighting for Shell */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(245,130,13,0.02),transparent_40%),radial-gradient(circle_at_100%_100%,rgba(252,231,243,0.15),transparent_50%)] pointer-events-none" />
 
           {/* Header Section */}
-          <div className="flex flex-col items-center text-center mb-24 relative z-10">
+          <div className="flex flex-col items-center text-center mb-10 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -315,7 +315,7 @@ export function CompareSection() {
           </div>
 
           {/* Strong Bottom Statement */}
-          <div className="mt-24 text-center space-y-6 relative z-10">
+          <div className="mt-16 text-center space-y-6 relative z-10">
             <motion.h4 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -339,7 +339,7 @@ export function CompareSection() {
       </div>
 
       {/* LUXURY INFINITE MARQUEE */}
-      <div className="mt-32 border-y border-brown/10 bg-white/20 backdrop-blur-sm py-12 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+      <div className="mt-20 border-y border-brown/10 bg-white/20 backdrop-blur-sm py-12 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-luxury-beige to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-luxury-beige to-transparent z-10 pointer-events-none" />
         

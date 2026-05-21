@@ -12,7 +12,7 @@ export function FinalCTA() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-cinematic-veil grain py-24 md:py-28 perspective-2000"
+      className="relative w-full overflow-hidden bg-cinematic-veil grain py-16 md:py-20 perspective-2000"
     >
       <Particles count={24} />
       
@@ -94,7 +94,7 @@ export function FinalCTA() {
 
         {/* Release dossier — editorial micro-anchor */}
         <div
-          className="reveal-on-scroll mx-auto mt-16 grid w-full max-w-3xl grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-8 border-t border-cream/5 pt-10 text-left"
+          className="reveal-on-scroll mx-auto mt-12 grid w-full max-w-3xl grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-8 border-t border-cream/5 pt-10 text-left"
           style={{ transitionDelay: "700ms" }}
         >
           {[

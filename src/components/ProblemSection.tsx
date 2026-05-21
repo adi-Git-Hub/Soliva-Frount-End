@@ -70,7 +70,7 @@ export function ProblemSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen w-full bg-luxury-beige flex items-center justify-center py-32 md:py-48 overflow-hidden z-10"
+      className="relative min-h-screen w-full bg-luxury-beige flex items-center justify-center py-20 md:py-28 overflow-hidden z-10"
     >
       {/* Background Mesh (Global Consistency) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -80,7 +80,7 @@ export function ProblemSection() {
 
       {/* Editorial Grid Container */}
       <div className="container relative mx-auto px-8 md:px-16 lg:px-24 max-w-[90rem] z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 lg:gap-32 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 lg:gap-24 items-center">
           {/* LEFT: Large vertical rounded image card */}
           <div className="relative flex justify-center md:justify-end order-2 md:order-1">
             <div

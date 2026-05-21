@@ -763,4 +763,192 @@
       filter: drop-shadow(0 8px 24px rgba(58, 42, 34, 0.15)) blur(0px);
     }
   }
+
+  /* === Cinematic bridge strip — slow ambient warmth + light streak that
+        sweeps left→right. Two GPU-accelerated translateX layers behind the
+        punchline. Honors prefers-reduced-motion. === */
+  .bridge-strip {
+    position: relative;
+    overflow: hidden;
+  }
+  .bridge-strip::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 60%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(245, 130, 13, 0.06) 50%,
+      transparent 100%
+    );
+    animation: bridgeAmbient 16s ease-in-out infinite;
+    will-change: transform;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bridge-strip::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 25%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.18) 50%,
+      transparent 100%
+    );
+    animation: bridgeStreak 10s linear infinite;
+    will-change: transform;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 1;
+  }
+  @keyframes bridgeAmbient {
+    0%,
+    100% {
+      transform: translateX(-30%);
+    }
+    50% {
+      transform: translateX(110%);
+    }
+  }
+  @keyframes bridgeStreak {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(500%);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bridge-strip::before,
+    .bridge-strip::after {
+      animation: none;
+    }
+  }
+
+  /* Per-word stagger reveal for the bridge-strip punchline. Each .punchline-word
+     receives an inline animation-delay; the rise+blur lift is one-shot on mount
+     (no continuous loop — the strip's amber/streak animations carry ambient
+     motion). */
+  .punchline-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(3px);
+    animation: punchlineRise 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes punchlineRise {
+    0% {
+      opacity: 0;
+      transform: translateY(6px);
+      filter: blur(3px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .punchline-word {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      animation: none;
+    }
+  }
+
+  /* === VideoSection cinematic atmospheric depth ===
+     A soft warm/cream radial gradient drift + two large blurred glow orbs
+     gently float behind the scaling video container. Visible at the section
+     edges while the video is small (scale 0.65); naturally hidden as it
+     scales to 1.0. Pure CSS transforms — GPU-friendly. */
+  .video-ambient-drift {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 25% 30%, rgba(245, 130, 13, 0.12) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 50% at 78% 72%, rgba(247, 243, 238, 0.14) 0%, transparent 65%);
+    animation: videoAmbientDrift 22s ease-in-out infinite;
+    will-change: transform;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+  }
+  @keyframes videoAmbientDrift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(2%, -2%) scale(1.05);
+    }
+  }
+
+  .video-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    will-change: transform;
+  }
+  .video-orb-1 {
+    background: radial-gradient(
+      circle,
+      rgba(245, 130, 13, 0.22) 0%,
+      rgba(245, 130, 13, 0.05) 50%,
+      transparent 75%
+    );
+    animation: videoOrb1Float 28s ease-in-out infinite;
+  }
+  @keyframes videoOrb1Float {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    33% {
+      transform: translate(8%, 12%);
+    }
+    66% {
+      transform: translate(-6%, 16%);
+    }
+  }
+  .video-orb-2 {
+    background: radial-gradient(
+      circle,
+      rgba(247, 243, 238, 0.28) 0%,
+      rgba(247, 243, 238, 0.08) 50%,
+      transparent 75%
+    );
+    animation: videoOrb2Float 32s ease-in-out infinite reverse;
+  }
+  @keyframes videoOrb2Float {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-8%, -10%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .video-ambient-drift,
+    .video-orb-1,
+    .video-orb-2 {
+      animation: none;
+    }
+  }
 }

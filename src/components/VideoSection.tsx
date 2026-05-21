@@ -46,38 +46,40 @@ export function VideoSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (videoContainerRef.current) {
+        // Light cinematic hold — pinned for ~80vh (vs the old 200vh trap) with
+        // a snappier scrub (0.8) and anticipatePin so the magnet engages
+        // smoothly. pinSpacing default (true) lets ScrollTrigger reserve the
+        // exact scroll budget; no manual 200vh spacer needed.
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: "+=200%", 
-            scrub: 1.5,
+            end: "+=80%",
+            scrub: 0.8,
             pin: true,
-            pinSpacing: false, // Switching to manual spacer for better background control
             anticipatePin: 1,
             invalidateOnRefresh: true,
           },
         });
 
-        // Scaling logic remains untouched
+        // Video scale-in / border-radius / border / shadow easing — untouched.
         tl.fromTo(videoContainerRef.current,
           { scale: 0.65, borderRadius: "4rem", border: "2px solid rgba(245,130,13,0.3)", boxShadow: "0 40px 100px rgba(58,42,34,0.15)" },
           { scale: 1, borderRadius: "0rem", border: "0px solid rgba(245,130,13,0)", boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 1, ease: "power2.inOut" }
         );
 
         if (textContentRef.current) {
-          // Move text up more aggressively and fade sooner
-          tl.to(textContentRef.current, { 
-            autoAlpha: 0, 
-            y: -150, 
-            scale: 0.9, 
-            filter: "blur(10px)",
-            duration: 0.7, 
-            ease: "power2.inOut" 
+          // Middle-ground exit — softer than the 200vh-era pin, more present
+          // than the no-pin flow, so it reads cinematic in ~80vh of scrub.
+          tl.to(textContentRef.current, {
+            autoAlpha: 0,
+            y: -100,
+            scale: 0.93,
+            filter: "blur(8px)",
+            duration: 0.7,
+            ease: "power2.inOut"
           }, 0);
         }
-
-        tl.to({}, { duration: 0.5 }); 
       }
     }, sectionRef);
 
@@ -86,10 +88,44 @@ export function VideoSection() {
 
   return (
     <>
+      {/* Amber luxury ribbon — vertical amber-fade gradient blends into Hero
+          above and VideoSection below (no hard borders), with bridge-strip
+          pseudo-layers (warm drift + white light streak) sweeping across as
+          glass shimmer. Glassmorphism via backdrop-blur. */}
+      <div className="bridge-strip relative z-0 w-full bg-gradient-to-b from-orange-glow/5 via-orange-glow/30 to-orange-glow/5 backdrop-blur-sm">
+        <div className="relative z-10 flex items-center justify-center px-6 py-3 md:py-4">
+          <p className="font-display italic text-sm md:text-base text-brown-deep tracking-[0.18em] text-center">
+            {"Built for Indian streets. Refined for modern living."
+              .split(" ")
+              .map((word, i, arr) => (
+                <span
+                  key={i}
+                  className="punchline-word"
+                  style={{ animationDelay: `${i * 90}ms` }}
+                >
+                  {word}
+                  {i < arr.length - 1 ? " " : ""}
+                </span>
+              ))}
+          </p>
+        </div>
+      </div>
+
       <section ref={sectionRef} className="relative w-full h-screen overflow-hidden bg-transparent z-0">
-        <div 
-          ref={textContentRef} 
-          className="absolute top-16 md:top-20 left-1/2 -translate-x-1/2 z-20 text-center w-full max-w-3xl px-6 pointer-events-none"
+        {/* Cinematic atmospheric depth — soft amber drift + two floating glow
+            orbs that peek into the section corners while the video container
+            is scaled in (0.65 → 1.0). Hidden naturally once the video fills
+            the section. z-1 so video (z-10), glass card (z-20) and marquee
+            (z-30) all sit above. */}
+        <div className="absolute inset-0 z-[1] pointer-events-none">
+          <div className="video-ambient-drift" />
+          <div className="video-orb video-orb-1 -top-32 -left-32 w-[32rem] h-[32rem]" />
+          <div className="video-orb video-orb-2 -bottom-32 -right-32 w-[36rem] h-[36rem]" />
+        </div>
+
+        <div
+          ref={textContentRef}
+          className="absolute top-8 md:top-10 left-1/2 -translate-x-1/2 z-20 text-center w-full max-w-3xl px-6 pointer-events-none"
         >
           <div className="bg-white/10 border border-brown/5 rounded-[3rem] p-10 backdrop-blur-md shadow-sm inline-block w-full">
             <span className="text-[10px] tracking-[0.6em] text-orange-glow font-bold uppercase block mb-4">— SYSTEM CORE 01</span>
@@ -125,10 +161,6 @@ export function VideoSection() {
           </div>
         </div>
       </section>
-      
-      {/* Manual Spacer for VideoSection — transparent so the global luxury
-          image continues unbroken behind the pinned scroll area. */}
-      <div className="h-[200vh] w-full pointer-events-none bg-transparent" />
     </>
   );
 }
