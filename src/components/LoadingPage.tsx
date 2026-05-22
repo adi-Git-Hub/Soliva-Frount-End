@@ -54,24 +54,25 @@ export function LoadingPage({ onComplete }: { onComplete: () => void }) {
         <div className="absolute inset-0 opacity-[0.02] mix-blend-multiply grain" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center px-6 w-full max-w-sm">
+      <div className="relative z-10 flex w-full max-w-sm flex-col items-center px-6">
         {/* Logo Fade + Scale */}
         <div
-          className={`mb-16 transition-all duration-[2000ms] cubic-bezier(0.2, 0.8, 0.2, 1) ${mounted ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
+          className={`mb-10 sm:mb-16 transition-all duration-[2000ms] cubic-bezier(0.2, 0.8, 0.2, 1) ${mounted ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
         >
-          <SolivaLogo height={80} />
+          <SolivaLogo height={64} className="sm:hidden" />
+          <SolivaLogo height={80} className="hidden sm:inline-flex" />
         </div>
 
         {/* Branding Reveal */}
-        <div className="flex flex-col items-center overflow-hidden">
+        <div className="flex w-full flex-col items-center overflow-hidden">
           <h1
-            className={`font-display text-4xl md:text-5xl tracking-[0.6em] text-[#3A2A1F] uppercase font-light mb-12 transition-all duration-[2500ms] ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
+            className={`font-display text-3xl sm:text-4xl md:text-5xl tracking-[0.45em] sm:tracking-[0.6em] text-[#3A2A1F] uppercase font-light mb-10 sm:mb-12 transition-all duration-[2500ms] ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
           >
             SOLIVA
           </h1>
 
           <div
-            className={`w-64 flex flex-col items-center transition-opacity duration-[2000ms] delay-500 ${mounted ? "opacity-100" : "opacity-0"}`}
+            className={`w-full max-w-[16rem] flex flex-col items-center transition-opacity duration-[2000ms] delay-500 ${mounted ? "opacity-100" : "opacity-0"}`}
           >
             <div className="flex justify-between w-full text-[9px] tracking-[0.5em] text-[#3A2A1F]/30 uppercase font-light mb-4">
               <span>Initializing</span>

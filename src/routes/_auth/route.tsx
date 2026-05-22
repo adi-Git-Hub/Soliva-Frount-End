@@ -13,16 +13,16 @@ export const Route = createFileRoute("/_auth")({
 
 function AuthLayout() {
   return (
-    <div className="flex min-h-screen flex-col bg-transparent">
+    <div className="flex min-h-screen flex-col bg-transparent safe-x">
       <header className="border-b border-border/40">
-        <div className="mx-auto flex h-16 max-w-7xl items-center px-4 md:px-8">
-          <Link to="/" className="font-display text-2xl tracking-tight text-foreground">
+        <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center px-4 md:px-8">
+          <Link to="/" className="font-display text-xl sm:text-2xl tracking-tight text-foreground">
             Soliva
           </Link>
         </div>
       </header>
 
-      <main className="flex flex-1 items-center justify-center px-4 py-12">
+      <main className="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 sm:py-12 safe-bottom">
         <div className="w-full max-w-sm">
           <Outlet />
         </div>

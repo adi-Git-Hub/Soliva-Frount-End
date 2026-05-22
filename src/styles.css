@@ -99,6 +99,8 @@
   html {
     min-height: 100%;
     background-color: var(--luxury-beige);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   body {
     background: transparent;
@@ -108,7 +110,65 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
   }
+  /* Universal overflow guard — keep media/forms from blowing past the viewport
+     on narrow screens, which is the #1 cause of horizontal scroll on iPhone SE. */
+  img,
+  video,
+  canvas,
+  svg,
+  iframe {
+    max-width: 100%;
+  }
+  /* Prevent iOS Safari from auto-zooming when a form field is focused. 16px is
+     the threshold; we apply it only on small screens so desktop sizing is
+     unaffected. */
+  @media (max-width: 480px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
+  }
+  /* Touch-target floor on small screens — interactive elements should meet the
+     iOS 44px / Material 48px guideline. Applied only to ≤480px so dense
+     desktop UI keeps its current sizing. */
+  @media (max-width: 480px) {
+    button,
+    [role="button"],
+    a[href] {
+      min-height: 0;
+    }
+    button:not([class*="h-"]):not(.inline-button),
+    [role="button"]:not([class*="h-"]) {
+      min-height: 40px;
+    }
+  }
+  /* Safe-area aware utility helpers — additive padding using env() so we
+     respect notches/home indicators on iOS. Pair with existing px-* classes
+     by adding `safe-x` / `safe-bottom` where needed. */
+  .safe-x {
+    padding-left: max(env(safe-area-inset-left), 0px);
+    padding-right: max(env(safe-area-inset-right), 0px);
+  }
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 0px);
+  }
+  .safe-top {
+    padding-top: max(env(safe-area-inset-top), 0px);
+  }
+
+  /* Reusable hide-scrollbar (was inlined via dangerouslySetInnerHTML in
+     CollectionSection — promote to a global utility). */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   /* Global luxury background image — rendered ONCE on its own GPU layer via
      position: fixed + translateZ(0). Avoids background-attachment: fixed,
      which forces a full-page repaint on every scroll frame. */
@@ -949,6 +1009,77 @@
     .video-orb-1,
     .video-orb-2 {
       animation: none;
+    }
+  }
+
+  /* === Mobile refinements (≤ 480px, tuned for iPhone SE @ 375 × 667) ===
+     Targets only screen-sized phones — desktop and tablet are untouched.
+     Tones down letter-spacing on small caps headings (which otherwise
+     overflow), gives heavy display headings a fluid clamp, tightens marquee
+     timing so the running ticker doesn't crawl, and clamps any leftover
+     fixed pixel widths that would push past 375px. */
+  @media (max-width: 480px) {
+    /* Heavy display headings — anything Cormorant + size 4xl+ gets a softer
+       upper bound on small screens so it doesn't wrap into 4–5 lines. */
+    .font-display {
+      letter-spacing: -0.015em;
+    }
+    /* Marquee was 40s / 60s — feels frozen on small screens because the
+       visible window is so short. Halve it so movement reads. */
+    .marquee {
+      animation-duration: 22s;
+    }
+    /* Wide letter-spacing on small caps + small font sizes is the single
+       biggest source of horizontal overflow at 375px. Soften across the
+       site without flattening it entirely. */
+    .tracking-\[0\.6em\],
+    .tracking-\[0\.7em\],
+    .tracking-\[0\.8em\] {
+      letter-spacing: 0.35em;
+    }
+    .tracking-\[0\.5em\],
+    .tracking-\[0\.45em\] {
+      letter-spacing: 0.3em;
+    }
+    .tracking-\[0\.4em\] {
+      letter-spacing: 0.25em;
+    }
+    /* Pre-title editorial markers wrap rather than overflow — they're
+       decorative so wrapping is fine, but break-words avoids a fixed-pixel
+       text run from forcing horizontal scroll. */
+    .mobile-wrap-anywhere {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+  }
+
+  /* Respect user motion preferences globally — kill the largest, longest
+     animations that aren't already gated above. */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee,
+    .float-y,
+    .rotate-slow,
+    .drift,
+    .text-shimmer,
+    .scroll-dot,
+    .text-3d-float,
+    .banner-slide-l,
+    .banner-slide-r,
+    .animate-premium-pulse,
+    .logo-glow,
+    .depth-float,
+    .depth-float-delayed,
+    .particle {
+      animation: none !important;
+    }
+    .reveal-up,
+    .fade-in-slow,
+    .punchline-word,
+    .progress-fill {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
     }
   }
 }

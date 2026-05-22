@@ -11,11 +11,11 @@ export function CartLineItem({ line }: { line: CartLine }) {
   const remove = useCartStore((s) => s.remove);
 
   return (
-    <div className="flex gap-4 border-b border-border/40 py-5">
+    <div className="flex gap-3 sm:gap-4 border-b border-border/40 py-4 sm:py-5">
       <Link
         to="/products/$slug"
         params={{ slug: line.slug }}
-        className="block h-28 w-24 shrink-0 overflow-hidden rounded-xl bg-secondary"
+        className="block h-24 w-20 sm:h-28 sm:w-24 shrink-0 overflow-hidden rounded-xl bg-secondary"
       >
         <img
           src={line.image}
@@ -25,45 +25,45 @@ export function CartLineItem({ line }: { line: CartLine }) {
         />
       </Link>
 
-      <div className="flex flex-1 flex-col justify-between gap-3">
+      <div className="flex min-w-0 flex-1 flex-col justify-between gap-3">
         <div className="flex items-start justify-between gap-3">
           <Link
             to="/products/$slug"
             params={{ slug: line.slug }}
-            className="font-display text-lg leading-tight text-foreground hover:underline"
+            className="font-display text-base sm:text-lg leading-tight text-foreground hover:underline break-words"
           >
             {line.name}
           </Link>
           <button
             type="button"
             onClick={() => remove(line.productId)}
-            className="text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground -m-1.5"
             aria-label={`Remove ${line.name} from cart`}
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="inline-flex items-center rounded-full border border-border">
             <Button
               size="icon"
               variant="ghost"
-              className="h-8 w-8 rounded-full"
+              className="h-10 w-10 rounded-full"
               onClick={() => setQuantity(line.productId, line.quantity - 1)}
               aria-label="Decrease quantity"
             >
-              <Minus className="h-3 w-3" />
+              <Minus className="h-3.5 w-3.5" />
             </Button>
-            <span className="w-8 text-center text-sm tabular-nums">{line.quantity}</span>
+            <span className="w-7 text-center text-sm tabular-nums">{line.quantity}</span>
             <Button
               size="icon"
               variant="ghost"
-              className="h-8 w-8 rounded-full"
+              className="h-10 w-10 rounded-full"
               onClick={() => setQuantity(line.productId, line.quantity + 1)}
               aria-label="Increase quantity"
             >
-              <Plus className="h-3 w-3" />
+              <Plus className="h-3.5 w-3.5" />
             </Button>
           </div>
 

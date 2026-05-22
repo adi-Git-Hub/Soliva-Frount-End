@@ -121,7 +121,7 @@ export function UrbanStorytelling() {
             pin: true,
             scrub: true,
             start: "top top",
-            end: "+=400%",
+            end: "+=250%",
             anticipatePin: 1,
             pinSpacing: false,
             invalidateOnRefresh: true,
@@ -236,7 +236,7 @@ export function UrbanStorytelling() {
     <>
       <section
         ref={sectionRef}
-        className="relative bg-transparent h-screen w-full z-10 overflow-hidden"
+        className="relative bg-transparent w-full z-10 overflow-hidden min-h-screen md:h-screen"
       >
         {/* Animated Background Gradients using Global Colors */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -267,18 +267,18 @@ export function UrbanStorytelling() {
 
         <div
           ref={containerRef}
-          className="flex flex-col md:flex-row md:flex-nowrap md:w-[200%] h-full items-center z-10 relative overflow-visible"
+          className="flex flex-col md:flex-row md:flex-nowrap md:w-[200%] md:h-full items-center z-10 relative overflow-visible"
         >
           {/* PANEL 1 — EDITORIAL GRID PROBLEM */}
-          <div className="relative flex flex-col h-full w-full md:w-1/2 justify-center px-6 md:px-12 lg:px-16 pt-20 pb-16 md:pt-24 md:pb-20 flex-shrink-0 overflow-visible">
-            <div className="flex flex-col w-full gap-y-6 md:gap-y-8 max-w-[1400px] mx-auto relative z-10 overflow-visible">
-              <div className="relative flex flex-col md:flex-row md:items-start justify-between gap-6 md:gap-8 lg:gap-16 overflow-visible bg-white/5 border border-brown/5 rounded-[3rem] p-10 backdrop-blur-md shadow-sm">
-                <div className="max-w-3xl space-y-3 z-10 overflow-visible">
-                  <span className="p1-label block font-mono text-[10px] uppercase tracking-[0.6em] text-brown opacity-70 mb-0.5 font-bold">
+          <div className="relative flex flex-col w-full md:h-full md:w-1/2 justify-center px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 pt-14 pb-10 sm:pt-16 sm:pb-12 md:pt-16 md:pb-12 lg:pt-18 lg:pb-14 flex-shrink-0 overflow-visible">
+            <div className="flex flex-col w-full gap-y-3 sm:gap-y-4 md:gap-y-5 max-w-[1400px] mx-auto relative z-10 overflow-visible">
+              <div className="relative flex flex-col md:flex-row md:items-start justify-between gap-4 sm:gap-5 md:gap-6 lg:gap-10 overflow-visible bg-white/5 border border-brown/5 rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] p-4 sm:p-5 md:p-7 backdrop-blur-md shadow-sm">
+                <div className="max-w-3xl space-y-2 z-10 overflow-visible">
+                  <span className="p1-label block font-mono text-[9px] uppercase tracking-[0.6em] text-brown opacity-70 mb-0.5 font-bold">
                     STRESSOR MAP
                   </span>
                   <div className="relative overflow-visible">
-                    <h2 className="p1-headline font-display text-sculpted text-[clamp(1.8rem,4vw,3.25rem)] leading-[1.1] tracking-[-0.03em] text-brown-deep py-2">
+                    <h2 className="p1-headline font-display text-sculpted text-[clamp(1.4rem,3vw,2.5rem)] leading-[1.1] tracking-[-0.03em] text-brown-deep py-1">
                       Protection is often an{" "}
                       <span className="italic font-normal text-orange-glow drop-shadow-sm">
                         illusion
@@ -287,9 +287,9 @@ export function UrbanStorytelling() {
                     </h2>
                   </div>
                 </div>
-                <div className="md:max-w-[260px] flex flex-col items-start md:items-end gap-3 md:mt-16">
-                  <div className="p1-label hidden md:block h-px w-10 bg-brown/20" />
-                  <p className="p1-subtext text-[13px] md:text-sm font-light text-brown leading-relaxed italic md:text-right">
+                <div className="md:max-w-[220px] flex flex-col items-start md:items-end gap-2 md:mt-10">
+                  <div className="p1-label hidden md:block h-px w-8 bg-brown/20" />
+                  <p className="p1-subtext text-[11px] md:text-xs font-light text-brown leading-relaxed italic md:text-right">
                     Everyday commuting silently exposes people to{" "}
                     <span className="text-orange-glow font-medium">
                       UV rays, pollution, trapped heat,
@@ -309,23 +309,23 @@ export function UrbanStorytelling() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6 items-start">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-2 sm:gap-3 md:gap-4 items-start">
                 {problemPoints.map((point) => (
                   <div
                     key={point.id}
-                    className="problem-card-container flex-shrink-0 space-y-2 group cursor-pointer relative bg-white/20 border border-brown/10 rounded-3xl p-3 backdrop-blur-sm hover:bg-white/40 transition-all duration-500 shadow-sm"
+                    className="problem-card-container flex-shrink-0 space-y-1.5 group cursor-pointer relative bg-white/20 border border-brown/10 rounded-xl sm:rounded-2xl p-2 sm:p-2.5 backdrop-blur-sm hover:bg-white/40 transition-all duration-500 shadow-sm"
                   >
-                    <div className="flex items-center justify-between px-1 mb-2">
-                      <span className="font-mono text-[9px] tracking-[0.35em] text-orange-glow font-bold uppercase">
+                    <div className="flex items-center justify-between px-1 mb-1.5">
+                      <span className="font-mono text-[8px] tracking-[0.35em] text-orange-glow font-bold uppercase">
                         {point.tag}
                       </span>
-                      <span className="font-mono text-[9px] tracking-[0.2em] text-brown/50">
+                      <span className="font-mono text-[8px] tracking-[0.2em] text-brown/50">
                         0{point.id}
                         <span className="text-brown/30"> / 05</span>
                       </span>
                     </div>
                     <div
-                      className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-cream transition-all duration-1000 group-hover:scale-[1.02] perspective-1000 border border-brown/5"
+                      className="relative aspect-[3/4] rounded-xl overflow-hidden bg-cream transition-all duration-1000 group-hover:scale-[1.02] perspective-1000 border border-brown/5"
                     >
                       <img
                         src={point.image}
@@ -335,30 +335,30 @@ export function UrbanStorytelling() {
                         alt={point.title}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-brown-deep/40 via-transparent to-transparent opacity-60" />
-                      <div className="absolute top-2 left-2 h-6 w-6 rounded-full border border-white/30 bg-black/20 flex items-center justify-center text-[9px] font-mono text-white/90 backdrop-blur-md">
+                      <div className="absolute top-1.5 left-1.5 h-5 w-5 rounded-full border border-white/30 bg-black/20 flex items-center justify-center text-[8px] font-mono text-white/90 backdrop-blur-md">
                         0{point.id}
                       </div>
-                      <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[7px] font-mono tracking-[0.25em] text-white/90 uppercase">
+                      <div className="absolute bottom-1.5 left-1.5 right-1.5 flex items-center justify-between text-[6px] font-mono tracking-[0.25em] text-white/90 uppercase">
                         <span>SLV · F26</span>
-                        <span className="block h-px w-4 bg-white/40" />
+                        <span className="block h-px w-3 bg-white/40" />
                         <span>EXHIBIT</span>
                       </div>
                     </div>
-                    <div className="space-y-1.5 px-1 pt-2 transition-opacity duration-500 group-hover:opacity-100 opacity-90">
-                      <h3 className="font-display text-base lg:text-lg text-brown-deep leading-tight tracking-tight">
+                    <div className="space-y-1 px-1 pt-1.5 transition-opacity duration-500 group-hover:opacity-100 opacity-90">
+                      <h3 className="font-display text-sm lg:text-base text-brown-deep leading-tight tracking-tight">
                         {point.title}
                       </h3>
-                      <p className="font-light text-[10px] text-brown leading-relaxed line-clamp-2">
+                      <p className="font-light text-[9px] text-brown leading-relaxed line-clamp-2">
                         {point.desc}
                       </p>
                     </div>
-                    <div className="grid grid-cols-3 gap-1.5 px-1 pt-2 mt-1 border-t border-brown/10">
+                    <div className="grid grid-cols-3 gap-1 px-1 pt-1.5 mt-1 border-t border-brown/10">
                       {point.metrics.map((m) => (
                         <div key={m.k} className="card-metric space-y-0.5">
                           <span className="block font-mono text-[6px] tracking-[0.35em] text-brown/60 uppercase">
                             {m.k}
                           </span>
-                          <span className="block font-mono text-[9px] tracking-[0.05em] text-brown-deep font-bold">
+                          <span className="block font-mono text-[8px] tracking-[0.05em] text-brown-deep font-bold">
                             {m.v}
                           </span>
                         </div>
@@ -368,7 +368,7 @@ export function UrbanStorytelling() {
                 ))}
               </div>
 
-              <div className="p1-label hidden md:flex items-center justify-between pt-4 border-t border-brown/10 px-4">
+              <div className="p1-label hidden md:flex items-center justify-between pt-3 border-t border-brown/10 px-3">
                 <div className="flex items-center gap-3">
                   <span className="block h-1.5 w-1.5 rounded-full bg-orange-glow/60 animate-premium-pulse" />
                   <span className="font-mono text-[9px] tracking-[0.45em] text-brown/60 uppercase font-bold">
@@ -385,8 +385,8 @@ export function UrbanStorytelling() {
           </div>
 
           {/* PANEL 2 — THE RATIONALE */}
-          <div className="relative flex h-full w-full md:w-1/2 items-center bg-transparent px-10 md:px-20 py-24 md:py-0 flex-shrink-0 overflow-visible">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center w-full max-w-[1400px] mx-auto relative z-10 overflow-visible">
+          <div className="relative flex w-full md:h-full md:w-1/2 items-center bg-transparent px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 py-14 sm:py-16 md:py-0 flex-shrink-0 overflow-visible">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-14 items-center w-full max-w-[1400px] mx-auto relative z-10 overflow-visible">
               {/* IMMERSIVE PRODUCT SHOWCASE */}
               <div ref={p2VisualRef} className="relative aspect-square group">
                 <div
@@ -464,13 +464,13 @@ export function UrbanStorytelling() {
                       x: [0, 4, 0],
                     }}
                     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-8 left-8 z-40 p-5 rounded-3xl bg-white/60 border border-white/50 backdrop-blur-xl shadow-[0_20px_40px_rgba(58,42,34,0.08)] pointer-events-none"
+                    className="absolute bottom-6 left-6 z-40 p-3.5 rounded-3xl bg-white/60 border border-white/50 backdrop-blur-xl shadow-[0_20px_40px_rgba(58,42,34,0.08)] pointer-events-none"
                   >
                     <div className="flex flex-col gap-1.5">
                       <span className="font-mono text-[8px] uppercase tracking-widest text-orange-glow font-bold">
                         Certified Protection
                       </span>
-                      <span className="font-display text-2xl text-brown-deep leading-none">UPF 50+</span>
+                      <span className="font-display text-xl text-brown-deep leading-none">UPF 50+</span>
                       <div className="h-px w-full bg-brown/10 my-1.5" />
                       <span className="font-mono text-[8px] text-brown/80 uppercase tracking-tighter">
                         Blocks 98% of UV Rays
@@ -488,37 +488,37 @@ export function UrbanStorytelling() {
                 </div>
               </div>
 
-              <div ref={p2TextRef} className="space-y-10 md:space-y-12 bg-white/10 border border-brown/5 rounded-[3rem] p-10 backdrop-blur-md shadow-sm">
-                <div className="space-y-5 relative">
-                  <span className="block font-mono text-[10px] uppercase tracking-[0.8em] text-orange-glow font-bold">
+              <div ref={p2TextRef} className="space-y-5 sm:space-y-6 md:space-y-8 bg-white/10 border border-brown/5 rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] p-5 sm:p-6 md:p-7 backdrop-blur-md shadow-sm">
+                <div className="space-y-3 relative">
+                  <span className="block font-mono text-[9px] uppercase tracking-[0.8em] text-orange-glow font-bold">
                     02 — THE RATIONALE
                   </span>
-                  <h2 className="p2-headline font-display text-sculpted text-3xl sm:text-4xl md:text-5xl lg:text-[4.25rem] leading-[1.05] tracking-tight text-brown-deep">
+                  <h2 className="p2-headline font-display text-sculpted leading-[1.05] tracking-tight text-brown-deep" style={{ fontSize: "clamp(1.4rem, 4.5vw, 3rem)" }}>
                     Engineered for <br />
                     <span className="italic font-normal text-orange-glow opacity-90">Everyday Exposure.</span>
                   </h2>
-                  <p className="p2-subtext max-w-xl text-[13px] md:text-sm text-brown leading-relaxed font-light italic">
+                  <p className="p2-subtext max-w-xl text-[11px] md:text-xs text-brown leading-relaxed font-light italic">
                     Protection should move naturally with the body — without heat, friction,
                     constant adjustment, or discomfort.
                   </p>
                 </div>
-                <div className="grid grid-cols-1 gap-6 md:gap-8">
+                <div className="grid grid-cols-1 gap-4 md:gap-5">
                   {rationalePoints.map((point, i) => (
                     <div
                       key={i}
-                      className="rationale-point group flex items-start gap-6 cursor-default p-4 rounded-2xl hover:bg-white/30 transition-colors duration-500 border border-transparent hover:border-brown/5"
+                      className="rationale-point group flex items-start gap-4 cursor-default p-3 rounded-xl hover:bg-white/30 transition-colors duration-500 border border-transparent hover:border-brown/5"
                     >
-                      <span className="rationale-number font-mono text-[10px] text-orange-glow/80 pt-1 font-bold">
+                      <span className="rationale-number font-mono text-[9px] text-orange-glow/80 pt-1 font-bold">
                         0{i + 1}
                       </span>
-                      <div className="space-y-2 flex-1">
-                        <h4 className="font-display text-lg md:text-xl text-brown-deep tracking-tight group-hover:text-orange-glow transition-colors duration-500 uppercase font-bold">
+                      <div className="space-y-1.5 flex-1">
+                        <h4 className="font-display text-sm md:text-base text-brown-deep tracking-tight group-hover:text-orange-glow transition-colors duration-500 uppercase font-bold">
                           {point.title}
                         </h4>
-                        <p className="text-[11px] text-brown leading-relaxed font-light max-w-md opacity-80 group-hover:opacity-100 transition-opacity">
+                        <p className="text-[10px] text-brown leading-relaxed font-light max-w-md opacity-80 group-hover:opacity-100 transition-opacity">
                           {point.desc}
                         </p>
-                        <div className="h-[2px] bg-orange-glow/10 w-0 group-hover:w-full transition-all duration-700 mt-2" />
+                        <div className="h-[2px] bg-orange-glow/10 w-0 group-hover:w-full transition-all duration-700 mt-1.5" />
                       </div>
                     </div>
                   ))}
@@ -529,27 +529,37 @@ export function UrbanStorytelling() {
         </div>
 
         {/* LUXURY FOOTER STRIP */}
-        <div className="hidden md:flex fixed bottom-0 left-0 right-0 z-50 w-full px-12 lg:px-16 py-3 items-center justify-between border-t border-brown/10 bg-luxury-beige/95 backdrop-blur-xl shadow-[0_-10px_40px_rgba(58,42,34,0.05)]">
-          <div className="flex items-center gap-10">
-            <div className="opacity-90 hover:opacity-100 transition-opacity duration-500 pr-8 border-r border-brown/10">
-              <SolivaLogo height={20} />
+        <div className="hidden md:flex fixed bottom-0 left-0 right-0 z-50 w-full px-12 lg:px-16 py-4 items-center border-t border-brown/10 bg-luxury-beige/95 backdrop-blur-xl shadow-[0_-10px_40px_rgba(58,42,34,0.05)]">
+          {/* LEFT — System metadata */}
+          <div className="flex flex-1 items-center gap-8 min-w-0">
+            <div className="opacity-90 hover:opacity-100 transition-opacity duration-500 pr-8 border-r border-brown/10 shrink-0">
+              <SolivaLogo height={22} />
             </div>
-            <div className="flex items-center gap-10">
-              <div className="flex flex-col">
-                <span className="font-mono text-[7px] tracking-[0.7em] text-brown-deep/60 uppercase leading-none text-nowrap font-bold">
-                  SYSTEM ARCHIVE // 26.01
+            <div className="flex flex-col gap-1.5 min-w-0">
+              <span className="font-mono text-[10px] tracking-[0.4em] text-brown-deep uppercase leading-none text-nowrap font-bold">
+                SYSTEM ARCHIVE
+                <span className="ml-3 text-orange-glow font-black tracking-[0.25em]">
+                  26.01
                 </span>
-                <span className="font-mono text-[6px] text-brown/60 uppercase mt-1 tracking-widest text-nowrap">
-                  MILAN // PARIS // TOKYO
-                </span>
-              </div>
-              <div className="w-px h-5 bg-brown/15" />
-              <span className="font-mono text-[7px] tracking-[0.7em] text-brown-deep/50 uppercase text-nowrap font-bold">
-                THOUGHTFULLY LAYERED. EFFORTLESSLY WORN.
+              </span>
+              <span className="font-mono text-[8px] tracking-[0.35em] text-brown/65 uppercase leading-none text-nowrap">
+                MILAN · PARIS · TOKYO
               </span>
             </div>
           </div>
-          <div className="perspective-2000">
+
+          {/* CENTER — Philosophy anchor */}
+          <div className="hidden lg:flex flex-1 justify-center px-6">
+            <p className="font-display text-base xl:text-lg text-brown-deep leading-none tracking-tight text-nowrap">
+              Thoughtfully layered.{" "}
+              <span className="italic text-orange-glow drop-shadow-sm">
+                Effortlessly worn.
+              </span>
+            </p>
+          </div>
+
+          {/* RIGHT — CTA */}
+          <div className="perspective-2000 flex flex-1 justify-end">
             <motion.button
               onClick={() => navigate({ to: "/products", search: { sort: "newest" } })}
               style={{
@@ -591,8 +601,9 @@ export function UrbanStorytelling() {
         </div>
       </section>
 
-      {/* Spacer */}
-      <div className="h-[400vh] w-full pointer-events-none bg-transparent relative overflow-hidden" />
+      {/* Spacer — only reserved on desktop where the GSAP pin consumes scroll.
+          Sized to match the ScrollTrigger end (+=250%). */}
+      <div className="hidden md:block md:h-[250vh] w-full pointer-events-none bg-transparent relative overflow-hidden" />
     </>
   );
 }

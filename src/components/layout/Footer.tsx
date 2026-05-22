@@ -27,9 +27,9 @@ const groups: { title: string; links: { to: string; label: string }[] }[] = [
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-border/40 bg-background/60">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-4 md:px-8">
-        <div>
+    <footer className="mt-16 sm:mt-24 border-t border-border/40 bg-background/60 safe-x">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-10 sm:gap-10 sm:py-14 md:grid-cols-4 md:py-16 md:px-8">
+        <div className="col-span-2 md:col-span-1">
           <Link to="/" className="font-display text-2xl tracking-tight text-foreground">
             Soliva
           </Link>
@@ -48,7 +48,7 @@ export function Footer() {
                 <li key={l.to}>
                   <Link
                     to={l.to}
-                    className="text-sm text-foreground/80 transition-colors hover:text-foreground"
+                    className="inline-flex min-h-[32px] items-center text-sm text-foreground/80 transition-colors hover:text-foreground"
                   >
                     {l.label}
                   </Link>
@@ -60,7 +60,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-border/40">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 text-xs text-muted-foreground md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-2 px-4 py-5 text-[11px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:text-xs md:px-8 md:py-6 safe-bottom">
           <span>© {new Date().getFullYear()} Soliva. All rights reserved.</span>
           <span>Made with care</span>
         </div>

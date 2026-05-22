@@ -94,22 +94,29 @@ export function Header() {
       animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "sticky top-0 z-40 w-full transition-all duration-500 ease-in-out border-b border-border/40",
-        isScrolled 
-          ? "h-14 bg-background/90 backdrop-blur-xl shadow-sm" 
-          : "h-20 bg-background/60 backdrop-blur-md"
+        // Glassmorphism shell: frosted translucent surface, saturated backdrop,
+        // hairline white inset highlight, soft warm border, atmospheric shadow.
+        // The ::before / ::after layers below add the sheen + bottom highlight.
+        "group/header sticky top-0 z-40 w-full transition-all duration-500 ease-in-out safe-x",
+        "border-b backdrop-saturate-150",
+        "before:pointer-events-none before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:via-white/5 before:to-transparent before:opacity-90",
+        "after:pointer-events-none after:absolute after:inset-x-6 after:bottom-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-white/40 after:to-transparent",
+        "shadow-[0_8px_24px_-12px_rgba(58,42,34,0.18),inset_0_1px_0_rgba(255,255,255,0.45)]",
+        isScrolled
+          ? "h-14 bg-luxury-beige/55 backdrop-blur-2xl border-white/30"
+          : "h-16 sm:h-20 bg-luxury-beige/35 backdrop-blur-xl border-white/20"
       )}
     >
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-4 md:px-8">
+      <div className="relative mx-auto flex h-full max-w-7xl items-center justify-between gap-2 px-3 sm:px-4 md:px-8">
         {/* Mobile menu */}
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center md:hidden">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="hover:bg-transparent" aria-label="Open menu">
+              <Button variant="ghost" size="icon" className="h-10 w-10 hover:bg-transparent" aria-label="Open menu">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-72 bg-background/95 backdrop-blur-2xl">
+            <SheetContent side="left" className="w-[min(20rem,85vw)] bg-background/95 backdrop-blur-2xl">
               <div className="mt-8 flex flex-col">
                 <p className="px-3 pb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground opacity-60">
                   Navigation
@@ -187,8 +194,15 @@ export function Header() {
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="flex-shrink-0"
         >
-          <Link to="/" className="inline-flex items-center">
-            <SolivaLogo size={isScrolled ? 90 : 110} className="transition-all duration-500" />
+          <Link to="/" className="inline-flex items-center" aria-label="Soliva — home">
+            <SolivaLogo
+              height={isScrolled ? 28 : 32}
+              className="transition-all duration-500 md:hidden"
+            />
+            <SolivaLogo
+              size={isScrolled ? 90 : 110}
+              className="hidden transition-all duration-500 md:inline-flex"
+            />
           </Link>
         </motion.div>
 
@@ -218,18 +232,18 @@ export function Header() {
         </nav>
 
         {/* Right actions (icons for quick access) */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 sm:gap-3">
           <div className="hidden md:block">
             <ApiStatusDot />
           </div>
-          
+
           {/* Search overlay */}
           <div className="relative flex items-center">
             <AnimatePresence>
               {searchOpen && (
                 <motion.form
                   initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: isScrolled ? 160 : 200, opacity: 1 }}
+                  animate={{ width: "min(60vw, 200px)", opacity: 1 }}
                   exit={{ width: 0, opacity: 0 }}
                   onSubmit={onSearch}
                   className="absolute right-0 flex items-center gap-1 overflow-hidden"
@@ -258,7 +272,7 @@ export function Header() {
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSearchOpen(true)}
-                className="rounded-full p-2 text-foreground/70 hover:bg-accent/40 hover:text-foreground transition-all"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-white/40 hover:backdrop-blur-md hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] hover:text-foreground transition-all"
                 aria-label="Search"
               >
                 <Search className="h-[18px] w-[18px]" />
@@ -272,7 +286,7 @@ export function Header() {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="rounded-full p-2 text-foreground/70 hover:bg-accent/40 hover:text-foreground transition-all flex items-center justify-center overflow-hidden"
+                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full text-foreground/70 hover:bg-white/40 hover:backdrop-blur-md hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] hover:text-foreground transition-all"
                 aria-label="Account"
               >
                 {session ? (
@@ -284,7 +298,12 @@ export function Header() {
                 )}
               </motion.button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-64 rounded-[2rem] bg-background/95 backdrop-blur-2xl border-border/40 shadow-2xl p-3 overflow-hidden">
+            <DropdownMenuContent
+              align="end"
+              sideOffset={8}
+              collisionPadding={12}
+              className="w-[min(18rem,calc(100vw-1.5rem))] rounded-[2rem] bg-background/95 backdrop-blur-2xl border-border/40 shadow-2xl p-3 overflow-hidden"
+            >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(245,130,13,0.03),transparent_40%)] pointer-events-none" />
               
               {session ? (
@@ -357,7 +376,7 @@ export function Header() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button variant="ghost" size="icon" asChild className="relative rounded-full hover:bg-accent/40" aria-label="Cart">
+            <Button variant="ghost" size="icon" asChild className="relative h-10 w-10 rounded-full hover:bg-white/40 hover:backdrop-blur-md hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]" aria-label="Cart">
               <Link to="/cart">
                 <ShoppingBag className="h-[18px] w-[18px] text-foreground/70" />
                 {cartCount > 0 && (

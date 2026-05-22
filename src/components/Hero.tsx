@@ -37,23 +37,26 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
         </div>
 
         {/* Floating Navbar */}
-        <nav className="absolute top-0 inset-x-0 z-20 flex items-center justify-between px-10 py-12 md:px-20">
+        <nav className="absolute top-0 inset-x-0 z-20 flex items-center justify-between px-5 py-6 sm:px-10 sm:py-10 md:px-20 md:py-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
             className="group cursor-pointer"
           >
-            <SolivaLogo height={38} />
+            <SolivaLogo height={28} className="sm:hidden" />
+            <SolivaLogo height={38} className="hidden sm:inline-flex" />
           </motion.div>
         </nav>
 
-        {/* LEFT EDITORIAL RAIL — dossier metadata, vertical anchor */}
+        {/* LEFT EDITORIAL RAIL — dossier metadata, vertical anchor.
+            Only rendered when the viewport is wide enough to not collide with
+            the centred H1 (which is ~830px wide at its 160px cap). */}
         <motion.aside
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.4, delay: 1.8 }}
-          className="hidden md:flex absolute left-10 lg:left-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-8 pointer-events-none bg-white/10 border border-brown/10 rounded-[2rem] p-8 backdrop-blur-md shadow-sm"
+          className="hidden min-[1440px]:flex absolute left-10 lg:left-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-8 pointer-events-none bg-white/10 border border-brown/10 rounded-[2rem] p-8 backdrop-blur-md shadow-sm"
         >
           <div className="flex items-center gap-3">
             <span className="block h-px w-8 bg-brown/30" />
@@ -100,7 +103,7 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.4, delay: 2 }}
-          className="hidden md:flex absolute right-10 lg:right-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-8 items-end pointer-events-none bg-white/10 border border-brown/10 rounded-[2rem] p-8 backdrop-blur-md shadow-sm"
+          className="hidden min-[1440px]:flex absolute right-10 lg:right-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-8 items-end pointer-events-none bg-white/10 border border-brown/10 rounded-[2rem] p-8 backdrop-blur-md shadow-sm"
         >
           <div className="flex items-center gap-3">
             <span className="font-mono text-[8px] tracking-[0.45em] text-brown/60 uppercase font-bold">
@@ -148,21 +151,22 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
         {/* Central Cinematic Composition */}
         <motion.div
           style={{ y: contentY, opacity }}
-          className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center"
+          className="relative z-10 h-full flex flex-col items-center justify-center px-4 sm:px-6 text-center"
         >
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center"
+            className="flex w-full flex-col items-center"
           >
             {/* Logo Mark */}
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="mb-8"
+              className="mb-6 sm:mb-8"
             >
-              <SolivaLogo height={80} />
+              <SolivaLogo height={56} className="sm:hidden" />
+              <SolivaLogo height={80} className="hidden sm:inline-flex" />
             </motion.div>
 
             {/* Pre-title editorial marker */}
@@ -170,22 +174,23 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.4, delay: 0.6 }}
-              className="mb-8 flex items-center gap-4 bg-white/20 px-6 py-2 rounded-full backdrop-blur-md border border-brown/10"
+              className="mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4 bg-white/20 px-4 sm:px-6 py-2 rounded-full backdrop-blur-md border border-brown/10"
             >
-              <span className="block h-px w-6 bg-brown/30" />
-              <span className="font-mono text-[8px] tracking-[0.6em] text-brown-deep uppercase font-bold">
+              <span className="block h-px w-5 sm:w-6 bg-brown/30" />
+              <span className="font-mono text-[7px] sm:text-[8px] tracking-[0.4em] sm:tracking-[0.6em] text-brown-deep uppercase font-bold">
                 SS / 26 — Volume 01
               </span>
-              <span className="block h-px w-6 bg-brown/30" />
+              <span className="block h-px w-5 sm:w-6 bg-brown/30" />
             </motion.div>
 
             {/* Brand Title with Cinematic Reveal */}
-            <div className="mb-10 overflow-hidden">
+            <div className="mb-8 sm:mb-10 w-full overflow-hidden">
               <motion.h1
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] tracking-[0.3em] uppercase font-light leading-none text-brown-deep drop-shadow-xl"
+                className="font-display tracking-[0.18em] sm:tracking-[0.22em] lg:tracking-[0.28em] xl:tracking-[0.3em] uppercase font-light leading-none text-brown-deep drop-shadow-xl"
+                style={{ fontSize: "clamp(2.5rem, 11vw, 10rem)" }}
               >
                 SOLIVA
               </motion.h1>
@@ -196,7 +201,7 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.4, delay: 1.4 }}
-              className="mb-2 flex items-center justify-center gap-6 font-mono text-[8px] tracking-[0.5em] text-brown/70 uppercase font-bold"
+              className="mb-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:gap-x-6 font-mono text-[7px] sm:text-[8px] tracking-[0.3em] sm:tracking-[0.5em] text-brown/70 uppercase font-bold"
             >
               <span>Sunwrap</span>
               <span className="block h-1.5 w-1.5 rounded-full bg-orange-glow/60" />
@@ -210,15 +215,15 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 2, delay: 1.6 }}
-              className="space-y-10"
+              className="space-y-8 sm:space-y-10"
             >
-              <p className="font-body text-[10px] md:text-[11px] font-bold tracking-[1.4em] text-orange-glow uppercase italic">
+              <p className="font-body text-[9px] sm:text-[10px] md:text-[11px] font-bold tracking-[0.8em] sm:tracking-[1.4em] text-orange-glow uppercase italic">
                 Coming Soon
               </p>
 
               {/* Mission Statement */}
-              <div className="max-w-2xl mx-auto border-t border-brown/20 pt-10">
-                <p className="font-body text-[11px] md:text-sm font-light tracking-[0.25em] text-brown-deep leading-relaxed uppercase italic drop-shadow-sm">
+              <div className="mx-auto max-w-2xl border-t border-brown/20 pt-8 sm:pt-10">
+                <p className="font-body text-[10px] sm:text-[11px] md:text-sm font-light tracking-[0.18em] sm:tracking-[0.25em] text-brown-deep leading-relaxed uppercase italic drop-shadow-sm">
                   Redefining urban movement <br className="hidden md:block" /> through advanced
                   textile architecture.
                 </p>
@@ -228,14 +233,14 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
         </motion.div>
 
         {/* Bottom Details */}
-        <div className="absolute bottom-12 inset-x-12 z-20 flex justify-between items-end pointer-events-none px-4 md:px-8">
+        <div className="absolute bottom-6 inset-x-4 z-20 flex flex-col items-center gap-3 pointer-events-none sm:bottom-12 sm:inset-x-12 sm:flex-row sm:items-end sm:justify-between sm:gap-0 sm:px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 2.2 }}
-            className="flex flex-col gap-3"
+            className="hidden sm:flex flex-col gap-3"
           >
-            <span className="font-mono text-[8px] tracking-[0.5em] text-brown/60 uppercase font-bold">
+            <span className="font-mono text-[8px] tracking-[0.4em] sm:tracking-[0.5em] text-brown/60 uppercase font-bold">
               SYSTEM ARCHIVE // 26.01
             </span>
             <div className="w-16 h-[2px] bg-brown/20" />
@@ -245,15 +250,15 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 2.2 }}
-            className="flex items-center gap-6 bg-white/10 px-6 py-2 rounded-full backdrop-blur-sm border border-brown/5"
+            className="flex items-center gap-4 bg-white/10 px-4 py-2 sm:gap-6 sm:px-6 rounded-full backdrop-blur-sm border border-brown/5"
           >
-            <span className="font-mono text-[8px] tracking-[0.5em] text-brown-deep uppercase font-bold">
+            <span className="font-mono text-[7px] sm:text-[8px] tracking-[0.35em] sm:tracking-[0.5em] text-brown-deep uppercase font-bold">
               SCROLL TO EXPLORE
             </span>
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-[2px] h-6 bg-gradient-to-b from-orange-glow to-transparent rounded-full"
+              className="w-[2px] h-5 sm:h-6 bg-gradient-to-b from-orange-glow to-transparent rounded-full"
             />
           </motion.div>
         </div>

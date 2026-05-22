@@ -12,7 +12,7 @@ export function FinalCTA() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-cinematic-veil grain py-16 md:py-20 perspective-2000"
+      className="relative w-full overflow-hidden bg-cinematic-veil grain py-12 sm:py-14 lg:py-16 xl:py-20 perspective-2000"
     >
       <Particles count={24} />
       
@@ -22,22 +22,24 @@ export function FinalCTA() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(42,30,23,0.4)_100%)] opacity-60" />
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-6 text-center">
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 text-center">
         {/* Main Panel */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 bg-black/15 rounded-[3rem] p-10 md:p-16 border border-luxury-beige/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.4)]"
+          className="relative z-10 rounded-[2rem] sm:rounded-[3rem] border border-luxury-beige/10 bg-black/15 p-6 sm:p-9 lg:p-12 xl:p-16 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.4)]"
         >
           <div className="reveal-on-scroll mx-auto inline-flex text-cream/90">
-            <SolivaLogo size={110} />
+            <SolivaLogo size={84} className="sm:hidden" />
+            <SolivaLogo size={110} className="hidden sm:inline-flex" />
           </div>
 
           <h2
-            className="reveal-on-scroll font-display mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.05em] text-cream leading-[1.05] will-change-transform"
+            className="reveal-on-scroll font-display mt-6 sm:mt-8 tracking-[0.05em] text-cream leading-[1.05] will-change-transform"
             style={{
+              fontSize: "clamp(2.25rem, 8vw, 6rem)",
               transitionDelay: "200ms",
               textShadow:
                 "0.5px 0.5px 0 #a55300, 1px 1px 0 #864300, 2px 2px 5px rgba(245,130,13,0.3), 0 0 40px rgba(245,130,13,0.15)",
@@ -49,7 +51,7 @@ export function FinalCTA() {
           </h2>
 
           <p
-            className="reveal-on-scroll font-display mt-6 text-lg md:text-xl italic text-cream/70 tracking-wide"
+            className="reveal-on-scroll font-display mt-5 sm:mt-6 text-base sm:text-lg md:text-xl italic text-cream/70 tracking-wide"
             style={{ transitionDelay: "400ms" }}
           >
             Engineering protection. Designed in India.
@@ -61,31 +63,33 @@ export function FinalCTA() {
                 e.preventDefault();
                 if (email) setSubmitted(true);
               }}
-              className="reveal-on-scroll mx-auto mt-12 flex max-w-md flex-col gap-4 sm:flex-row items-stretch"
+              className="reveal-on-scroll mx-auto mt-8 sm:mt-12 flex max-w-md flex-col items-stretch gap-3 sm:flex-row sm:gap-4"
               style={{ transitionDelay: "600ms" }}
             >
-              <div className="flex-1 relative group">
+              <div className="relative flex-1 group">
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="w-full rounded-full border border-cream/20 bg-white/[0.03] px-8 py-4 text-sm text-cream placeholder:text-cream/30 outline-none focus:border-brown transition-all backdrop-blur-md shadow-inner"
+                  autoComplete="email"
+                  inputMode="email"
+                  className="w-full min-w-0 rounded-full border border-cream/20 bg-white/[0.03] px-6 sm:px-8 py-3.5 sm:py-4 text-sm text-cream placeholder:text-cream/30 outline-none focus:border-brown transition-all backdrop-blur-md shadow-inner"
                 />
               </div>
               <button
                 type="submit"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-br from-brown via-orange-glow to-brown-deep px-10 py-4 text-[9px] tracking-[0.3em] text-white transition-all duration-700 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(245,130,13,0.3)] light-sweep uppercase font-bold"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-br from-brown via-orange-glow to-brown-deep px-6 sm:px-10 py-3.5 sm:py-4 text-[9px] tracking-[0.25em] sm:tracking-[0.3em] text-white transition-all duration-700 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(245,130,13,0.3)] light-sweep uppercase font-bold"
               >
                 <span className="relative z-10">SECURE ACCESS</span>
               </button>
             </form>
           ) : (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="reveal-on-scroll mx-auto mt-12 max-w-md rounded-full border border-orange-glow/20 bg-orange-glow/5 px-8 py-4 text-sm tracking-[0.1em] text-cream/90 backdrop-blur-sm"
+              className="reveal-on-scroll mx-auto mt-8 sm:mt-12 max-w-md rounded-full border border-orange-glow/20 bg-orange-glow/5 px-6 sm:px-8 py-3.5 sm:py-4 text-[13px] sm:text-sm tracking-[0.1em] text-cream/90 backdrop-blur-sm"
             >
               You're on the list. Welcome to SOLIVA.
             </motion.div>
@@ -94,7 +98,7 @@ export function FinalCTA() {
 
         {/* Release dossier — editorial micro-anchor */}
         <div
-          className="reveal-on-scroll mx-auto mt-12 grid w-full max-w-3xl grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-8 border-t border-cream/5 pt-10 text-left"
+          className="reveal-on-scroll mx-auto mt-10 sm:mt-12 grid w-full max-w-3xl grid-cols-2 md:grid-cols-4 gap-y-5 gap-x-6 sm:gap-y-6 sm:gap-x-8 border-t border-cream/5 pt-8 sm:pt-10 text-left"
           style={{ transitionDelay: "700ms" }}
         >
           {[
@@ -114,10 +118,10 @@ export function FinalCTA() {
 
         {/* Footer Meta */}
         <div
-          className="reveal-on-scroll mt-14 flex flex-col items-center gap-10"
+          className="reveal-on-scroll mt-10 sm:mt-14 flex flex-col items-center gap-8 sm:gap-10"
           style={{ transitionDelay: "800ms" }}
         >
-          <div className="flex gap-10 text-[8px] tracking-[0.4em] font-light items-center uppercase text-cream/40">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 sm:gap-10 text-[8px] tracking-[0.3em] sm:tracking-[0.4em] font-light items-center uppercase text-cream/40">
             <span className="hover:text-cream transition-colors cursor-pointer">INSTAGRAM</span>
             <span className="opacity-20 text-xs">✦</span>
             <span className="hover:text-cream transition-colors cursor-pointer">JOURNAL</span>

@@ -22,10 +22,10 @@ function CategoryRoute() {
   if (isError) throw notFound();
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12 md:px-8 md:py-16 safe-x">
       <nav
         aria-label="Breadcrumb"
-        className="mb-6 flex items-center gap-1 text-xs text-muted-foreground"
+        className="mb-5 sm:mb-6 flex flex-wrap items-center gap-x-1 gap-y-0.5 text-xs text-muted-foreground"
       >
         <Link to="/" className="hover:text-foreground">
           Home
@@ -35,17 +35,17 @@ function CategoryRoute() {
           Categories
         </Link>
         <ChevronRight className="h-3 w-3" />
-        <span className="text-foreground">{category?.name ?? "…"}</span>
+        <span className="truncate max-w-[60vw] sm:max-w-none text-foreground">{category?.name ?? "…"}</span>
       </nav>
 
-      <header className="mb-10">
+      <header className="mb-8 sm:mb-10">
         {category ? (
           <>
-            <h1 className="font-display text-4xl text-foreground md:text-5xl">{category.name}</h1>
+            <h1 className="font-display text-3xl sm:text-4xl text-foreground md:text-5xl">{category.name}</h1>
             <p className="mt-2 max-w-xl text-sm text-muted-foreground">{category.description}</p>
           </>
         ) : (
-          <Skeleton className="h-12 w-64" />
+          <Skeleton className="h-10 sm:h-12 w-56 sm:w-64" />
         )}
       </header>
 

@@ -8,6 +8,7 @@ import { VideoSection } from "@/components/VideoSection";
 import { FinalCTA } from "@/components/FinalCTA";
 import { LoadingPage } from "@/components/LoadingPage";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -122,6 +123,7 @@ function Index() {
         <CollectionSection />
         <CompareSection />
         <FinalCTA />
+        <Footer />
       </main>
     </>
   );

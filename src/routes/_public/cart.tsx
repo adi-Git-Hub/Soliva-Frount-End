@@ -27,9 +27,9 @@ function CartRoute() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
-      <header className="mb-10">
-        <h1 className="font-display text-4xl text-foreground md:text-5xl">Cart</h1>
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12 md:px-8 md:py-16 safe-x">
+      <header className="mb-6 sm:mb-10">
+        <h1 className="font-display text-3xl sm:text-4xl text-foreground md:text-5xl">Cart</h1>
       </header>
 
       {lines.length === 0 ? (
@@ -46,7 +46,7 @@ function CartRoute() {
           }
         />
       ) : (
-        <div className="grid gap-10 md:grid-cols-[1fr_360px]">
+        <div className="grid gap-6 sm:gap-10 md:grid-cols-[1fr_360px]">
           <div>
             {lines.map((line) => (
               <CartLineItem key={line.productId} line={line} />

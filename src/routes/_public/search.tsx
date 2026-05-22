@@ -31,17 +31,18 @@ function SearchRoute() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
-      <header className="mb-10">
-        <h1 className="font-display text-4xl text-foreground md:text-5xl">Search</h1>
-        <form onSubmit={submit} className="mt-6 flex max-w-xl gap-2">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12 md:px-8 md:py-16 safe-x">
+      <header className="mb-8 sm:mb-10">
+        <h1 className="font-display text-3xl sm:text-4xl text-foreground md:text-5xl">Search</h1>
+        <form onSubmit={submit} className="mt-5 sm:mt-6 flex max-w-xl gap-2">
           <Input
             placeholder="Search products, categories…"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             autoFocus
+            className="h-11 min-w-0 flex-1"
           />
-          <Button type="submit">
+          <Button type="submit" className="h-11 px-4 shrink-0">
             <SearchIcon className="h-4 w-4" />
             <span className="sr-only md:not-sr-only md:ml-2">Search</span>
           </Button>

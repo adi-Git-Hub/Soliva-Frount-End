@@ -25,7 +25,7 @@ type Props = {
 export function SortMenu({ value, onChange }: Props) {
   return (
     <Select value={value} onValueChange={(v) => onChange(v as Sort)}>
-      <SelectTrigger className="w-[200px]">
+      <SelectTrigger className="h-11 w-full sm:w-[200px]">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

@@ -58,7 +58,7 @@ export function CollectionSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-luxury-beige pt-2 md:pt-3 pb-8 md:pb-10 z-20"
+      className="relative w-full overflow-hidden bg-luxury-beige pt-2 md:pt-3 pb-0 z-20"
     >
       {/* Background Decorative Elements (Global Consistency) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -67,20 +67,20 @@ export function CollectionSection() {
         <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
       </div>
 
-      <div className="relative mx-auto max-w-[90rem] px-6 md:px-12 z-10">
+      <div className="relative mx-auto max-w-[90rem] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 z-10">
         {/* Header Section */}
-        <div className="flex flex-col items-center text-center mb-6 md:mb-8 bg-white/10 border border-brown/5 rounded-[2.5rem] px-8 py-2 md:py-3 backdrop-blur-md shadow-sm">
+        <div className="flex flex-col items-center text-center mb-6 md:mb-8 bg-white/10 border border-brown/5 rounded-[1.75rem] sm:rounded-[2.5rem] px-5 sm:px-8 py-3 sm:py-2 md:py-3 backdrop-blur-md shadow-sm">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 mb-3"
+            className="flex items-center gap-3 sm:gap-4 mb-3"
           >
-            <div className="h-px w-8 bg-brown/20" />
-            <span className="text-[10px] tracking-[0.6em] text-orange-glow uppercase font-bold">
+            <div className="h-px w-6 sm:w-8 bg-brown/20" />
+            <span className="text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] text-orange-glow uppercase font-bold">
               PREVIEW COLLECTION
             </span>
-            <div className="h-px w-8 bg-brown/20" />
+            <div className="h-px w-6 sm:w-8 bg-brown/20" />
           </motion.div>
 
           <motion.h2
@@ -88,7 +88,7 @@ export function CollectionSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-display text-2xl md:text-[2.6rem] text-brown-deep leading-[1.1] tracking-tight whitespace-nowrap"
+            className="font-display text-[1.6rem] sm:text-2xl md:text-[2.6rem] text-brown-deep leading-[1.15] tracking-tight md:whitespace-nowrap"
           >
             Five editions.{" "}
             <span className="italic font-serif text-orange-glow drop-shadow-sm">One philosophy.</span>
@@ -114,7 +114,7 @@ export function CollectionSection() {
         </div>
 
         {/* Collection Cards Grid */}
-        <div className="flex overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-5 md:gap-4 md:overflow-visible md:pb-0 md:-mt-4 md:items-end">
+        <div className="flex overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0 md:-mt-4 md:items-end lg:grid-cols-4 xl:grid-cols-5">
           {products.map((p, i) => (
             <motion.article
               key={p.id}
@@ -203,12 +203,12 @@ export function CollectionSection() {
         </div>
 
         {/* Bottom CTA Text */}
-        <div className="mt-10 text-center">
+        <div className="mt-8 sm:mt-10 text-center">
           <motion.h4
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="font-display text-3xl md:text-4xl text-brown-deep leading-[1.1] tracking-tight"
+            className="font-display text-2xl sm:text-3xl md:text-4xl text-brown-deep leading-[1.15] tracking-tight"
           >
             Thoughtfully layered.
             <br />
@@ -218,42 +218,28 @@ export function CollectionSection() {
       </div>
 
       {/* Infinite Marquee Strip */}
-      <div className="mt-8 border-y border-brown/10 bg-white/20 backdrop-blur-md py-6 md:py-8 overflow-hidden relative [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <div className="flex whitespace-nowrap overflow-hidden">
+      <div className="relative mt-10 sm:mt-12 lg:mt-14 border-y border-brown/15 bg-white/25 backdrop-blur-md py-5 sm:py-7 lg:py-9 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-luxury-beige to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-luxury-beige to-transparent z-10 pointer-events-none" />
+
+        <div className="flex whitespace-nowrap items-center justify-center">
           <motion.div
             animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="flex gap-16 items-center pr-16"
+            transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+            className="flex gap-14 sm:gap-20 items-center pr-14 sm:pr-20"
           >
             {[...trustLines, ...trustLines].map((line, idx) => (
-              <div key={idx} className="flex items-center gap-16">
-                <span className="text-[11px] md:text-xs tracking-[0.4em] text-brown-deep font-bold uppercase">
+              <div key={idx} className="flex items-center gap-14 sm:gap-20">
+                <span className="text-xs sm:text-sm md:text-[15px] tracking-[0.3em] sm:tracking-[0.45em] text-brown-deep/80 uppercase font-black hover:text-orange-glow transition-colors duration-700 cursor-default">
                   {line}
                 </span>
-                <span className="text-orange-glow text-xl">✦</span>
+                <span className="text-orange-glow/70 text-xl sm:text-2xl font-serif leading-none">✦</span>
               </div>
             ))}
           </motion.div>
         </div>
       </div>
 
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `,
-        }}
-      />
     </section>
   );
 }
