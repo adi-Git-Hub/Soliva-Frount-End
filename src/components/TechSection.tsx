@@ -62,20 +62,20 @@ export function TechSection() {
         <div className="flex flex-col items-center text-center reveal-on-scroll mb-20">
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-8 bg-brown/20" />
-            <span className="text-[10px] tracking-[0.6em] text-orange-glow uppercase font-black">
+            <span className="text-micro-md tracking-editorial text-orange-glow uppercase font-black">
               FABRIC TECHNOLOGY
             </span>
             <div className="h-px w-8 bg-brown/20" />
           </div>
           
-          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-brown-deep leading-[1.05] tracking-tight">
+          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-brown-deep leading-hero tracking-tight">
             Engineered as a
             <br />
-            <span className="italic font-serif text-orange-glow drop-shadow-[0_2px_10px_rgba(245,130,13,0.2)]">single layer of relief.</span>
+            <span className="italic font-serif text-orange-glow drop-shadow-glow-soft">single layer of relief.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 items-center bg-white/10 border border-brown/10 rounded-[3rem] p-8 md:p-16 backdrop-blur-md shadow-[0_40px_100px_-40px_rgba(58,42,34,0.08),inset_0_0_60px_rgba(58,42,34,0.02)]">
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 items-center bg-surface-panel border border-line-soft rounded-panel-lg p-8 md:p-16 backdrop-blur-medium shadow-editorial">
           {/* 3D scarf object */}
           <div className="reveal-on-scroll relative flex items-center justify-center min-h-[400px] transform-gpu">
             <div className="absolute inset-0 flex items-center justify-center rotate-slow scale-110 opacity-60">
@@ -112,9 +112,9 @@ export function TechSection() {
                 transform: `translate3d(0, ${scrollY * -0.05}px, 0) rotateY(${scrollY * 0.05}deg)`,
               }}
             >
-              <div className="h-40 w-40 rounded-full bg-orange-glow/20 blur-[60px] animate-premium-pulse" />
+              <div className="h-40 w-40 rounded-full bg-accent-faint blur-[60px] animate-premium-pulse" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-28 w-28 rounded-full border border-orange-glow/30 bg-white/20 backdrop-blur-md shadow-[0_10px_30px_rgba(245,130,13,0.1)]" />
+                <div className="h-28 w-28 rounded-full border border-line-accent bg-surface-panel-strong backdrop-blur-medium shadow-glow-soft" />
               </div>
             </div>
 
@@ -149,23 +149,23 @@ export function TechSection() {
             {features.map((f, i) => (
               <div
                 key={f.tag}
-                className="reveal-on-scroll group flex gap-6 border-t border-brown/10 bg-transparent hover:bg-white/40 py-8 px-6 transition-all duration-500 rounded-2xl cursor-default"
+                className="reveal-on-scroll group flex gap-6 border-t border-line-soft bg-transparent hover:bg-surface-glass-strong py-8 px-6 transition-all duration-500 rounded-2xl cursor-default"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                <span className="font-mono text-[10px] text-orange-glow tracking-[0.2em] font-bold mt-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
+                <span className="font-mono text-micro-md text-orange-glow tracking-cta font-bold mt-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
                   {f.tag}
                 </span>
                 <div className="flex-1">
                   <h4 className="font-display text-2xl text-brown-deep group-hover:text-orange-glow transition-all duration-500 tracking-tight">
                     {f.title}
                   </h4>
-                  <p className="mt-2 text-sm text-brown/80 leading-relaxed font-light transition-colors">
+                  <p className="mt-2 text-sm text-ink-soft leading-relaxed font-light transition-colors">
                     {f.desc}
                   </p>
                 </div>
               </div>
             ))}
-            <div className="border-t border-brown/10 w-full" />
+            <div className="border-t border-line-soft w-full" />
           </div>
         </div>
       </div>

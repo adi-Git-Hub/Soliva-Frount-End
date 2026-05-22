@@ -60,7 +60,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-border/40">
-        <div className="mx-auto flex max-w-7xl flex-col items-start gap-2 px-4 py-5 text-[11px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:text-xs md:px-8 md:py-6 safe-bottom">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-2 px-4 py-5 text-micro-lg text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:text-xs md:px-8 md:py-6 safe-bottom">
           <span>© {new Date().getFullYear()} Soliva. All rights reserved.</span>
           <span>Made with care</span>
         </div>

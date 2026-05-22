@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ease, hover, tap } from "@/design-system";
 import {
   Search,
   ShoppingBag,
@@ -92,7 +93,7 @@ export function Header() {
     <motion.header
       initial={{ y: -20, opacity: 0, filter: "blur(10px)" }}
       animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.8, ease: ease.luxe }}
       className={cn(
         // Glassmorphism shell: frosted translucent surface, saturated backdrop,
         // hairline white inset highlight, soft warm border, atmospheric shadow.
@@ -101,10 +102,10 @@ export function Header() {
         "border-b backdrop-saturate-150",
         "before:pointer-events-none before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:via-white/5 before:to-transparent before:opacity-90",
         "after:pointer-events-none after:absolute after:inset-x-6 after:bottom-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-white/40 after:to-transparent",
-        "shadow-[0_8px_24px_-12px_rgba(58,42,34,0.18),inset_0_1px_0_rgba(255,255,255,0.45)]",
+        "shadow-card inset-shadow-line",
         isScrolled
-          ? "h-14 bg-luxury-beige/55 backdrop-blur-2xl border-white/30"
-          : "h-16 sm:h-20 bg-luxury-beige/35 backdrop-blur-xl border-white/20"
+          ? "h-14 bg-luxury-beige/55 backdrop-blur-strong border-white/30"
+          : "h-16 sm:h-20 bg-luxury-beige/35 backdrop-blur-medium border-white/20"
       )}
     >
       <div className="relative mx-auto flex h-full max-w-7xl items-center justify-between gap-2 px-3 sm:px-4 md:px-8">
@@ -116,9 +117,9 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[min(20rem,85vw)] bg-background/95 backdrop-blur-2xl">
+            <SheetContent side="left" className="w-[min(20rem,85vw)] bg-background/95 backdrop-blur-strong">
               <div className="mt-8 flex flex-col">
-                <p className="px-3 pb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground opacity-60">
+                <p className="px-3 pb-4 text-micro-md font-bold uppercase tracking-eyebrow text-muted-foreground opacity-60">
                   Navigation
                 </p>
                 <nav className="flex flex-col gap-1">
@@ -137,7 +138,7 @@ export function Header() {
 
                 <Separator className="my-6 opacity-40" />
 
-                <p className="px-3 pb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground opacity-60">
+                <p className="px-3 pb-4 text-micro-md font-bold uppercase tracking-eyebrow text-muted-foreground opacity-60">
                   Account
                 </p>
                 {session ? (
@@ -190,8 +191,8 @@ export function Header() {
 
         {/* Logo */}
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={hover.gentle}
+          transition={{ duration: 0.4, ease: ease.luxe }}
           className="flex-shrink-0"
         >
           <Link to="/" className="inline-flex items-center" aria-label="Soliva — home">
@@ -212,7 +213,7 @@ export function Header() {
             <Link
               key={l.to}
               to={l.to}
-              className="group relative text-[11px] font-bold uppercase tracking-[0.25em] text-foreground/60 transition-all duration-500 hover:text-foreground hover:-translate-y-0.5"
+              className="group relative text-micro-lg font-bold uppercase tracking-cta text-foreground/60 transition-all duration-500 hover:text-foreground hover:-translate-y-0.5"
               activeOptions={{ exact: l.to === "/" }}
               activeProps={{
                 className: "text-foreground",
@@ -223,7 +224,7 @@ export function Header() {
               <span className="absolute -bottom-1 left-0 h-[1.5px] w-0 bg-orange-glow transition-all duration-500 ease-out group-hover:w-full" />
               
               {l.to === "/cart" && cartCount > 0 && (
-                <span className="absolute -right-5 -top-1 inline-flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-orange-glow px-1 text-[8px] font-black text-white shadow-[0_0_10px_rgba(245,130,13,0.4)]">
+                <span className="absolute -right-5 -top-1 inline-flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-orange-glow px-1 text-micro-xs font-black text-white shadow-glow-soft">
                   {cartCount}
                 </span>
               )}
@@ -254,7 +255,7 @@ export function Header() {
                     onChange={(e) => setSearchQ(e.target.value)}
                     onBlur={() => !searchQ && setSearchOpen(false)}
                     placeholder="Search…"
-                    className="h-8 rounded-full border-border/40 bg-white/5 pr-8 text-xs focus:ring-0 transition-all"
+                    className="h-8 rounded-full border-border/40 bg-surface-glass-ghost pr-8 text-xs focus:ring-0 transition-all"
                   />
                   <button 
                     type="button" 
@@ -269,10 +270,10 @@ export function Header() {
 
             {!searchOpen && (
               <motion.button
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={hover.icon}
+                whileTap={tap}
                 onClick={() => setSearchOpen(true)}
-                className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-white/40 hover:backdrop-blur-md hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] hover:text-foreground transition-all"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 hover:bg-surface-glass-strong hover:backdrop-blur-medium hover:inset-shadow-line hover:text-foreground transition-all"
                 aria-label="Search"
               >
                 <Search className="h-[18px] w-[18px]" />
@@ -284,13 +285,13 @@ export function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full text-foreground/70 hover:bg-white/40 hover:backdrop-blur-md hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] hover:text-foreground transition-all"
+                whileHover={hover.icon}
+                whileTap={tap}
+                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full text-foreground/70 hover:bg-surface-glass-strong hover:backdrop-blur-medium hover:inset-shadow-line hover:text-foreground transition-all"
                 aria-label="Account"
               >
                 {session ? (
-                  <div className="h-5 w-5 rounded-full bg-orange-glow/10 border border-orange-glow/20 flex items-center justify-center text-[9px] font-black text-orange-glow uppercase shadow-sm">
+                  <div className="h-5 w-5 rounded-full bg-accent-ghost border border-line-accent flex items-center justify-center text-micro-sm font-black text-orange-glow uppercase shadow-sm">
                     {getUserInitials()}
                   </div>
                 ) : (
@@ -302,7 +303,7 @@ export function Header() {
               align="end"
               sideOffset={8}
               collisionPadding={12}
-              className="w-[min(18rem,calc(100vw-1.5rem))] rounded-[2rem] bg-background/95 backdrop-blur-2xl border-border/40 shadow-2xl p-3 overflow-hidden"
+              className="w-[min(18rem,calc(100vw-1.5rem))] rounded-panel-sm bg-background/95 backdrop-blur-strong border-border/40 shadow-2xl p-3 overflow-hidden"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(245,130,13,0.03),transparent_40%)] pointer-events-none" />
               
@@ -310,35 +311,35 @@ export function Header() {
                 <>
                   <DropdownMenuLabel className="px-4 py-4 mb-2">
                     <div className="flex flex-col gap-0.5">
-                      <span className="font-mono text-[8px] tracking-[0.2em] text-muted-foreground uppercase font-bold">Authenticated Member</span>
+                      <span className="font-mono text-micro-xs tracking-cta text-muted-foreground uppercase font-bold">Authenticated Member</span>
                       <div className="truncate font-display text-lg text-brown-deep italic">{session.user.name}</div>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator className="bg-brown/10 mb-2" />
                   
                   <div className="grid gap-1">
-                    <DropdownMenuItem asChild className="rounded-xl px-4 py-3 focus:bg-white/40 transition-all cursor-pointer group">
+                    <DropdownMenuItem asChild className="rounded-xl px-4 py-3 focus:bg-surface-glass-strong transition-all cursor-pointer group">
                       <Link to="/profile" className="flex items-center w-full">
-                        <User className="mr-3 h-4 w-4 text-brown/40 group-hover:text-orange-glow transition-colors" />
-                        <span className="font-mono text-[9px] tracking-widest uppercase font-bold text-brown/70 group-hover:text-brown-deep">My Profile</span>
+                        <User className="mr-3 h-4 w-4 text-ink-faint group-hover:text-orange-glow transition-colors" />
+                        <span className="font-mono text-micro-sm tracking-widest uppercase font-bold text-ink-soft group-hover:text-brown-deep">My Profile</span>
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-xl px-4 py-3 focus:bg-white/40 transition-all cursor-pointer group">
+                    <DropdownMenuItem asChild className="rounded-xl px-4 py-3 focus:bg-surface-glass-strong transition-all cursor-pointer group">
                       <Link to="/profile" className="flex items-center w-full">
-                        <Package className="mr-3 h-4 w-4 text-brown/40 group-hover:text-orange-glow transition-colors" />
-                        <span className="font-mono text-[9px] tracking-widest uppercase font-bold text-brown/70 group-hover:text-brown-deep">Orders</span>
+                        <Package className="mr-3 h-4 w-4 text-ink-faint group-hover:text-orange-glow transition-colors" />
+                        <span className="font-mono text-micro-sm tracking-widest uppercase font-bold text-ink-soft group-hover:text-brown-deep">Orders</span>
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-xl px-4 py-3 focus:bg-white/40 transition-all cursor-pointer group">
+                    <DropdownMenuItem asChild className="rounded-xl px-4 py-3 focus:bg-surface-glass-strong transition-all cursor-pointer group">
                       <Link to="/profile" className="flex items-center w-full">
-                        <Heart className="mr-3 h-4 w-4 text-brown/40 group-hover:text-orange-glow transition-colors" />
-                        <span className="font-mono text-[9px] tracking-widest uppercase font-bold text-brown/70 group-hover:text-brown-deep">Wishlist</span>
+                        <Heart className="mr-3 h-4 w-4 text-ink-faint group-hover:text-orange-glow transition-colors" />
+                        <span className="font-mono text-micro-sm tracking-widest uppercase font-bold text-ink-soft group-hover:text-brown-deep">Wishlist</span>
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="rounded-xl px-4 py-3 focus:bg-white/40 transition-all cursor-pointer group">
+                    <DropdownMenuItem asChild className="rounded-xl px-4 py-3 focus:bg-surface-glass-strong transition-all cursor-pointer group">
                       <Link to="/profile" className="flex items-center w-full">
-                        <Settings className="mr-3 h-4 w-4 text-brown/40 group-hover:text-orange-glow transition-colors" />
-                        <span className="font-mono text-[9px] tracking-widest uppercase font-bold text-brown/70 group-hover:text-brown-deep">Settings</span>
+                        <Settings className="mr-3 h-4 w-4 text-ink-faint group-hover:text-orange-glow transition-colors" />
+                        <span className="font-mono text-micro-sm tracking-widest uppercase font-bold text-ink-soft group-hover:text-brown-deep">Settings</span>
                       </Link>
                     </DropdownMenuItem>
                   </div>
@@ -346,12 +347,12 @@ export function Header() {
                   <DropdownMenuSeparator className="bg-brown/10 my-2" />
                   <DropdownMenuItem onSelect={() => logout.mutate()} className="rounded-xl px-4 py-3 focus:bg-red-500/5 transition-all cursor-pointer group text-red-500/60">
                     <LogOut className="mr-3 h-4 w-4 opacity-70 group-hover:opacity-100" />
-                    <span className="font-mono text-[9px] tracking-widest uppercase font-bold">Sign out</span>
+                    <span className="font-mono text-micro-sm tracking-widest uppercase font-bold">Sign out</span>
                   </DropdownMenuItem>
                 </>
               ) : (
                 <>
-                  <DropdownMenuLabel className="px-4 py-3 text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground opacity-60">
+                  <DropdownMenuLabel className="px-4 py-3 text-micro-md font-bold uppercase tracking-eyebrow text-muted-foreground opacity-60">
                     Account Access
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator className="bg-brown/10 mb-2" />
@@ -360,8 +361,8 @@ export function Header() {
                     return (
                       <DropdownMenuItem key={l.to} asChild className="rounded-xl px-4 py-3 focus:bg-accent transition-all cursor-pointer group">
                         <Link to={l.to} className="flex items-center w-full">
-                          <Icon className="mr-3 h-4 w-4 text-brown/40 group-hover:text-orange-glow transition-colors" />
-                          <span className="font-mono text-[9px] tracking-widest uppercase font-bold text-brown/70 group-hover:text-brown-deep">{l.label}</span>
+                          <Icon className="mr-3 h-4 w-4 text-ink-faint group-hover:text-orange-glow transition-colors" />
+                          <span className="font-mono text-micro-sm tracking-widest uppercase font-bold text-ink-soft group-hover:text-brown-deep">{l.label}</span>
                         </Link>
                       </DropdownMenuItem>
                     );
@@ -373,14 +374,14 @@ export function Header() {
 
           {/* Cart icon */}
           <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={hover.icon}
+            whileTap={tap}
           >
-            <Button variant="ghost" size="icon" asChild className="relative h-10 w-10 rounded-full hover:bg-white/40 hover:backdrop-blur-md hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]" aria-label="Cart">
+            <Button variant="ghost" size="icon" asChild className="relative h-10 w-10 rounded-full hover:bg-surface-glass-strong hover:backdrop-blur-medium hover:inset-shadow-line" aria-label="Cart">
               <Link to="/cart">
                 <ShoppingBag className="h-[18px] w-[18px] text-foreground/70" />
                 {cartCount > 0 && (
-                  <span className="absolute right-1.5 top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-orange-glow px-1 text-[8px] font-black text-white shadow-[0_0_10px_rgba(245,130,13,0.5)]">
+                  <span className="absolute right-1.5 top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-orange-glow px-1 text-micro-xs font-black text-white shadow-glow-soft">
                     {cartCount}
                   </span>
                 )}

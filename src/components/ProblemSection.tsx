@@ -85,7 +85,7 @@ export function ProblemSection() {
           <div className="relative flex justify-center md:justify-end order-2 md:order-1">
             <div
               ref={imageRef}
-              className="relative w-full max-w-[480px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-[0_40px_100px_-20px_rgba(58,42,34,0.15)] bg-cream will-change-transform border border-brown/10"
+              className="relative w-full max-w-[480px] aspect-[4/5] rounded-panel-lg overflow-hidden shadow-editorial bg-cream will-change-transform border border-line-soft"
             >
               <img
                 src="https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=2000&auto=format&fit=crop"
@@ -100,7 +100,7 @@ export function ProblemSection() {
 
           {/* RIGHT: Editorial typography content in a premium translucent panel */}
           <div
-            className="flex flex-col space-y-12 md:space-y-14 order-1 md:order-2 bg-white/10 border border-brown/5 rounded-[3rem] p-10 md:p-16 backdrop-blur-md shadow-sm relative overflow-hidden"
+            className="flex flex-col space-y-12 md:space-y-14 order-1 md:order-2 bg-surface-panel border border-line-hairline rounded-panel-lg p-10 md:p-16 backdrop-blur-medium shadow-sm relative overflow-hidden"
           >
             {/* Inner ambient glow for the text panel */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(245,130,13,0.02),transparent_40%),radial-gradient(circle_at_100%_100%,rgba(252,231,243,0.1),transparent_50%)] pointer-events-none" />
@@ -109,29 +109,29 @@ export function ProblemSection() {
               {/* Small uppercase label */}
               <div className="overflow-hidden flex items-center gap-4">
                 <span className="block h-px w-6 bg-brown/20" />
-                <span className="block font-mono text-[10px] tracking-[0.6em] text-orange-glow uppercase font-bold">
+                <span className="block font-mono text-micro-md tracking-editorial text-orange-glow uppercase font-bold">
                   STORYLINE 01 — THE CONTEXT
                 </span>
               </div>
 
               {/* Large serif headline */}
-              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-[5rem] leading-[1.05] text-brown-deep tracking-tight">
+              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-[5rem] leading-hero text-brown-deep tracking-tight">
                 The city is <br />
-                <span className="italic font-normal text-orange-glow opacity-90 drop-shadow-[0_2px_10px_rgba(245,130,13,0.1)]">designed</span> to <br />
+                <span className="italic font-normal text-orange-glow opacity-90 drop-shadow-glow-soft">designed</span> to <br />
                 test you.
               </h2>
 
               {/* Supporting paragraph */}
               <div className="space-y-8 max-w-lg">
-                <p className="font-light text-xl md:text-2xl text-brown/80 leading-relaxed">
+                <p className="font-light text-xl md:text-2xl text-ink-soft leading-relaxed">
                   Daily exposure to pollution, UV radiation, and trapped heat affects urban comfort
                   more than we realize.
                 </p>
               </div>
 
               {/* Bottom faded statement */}
-              <div className="pt-10 md:pt-12 border-t border-brown/10">
-                <p className="font-mono text-[11px] tracking-[0.25em] uppercase text-brown/40 italic leading-loose max-w-md font-bold">
+              <div className="pt-10 md:pt-12 border-t border-line-soft">
+                <p className="font-mono text-micro-lg tracking-cta uppercase text-ink-faint italic leading-loose max-w-md font-bold">
                   Traditional fabrics were never designed <br />
                   for modern urban conditions.
                 </p>

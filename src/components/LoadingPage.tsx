@@ -66,7 +66,7 @@ export function LoadingPage({ onComplete }: { onComplete: () => void }) {
         {/* Branding Reveal */}
         <div className="flex w-full flex-col items-center overflow-hidden">
           <h1
-            className={`font-display text-3xl sm:text-4xl md:text-5xl tracking-[0.45em] sm:tracking-[0.6em] text-[#3A2A1F] uppercase font-light mb-10 sm:mb-12 transition-all duration-[2500ms] ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
+            className={`font-display text-3xl sm:text-4xl md:text-5xl tracking-luxe sm:tracking-editorial text-[#3A2A1F] uppercase font-light mb-10 sm:mb-12 transition-all duration-[2500ms] ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
           >
             SOLIVA
           </h1>
@@ -74,7 +74,7 @@ export function LoadingPage({ onComplete }: { onComplete: () => void }) {
           <div
             className={`w-full max-w-[16rem] flex flex-col items-center transition-opacity duration-[2000ms] delay-500 ${mounted ? "opacity-100" : "opacity-0"}`}
           >
-            <div className="flex justify-between w-full text-[9px] tracking-[0.5em] text-[#3A2A1F]/30 uppercase font-light mb-4">
+            <div className="flex justify-between w-full text-micro-sm tracking-luxe text-[#3A2A1F]/30 uppercase font-light mb-4">
               <span>Initializing</span>
               <span>{Math.floor(progress)}%</span>
             </div>

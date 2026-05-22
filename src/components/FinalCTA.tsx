@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Particles } from "./Particles";
 import { SolivaLogo } from "./SolivaLogo";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { ease, viewportOnce } from "@/design-system";
 
 export function FinalCTA() {
   const [email, setEmail] = useState("");
@@ -27,9 +28,9 @@ export function FinalCTA() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 rounded-[2rem] sm:rounded-[3rem] border border-luxury-beige/10 bg-black/15 p-6 sm:p-9 lg:p-12 xl:p-16 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.4)]"
+          viewport={viewportOnce}
+          transition={{ duration: 1.2, ease: ease.luxe }}
+          className="relative z-10 rounded-panel-sm sm:rounded-panel-lg border border-luxury-beige/10 bg-black/15 p-6 sm:p-9 lg:p-12 xl:p-16 shadow-cinematic"
         >
           <div className="reveal-on-scroll mx-auto inline-flex text-cream/90">
             <SolivaLogo size={84} className="sm:hidden" />
@@ -37,9 +38,8 @@ export function FinalCTA() {
           </div>
 
           <h2
-            className="reveal-on-scroll font-display mt-6 sm:mt-8 tracking-[0.05em] text-cream leading-[1.05] will-change-transform"
+            className="reveal-on-scroll font-display mt-6 sm:mt-8 tracking-soft text-cream leading-hero will-change-transform text-display-mega"
             style={{
-              fontSize: "clamp(2.25rem, 8vw, 6rem)",
               transitionDelay: "200ms",
               textShadow:
                 "0.5px 0.5px 0 #a55300, 1px 1px 0 #864300, 2px 2px 5px rgba(245,130,13,0.3), 0 0 40px rgba(245,130,13,0.15)",
@@ -47,11 +47,11 @@ export function FinalCTA() {
           >
             PREMIERE
             <br />
-            <span className="italic font-serif">SOON</span>
+            <span className="italic">SOON</span>
           </h2>
 
           <p
-            className="reveal-on-scroll font-display mt-5 sm:mt-6 text-base sm:text-lg md:text-xl italic text-cream/70 tracking-wide"
+            className="reveal-on-scroll font-display mt-6 sm:mt-8 text-base sm:text-lg md:text-xl italic text-cream/70"
             style={{ transitionDelay: "400ms" }}
           >
             Engineering protection. Designed in India.
@@ -63,7 +63,7 @@ export function FinalCTA() {
                 e.preventDefault();
                 if (email) setSubmitted(true);
               }}
-              className="reveal-on-scroll mx-auto mt-8 sm:mt-12 flex max-w-md flex-col items-stretch gap-3 sm:flex-row sm:gap-4"
+              className="reveal-on-scroll mx-auto mt-10 sm:mt-14 flex max-w-md flex-col items-stretch gap-3 sm:flex-row sm:gap-4"
               style={{ transitionDelay: "600ms" }}
             >
               <div className="relative flex-1 group">
@@ -75,12 +75,12 @@ export function FinalCTA() {
                   placeholder="your@email.com"
                   autoComplete="email"
                   inputMode="email"
-                  className="w-full min-w-0 rounded-full border border-cream/20 bg-white/[0.03] px-6 sm:px-8 py-3.5 sm:py-4 text-sm text-cream placeholder:text-cream/30 outline-none focus:border-brown transition-all backdrop-blur-md shadow-inner"
+                  className="w-full min-w-0 rounded-full border border-cream/20 bg-white/[0.03] px-6 sm:px-8 py-3.5 sm:py-4 text-sm text-cream placeholder:text-cream/30 outline-none focus:border-brown transition-all backdrop-blur-medium shadow-inner"
                 />
               </div>
               <button
                 type="submit"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-br from-brown via-orange-glow to-brown-deep px-6 sm:px-10 py-3.5 sm:py-4 text-[9px] tracking-[0.25em] sm:tracking-[0.3em] text-white transition-all duration-700 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(245,130,13,0.3)] light-sweep uppercase font-bold"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-br from-brown via-orange-glow to-brown-deep px-6 sm:px-10 py-3.5 sm:py-4 text-micro-sm tracking-cta sm:tracking-eyebrow text-white transition-all duration-700 hover:scale-[1.02] hover:shadow-glow light-sweep uppercase font-bold"
               >
                 <span className="relative z-10">SECURE ACCESS</span>
               </button>
@@ -89,7 +89,7 @@ export function FinalCTA() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="reveal-on-scroll mx-auto mt-8 sm:mt-12 max-w-md rounded-full border border-orange-glow/20 bg-orange-glow/5 px-6 sm:px-8 py-3.5 sm:py-4 text-[13px] sm:text-sm tracking-[0.1em] text-cream/90 backdrop-blur-sm"
+              className="reveal-on-scroll mx-auto mt-10 sm:mt-14 max-w-md rounded-full border border-line-accent bg-accent-ghost px-6 sm:px-8 py-3.5 sm:py-4 text-body-xs sm:text-sm tracking-nav text-cream/90 backdrop-blur-subtle"
             >
               You're on the list. Welcome to SOLIVA.
             </motion.div>
@@ -108,7 +108,7 @@ export function FinalCTA() {
             { k: "Atelier", v: "Delhi · IN" },
           ].map((item) => (
             <div key={item.k} className="space-y-1">
-              <span className="block font-mono text-[7px] tracking-[0.6em] text-cream/25 uppercase">
+              <span className="block font-mono text-micro-xs tracking-editorial text-cream/25 uppercase">
                 {item.k}
               </span>
               <span className="block font-display text-sm text-cream/70 italic">{item.v}</span>
@@ -121,7 +121,7 @@ export function FinalCTA() {
           className="reveal-on-scroll mt-10 sm:mt-14 flex flex-col items-center gap-8 sm:gap-10"
           style={{ transitionDelay: "800ms" }}
         >
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 sm:gap-10 text-[8px] tracking-[0.3em] sm:tracking-[0.4em] font-light items-center uppercase text-cream/40">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 sm:gap-10 text-micro-xs tracking-eyebrow sm:tracking-luxe font-light items-center uppercase text-cream/40">
             <span className="hover:text-cream transition-colors cursor-pointer">INSTAGRAM</span>
             <span className="opacity-20 text-xs">✦</span>
             <span className="hover:text-cream transition-colors cursor-pointer">JOURNAL</span>
@@ -129,14 +129,10 @@ export function FinalCTA() {
             <span className="hover:text-cream transition-colors cursor-pointer">PRESS</span>
           </div>
           <div className="flex flex-col items-center gap-4">
-            <motion.div 
-              animate={{ opacity: [0.3, 0.6, 0.3] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="opacity-40"
-            >
+            <div className="opacity-40">
               <SolivaLogo size={40} />
-            </motion.div>
-            <div className="font-mono text-[8px] opacity-30 uppercase tracking-[0.2em]">
+            </div>
+            <div className="font-mono text-micro-xs opacity-30 uppercase tracking-cta">
               © 2026 SOLIVA SUNWRAP — DESIGNED IN INDIA
             </div>
           </div>

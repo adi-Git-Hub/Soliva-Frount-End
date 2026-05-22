@@ -24,7 +24,7 @@ function ProductRoute() {
   if (isLoading || !product) {
     return (
       <div className="mx-auto grid max-w-[90rem] gap-8 px-4 py-16 sm:gap-10 sm:px-6 sm:py-20 md:grid-cols-2 md:gap-12 md:px-12 md:py-32 safe-x">
-        <Skeleton className="aspect-[4/5] w-full rounded-2xl sm:rounded-[2.5rem] bg-cream/50" />
+        <Skeleton className="aspect-[4/5] w-full rounded-2xl sm:rounded-panel bg-cream/50" />
         <div className="space-y-5 sm:space-y-6">
           <Skeleton className="h-10 sm:h-12 w-2/3 bg-cream/50" />
           <Skeleton className="h-7 sm:h-8 w-32 bg-cream/50" />
@@ -64,7 +64,7 @@ function ProductRoute() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           aria-label="Breadcrumb"
-          className="mb-8 sm:mb-12 flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-brown/60 uppercase font-bold"
+          className="mb-8 sm:mb-12 flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-micro-md tracking-nav sm:tracking-cta text-ink-muted uppercase font-bold"
         >
           <Link to="/" className="hover:text-brown-deep transition-colors">
             Home
@@ -89,7 +89,7 @@ function ProductRoute() {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-4"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:rounded-[2.5rem] bg-cream/30 border border-brown/5 shadow-[0_40px_100px_-20px_rgba(58,42,34,0.1)] backdrop-blur-md">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:rounded-panel bg-cream/30 border border-line-hairline shadow-editorial backdrop-blur-medium">
               <img
                 src={product.images[0]}
                 alt={product.name}
@@ -100,7 +100,7 @@ function ProductRoute() {
             {product.images.length > 1 && (
               <div className="grid grid-cols-4 gap-3 sm:gap-4">
                 {product.images.slice(1).map((src, i) => (
-                  <div key={i} className="aspect-square overflow-hidden rounded-xl sm:rounded-2xl bg-cream/30 border border-brown/5 backdrop-blur-sm cursor-pointer hover:border-brown/20 transition-all duration-300">
+                  <div key={i} className="aspect-square overflow-hidden rounded-xl sm:rounded-2xl bg-cream/30 border border-line-hairline backdrop-blur-subtle cursor-pointer hover:border-line-strong transition-all duration-300">
                     <img src={src} alt="" loading="lazy" className="h-full w-full object-cover mix-blend-multiply opacity-80 hover:opacity-100 transition-opacity" />
                   </div>
                 ))}
@@ -113,18 +113,17 @@ function ProductRoute() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex h-fit flex-col space-y-8 sm:space-y-10 rounded-2xl sm:rounded-[2.5rem] md:rounded-[3rem] border border-brown/5 bg-white/10 p-6 sm:p-10 md:p-14 backdrop-blur-md shadow-sm"
+            className="flex h-fit flex-col space-y-8 sm:space-y-10 rounded-2xl sm:rounded-panel md:rounded-panel-lg border border-line-hairline bg-surface-panel p-6 sm:p-10 md:p-14 backdrop-blur-medium shadow-sm"
           >
             <header className="space-y-5 sm:space-y-6">
               <div className="flex items-center gap-3 sm:gap-4">
                 <span className="block h-px w-5 sm:w-6 bg-brown/20" />
-                <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] text-orange-glow uppercase font-bold">
+                <span className="font-mono text-micro-sm sm:text-micro-md tracking-luxe sm:tracking-editorial text-orange-glow uppercase font-bold">
                   EDITION 01
                 </span>
               </div>
               <h1
-                className="font-display text-brown-deep tracking-tight leading-[1.05]"
-                style={{ fontSize: "clamp(1.85rem, 7vw, 3.75rem)" }}
+                className="font-display text-brown-deep tracking-tight leading-hero text-display-lg"
               >
                 {product.name}
               </h1>
@@ -137,17 +136,17 @@ function ProductRoute() {
                   className="text-brown-deep font-display"
                 />
               </div>
-              {!product.inStock && <Badge variant="secondary" className="bg-brown/10 text-brown-deep font-mono tracking-widest text-[10px]">Out of stock</Badge>}
+              {!product.inStock && <Badge variant="secondary" className="bg-brown/10 text-brown-deep font-mono tracking-widest text-micro-md">Out of stock</Badge>}
             </header>
 
-            <p className="text-[15px] sm:text-base md:text-lg leading-relaxed text-brown/70 font-light italic">
+            <p className="text-body sm:text-base md:text-lg leading-relaxed text-ink-soft font-light italic">
               {product.description}
             </p>
 
             <div className="pt-2 sm:pt-4">
               <Button
                 size="lg"
-                className="w-full rounded-full py-5 sm:py-7 bg-brown-deep text-white hover:bg-brown hover:shadow-[0_10px_30px_rgba(58,42,34,0.3)] transition-all duration-500 font-bold uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[11px]"
+                className="w-full rounded-full py-5 sm:py-7 bg-brown-deep text-white hover:bg-brown hover:shadow-[0_10px_30px_rgba(58,42,34,0.3)] transition-all duration-500 font-bold uppercase tracking-cta sm:tracking-cta text-micro-lg"
                 onClick={onAdd}
                 disabled={!product.inStock}
               >
@@ -155,15 +154,15 @@ function ProductRoute() {
               </Button>
             </div>
 
-            <dl className="mt-2 sm:mt-4 grid grid-cols-2 gap-x-4 gap-y-5 sm:gap-y-6 border-t border-brown/10 pt-6 sm:pt-8 text-sm">
+            <dl className="mt-2 sm:mt-4 grid grid-cols-2 gap-x-4 gap-y-5 sm:gap-y-6 border-t border-line-soft pt-6 sm:pt-8 text-sm">
               <div className="space-y-1.5 sm:space-y-2">
-                <dt className="font-mono text-[10px] tracking-[0.25em] sm:tracking-[0.3em] text-brown/60 uppercase font-bold">Rating</dt>
+                <dt className="font-mono text-micro-md tracking-cta sm:tracking-eyebrow text-ink-muted uppercase font-bold">Rating</dt>
                 <dd className="font-display text-base sm:text-lg text-brown-deep italic">
-                  {product.rating.toFixed(1)} <span className="text-xs sm:text-sm font-sans not-italic text-brown/50">({product.reviewCount} reviews)</span>
+                  {product.rating.toFixed(1)} <span className="text-xs sm:text-sm font-sans not-italic text-ink-muted">({product.reviewCount} reviews)</span>
                 </dd>
               </div>
               <div className="space-y-1.5 sm:space-y-2">
-                <dt className="font-mono text-[10px] tracking-[0.25em] sm:tracking-[0.3em] text-brown/60 uppercase font-bold">Category</dt>
+                <dt className="font-mono text-micro-md tracking-cta sm:tracking-eyebrow text-ink-muted uppercase font-bold">Category</dt>
                 <dd className="font-display text-base sm:text-lg text-brown-deep italic capitalize">{product.categorySlug}</dd>
               </div>
             </dl>

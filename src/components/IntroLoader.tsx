@@ -32,7 +32,7 @@ export function IntroLoader({ onComplete }: { onComplete: () => void }) {
 
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-glow/20 blur-[120px]" />
+        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-faint blur-[120px]" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center px-6">
@@ -42,7 +42,7 @@ export function IntroLoader({ onComplete }: { onComplete: () => void }) {
         </div>
 
         <p
-          className="mt-2 text-xs tracking-[0.6em] text-cream/60 reveal-up uppercase font-light"
+          className="mt-2 text-xs tracking-editorial text-cream/60 reveal-up uppercase font-light"
           style={{ animationDelay: "0.6s" }}
         >
           SUNWRAP
@@ -50,7 +50,7 @@ export function IntroLoader({ onComplete }: { onComplete: () => void }) {
 
         <div className="mt-12 text-3d-float reveal-up" style={{ animationDelay: "1s" }}>
           <h2
-            className="font-display text-5xl md:text-7xl text-cream/95 tracking-[0.2em]"
+            className="font-display text-5xl md:text-7xl text-cream/95 tracking-cta"
             style={{
               textShadow:
                 "1px 1px 0 #c46300, 2px 2px 0 #a55300, 3px 3px 0 #864300, 4px 4px 0 #7a4900, 5px 5px 14px rgba(255,124,0,0.6), 0 0 50px rgba(255,124,0,0.5)",
@@ -68,7 +68,7 @@ export function IntroLoader({ onComplete }: { onComplete: () => void }) {
               style={{ width: `${progress}%`, transition: "width 0.1s linear" }}
             />
           </div>
-          <div className="mt-3 flex justify-between text-[10px] tracking-[0.4em] text-cream/50">
+          <div className="mt-3 flex justify-between text-micro-md tracking-luxe text-cream/50">
             <span>LOADING</span>
             <span>{Math.floor(progress)}%</span>
           </div>

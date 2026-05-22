@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { easeGsap, useIsMobile } from "@/design-system";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,6 +9,7 @@ export function VideoSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const textContentRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   // Lazy-load the 3.4 MB video. Only attach <source> once the section is
   // about to enter the viewport, so first-paint never waits for it.
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
@@ -44,6 +46,12 @@ export function VideoSection() {
   const loop = [...trustItems, ...trustItems];
 
   useEffect(() => {
+    // Skip the GSAP pin entirely on mobile — scroll-jacking a 50vh hold on a
+    // small screen interrupts the reading flow and competes with native
+    // momentum. Mobile gets the video at its natural full-bleed state without
+    // the cinematic scale-in.
+    if (isMobile) return;
+
     const ctx = gsap.context(() => {
       if (videoContainerRef.current) {
         // Light cinematic hold — pinned for ~80vh (vs the old 200vh trap) with
@@ -65,7 +73,7 @@ export function VideoSection() {
         // Video scale-in / border-radius / border / shadow easing — untouched.
         tl.fromTo(videoContainerRef.current,
           { scale: 0.65, borderRadius: "4rem", border: "2px solid rgba(245,130,13,0.3)", boxShadow: "0 40px 100px rgba(58,42,34,0.15)" },
-          { scale: 1, borderRadius: "0rem", border: "0px solid rgba(245,130,13,0)", boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 1, ease: "power2.inOut" }
+          { scale: 1, borderRadius: "0rem", border: "0px solid rgba(245,130,13,0)", boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 1, ease: easeGsap.power2InOut }
         );
 
         if (textContentRef.current) {
@@ -77,14 +85,14 @@ export function VideoSection() {
             scale: 0.93,
             filter: "blur(8px)",
             duration: 0.7,
-            ease: "power2.inOut"
+            ease: easeGsap.power2InOut
           }, 0);
         }
       }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <>
@@ -92,9 +100,9 @@ export function VideoSection() {
           above and VideoSection below (no hard borders), with bridge-strip
           pseudo-layers (warm drift + white light streak) sweeping across as
           glass shimmer. Glassmorphism via backdrop-blur. */}
-      <div className="bridge-strip relative z-0 w-full bg-gradient-to-b from-orange-glow/5 via-orange-glow/30 to-orange-glow/5 backdrop-blur-sm">
+      <div className="bridge-strip relative z-0 w-full bg-gradient-to-b from-orange-glow/5 via-orange-glow/30 to-orange-glow/5 backdrop-blur-subtle">
         <div className="relative z-10 flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 md:py-4">
-          <p className="font-display italic text-[13px] sm:text-sm md:text-base text-brown-deep tracking-[0.12em] sm:tracking-[0.18em] text-center">
+          <p className="font-display italic text-body-xs sm:text-sm md:text-base text-brown-deep tracking-nav sm:tracking-cta text-center">
             {"Built for Indian streets. Refined for modern living."
               .split(" ")
               .map((word, i, arr) => (
@@ -125,15 +133,14 @@ export function VideoSection() {
 
         <div
           ref={textContentRef}
-          className="absolute left-1/2 top-4 z-20 w-full max-w-3xl -translate-x-1/2 px-4 text-center pointer-events-none sm:top-8 sm:px-6 md:top-10"
+          className="absolute left-1/2 top-6 z-20 w-full max-w-3xl -translate-x-1/2 px-4 text-center pointer-events-none sm:top-8 sm:px-6 md:top-10"
         >
-          <div className="inline-block w-full rounded-[2rem] border border-brown/5 bg-white/10 p-5 backdrop-blur-md shadow-sm sm:rounded-[2.5rem] sm:p-8 md:rounded-[3rem] md:p-10">
-            <span className="mb-3 block text-[9px] font-bold uppercase tracking-[0.4em] text-orange-glow sm:mb-4 sm:text-[10px] sm:tracking-[0.6em]">— SYSTEM CORE 01</span>
+          <div className="inline-block w-full rounded-panel-sm border border-line-hairline bg-surface-panel p-5 backdrop-blur-medium shadow-sm sm:rounded-panel sm:p-8 md:rounded-panel-lg md:p-10">
+            <span className="mb-3 block text-micro-sm font-bold uppercase tracking-luxe text-orange-glow sm:mb-4 sm:text-micro-md sm:tracking-editorial">— SYSTEM CORE 01</span>
             <h2
-              className="text-sculpted mt-1 font-display text-brown-deep leading-[1.05] tracking-tight sm:mt-2"
-              style={{ fontSize: "clamp(1.6rem, 6.5vw, 4.5rem)" }}
+              className="text-sculpted mt-1 font-display text-brown-deep leading-hero tracking-tight sm:mt-2 text-display-md"
             >
-              Built For Real <span className="italic text-orange-glow drop-shadow-[0_2px_10px_rgba(245,130,13,0.1)]">Daily Protection.</span>
+              Built For Real <span className="italic text-orange-glow">Daily Protection.</span>
             </h2>
           </div>
         </div>
@@ -150,15 +157,15 @@ export function VideoSection() {
           >
             {shouldLoadVideo && <source src="/soliva-logo-anim.mp4" type="video/mp4" />}
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-brown-deep/20 via-transparent to-brown-deep/40 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brown-deep/15 via-transparent to-brown-deep/30 pointer-events-none" />
         </div>
 
-        <div className="absolute bottom-0 inset-x-0 z-30 border-t border-brown/10 bg-white/20 backdrop-blur-xl py-3 sm:py-4 overflow-hidden shadow-[0_-10px_40px_rgba(58,42,34,0.05)]">
+        <div className="absolute bottom-0 inset-x-0 z-30 border-t border-line-soft bg-surface-panel-strong backdrop-blur-medium py-3 sm:py-4 overflow-hidden shadow-strip-top">
           <div className="marquee flex w-max gap-10 sm:gap-16 whitespace-nowrap">
             {loop.map((t, i) => (
-              <span key={i} className="flex items-center gap-10 sm:gap-16 text-[8px] sm:text-[9px] tracking-[0.3em] sm:tracking-[0.4em] text-brown-deep/60 font-bold uppercase">
+              <span key={i} className="flex items-center gap-10 sm:gap-16 text-micro-xs sm:text-micro-sm tracking-eyebrow sm:tracking-luxe text-brown-deep/60 font-bold uppercase">
                 {t}
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-glow/40 animate-premium-pulse" />
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-soft" />
               </span>
             ))}
           </div>

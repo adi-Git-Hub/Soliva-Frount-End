@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { viewportOnce, viewportOnceEarly } from "@/design-system";
 
 const products = [
   {
@@ -69,15 +70,15 @@ export function CollectionSection() {
 
       <div className="relative mx-auto max-w-[90rem] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 z-10">
         {/* Header Section */}
-        <div className="flex flex-col items-center text-center mb-6 md:mb-8 bg-white/10 border border-brown/5 rounded-[1.75rem] sm:rounded-[2.5rem] px-5 sm:px-8 py-3 sm:py-2 md:py-3 backdrop-blur-md shadow-sm">
+        <div className="flex flex-col items-center text-center mb-6 md:mb-8 bg-surface-panel border border-line-hairline rounded-[1.75rem] sm:rounded-panel px-5 sm:px-8 py-3 sm:py-2 md:py-3 backdrop-blur-medium shadow-sm">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={viewportOnce}
             className="flex items-center gap-3 sm:gap-4 mb-3"
           >
             <div className="h-px w-6 sm:w-8 bg-brown/20" />
-            <span className="text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] text-orange-glow uppercase font-bold">
+            <span className="text-micro-sm sm:text-micro-md tracking-luxe sm:tracking-editorial text-orange-glow uppercase font-bold">
               PREVIEW COLLECTION
             </span>
             <div className="h-px w-6 sm:w-8 bg-brown/20" />
@@ -86,18 +87,18 @@ export function CollectionSection() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={viewportOnce}
             transition={{ delay: 0.1 }}
-            className="font-display text-[1.6rem] sm:text-2xl md:text-[2.6rem] text-brown-deep leading-[1.15] tracking-tight md:whitespace-nowrap"
+            className="font-display text-h4 md:text-h1 text-brown-deep leading-display-snug tracking-tight md:whitespace-nowrap"
           >
             Five editions.{" "}
-            <span className="italic font-serif text-orange-glow drop-shadow-sm">One philosophy.</span>
+            <span className="italic text-orange-glow">One philosophy.</span>
           </motion.h2>
 
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
+            viewport={viewportOnce}
             transition={{ delay: 0.3, duration: 0.8 }}
             className="mt-3 h-[2px] w-16 bg-gradient-to-r from-transparent via-brown/20 to-transparent"
           />
@@ -105,9 +106,9 @@ export function CollectionSection() {
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={viewportOnce}
             transition={{ delay: 0.4 }}
-            className="mt-3 max-w-md text-xs md:text-sm text-brown/60 leading-relaxed font-light italic"
+            className="mt-3 max-w-md text-xs md:text-sm text-ink-muted leading-relaxed font-light italic"
           >
             Protective essentials, engineered for everyday Indian conditions.
           </motion.p>
@@ -120,13 +121,13 @@ export function CollectionSection() {
               key={p.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={viewportOnceEarly}
               transition={{ delay: i * 0.1, duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="flex-none w-[85vw] snap-center px-3 md:w-full md:px-0 group cursor-default"
             >
               <div className="relative flex flex-col h-full">
                 {/* Image Container */}
-                <div className="relative aspect-[4/5.2] overflow-hidden rounded-[2.5rem] border border-brown/10 bg-white/30 backdrop-blur-md transition-all duration-700 group-hover:-translate-y-1 group-hover:shadow-[0_20px_50px_-15px_rgba(58,42,34,0.14)] group-hover:ring-1 group-hover:ring-orange-glow/15">
+                <div className="relative aspect-[4/5.2] overflow-hidden rounded-panel border border-line-soft bg-surface-glass backdrop-blur-medium transition-all duration-700 group-hover:-translate-y-1 group-hover:shadow-floating">
                   {/* Subtle Background Glow */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${p.tone} opacity-40 transition-opacity duration-700 group-hover:opacity-60`}
@@ -141,15 +142,15 @@ export function CollectionSection() {
                   />
 
                   {/* Cinematic Ground Shadow — grounds the product, removes floating-PNG feel */}
-                  <div className="absolute left-1/2 -translate-x-1/2 rounded-[50%] bg-brown-deep/30 blur-2xl pointer-events-none bottom-[14%] w-[52%] h-2.5" />
+                  <div className="absolute left-1/2 -translate-x-1/2 rounded-[50%] bg-brown-deep/30 blur-atmospheric pointer-events-none bottom-[14%] w-[52%] h-2.5" />
 
                   {/* Edition Badge */}
-                  <div className="absolute top-6 left-6 z-20 bg-white/40 border border-white/50 backdrop-blur-sm rounded-2xl p-2.5 shadow-sm">
+                  <div className="absolute top-6 left-6 z-20 bg-surface-glass-strong backdrop-blur-subtle rounded-2xl p-2.5 shadow-sm">
                     <div className="flex flex-col gap-0.5 items-center">
-                      <span className="font-mono text-[8px] tracking-[0.2em] text-brown-deep/60 uppercase font-bold">
+                      <span className="font-mono text-micro-xs tracking-cta text-brown-deep/60 uppercase font-bold">
                         EDITION
                       </span>
-                      <span className="font-mono text-sm tracking-tighter text-brown-deep font-black">
+                      <span className="font-mono text-sm tracking-tighter text-brown-deep font-bold">
                         {p.id}
                       </span>
                     </div>
@@ -160,7 +161,7 @@ export function CollectionSection() {
                     <motion.img
                       src={p.image}
                       alt={p.name}
-                      className="w-full h-full object-contain drop-shadow-[0_20px_40px_rgba(58,42,34,0.18)]"
+                      className="w-full h-full object-contain drop-shadow-floating"
                       initial={{ scale: 0.9, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
                       animate={{
@@ -178,10 +179,11 @@ export function CollectionSection() {
                     />
                   </div>
 
-                  {/* Glassmorphism Reveal Label */}
-                  <div className="absolute bottom-6 inset-x-6 z-20 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700">
-                    <div className="bg-white/60 backdrop-blur-xl border border-white/50 rounded-full py-2.5 px-4 text-center shadow-[0_10px_30px_rgba(58,42,34,0.1)]">
-                      <span className="text-[9px] tracking-[0.2em] text-brown-deep font-bold uppercase">
+                  {/* Glassmorphism Reveal Label — visible on mobile (no hover),
+                      hover-revealed on md+ */}
+                  <div className="absolute bottom-6 inset-x-6 z-20 opacity-100 translate-y-0 transition-all duration-700 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0">
+                    <div className="bg-surface-glass-strong backdrop-blur-medium rounded-full py-2.5 px-4 text-center shadow-card">
+                      <span className="text-micro-sm tracking-cta text-brown-deep font-bold uppercase">
                         Reveal on Launch
                       </span>
                     </div>
@@ -189,11 +191,11 @@ export function CollectionSection() {
                 </div>
 
                 {/* Content */}
-                <div className="mt-5 text-center md:text-left px-2 bg-white/10 border border-brown/5 rounded-2xl p-4 backdrop-blur-sm">
-                  <h3 className="font-display text-xl text-brown-deep tracking-tight mb-1.5 transition-colors duration-500 group-hover:text-orange-glow font-bold">
+                <div className="mt-5 text-center md:text-left px-2 bg-surface-panel border border-line-hairline rounded-2xl p-4 backdrop-blur-subtle">
+                  <h3 className="font-display text-xl text-brown-deep tracking-tight mb-1.5 font-medium">
                     {p.name}
                   </h3>
-                  <p className="text-[10.5px] leading-relaxed text-brown/70 font-medium tracking-wide line-clamp-2">
+                  <p className="text-micro-lg leading-relaxed text-ink-soft font-light line-clamp-2">
                     {p.desc}
                   </p>
                 </div>
@@ -203,22 +205,22 @@ export function CollectionSection() {
         </div>
 
         {/* Bottom CTA Text */}
-        <div className="mt-8 sm:mt-10 text-center">
+        <div className="mt-10 sm:mt-14 text-center">
           <motion.h4
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="font-display text-2xl sm:text-3xl md:text-4xl text-brown-deep leading-[1.15] tracking-tight"
+            viewport={viewportOnce}
+            className="font-display text-2xl sm:text-3xl md:text-4xl text-brown-deep leading-display-snug tracking-tight"
           >
             Thoughtfully layered.
             <br />
-            <span className="italic text-orange-glow drop-shadow-sm">Effortlessly worn.</span>
+            <span className="italic text-orange-glow">Effortlessly worn.</span>
           </motion.h4>
         </div>
       </div>
 
       {/* Infinite Marquee Strip */}
-      <div className="relative mt-10 sm:mt-12 lg:mt-14 border-y border-brown/15 bg-white/25 backdrop-blur-md py-5 sm:py-7 lg:py-9 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      <div className="relative mt-10 sm:mt-12 lg:mt-14 border-y border-line-medium bg-surface-glass backdrop-blur-medium py-5 sm:py-7 lg:py-9 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-luxury-beige to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-luxury-beige to-transparent z-10 pointer-events-none" />
 
@@ -230,7 +232,7 @@ export function CollectionSection() {
           >
             {[...trustLines, ...trustLines].map((line, idx) => (
               <div key={idx} className="flex items-center gap-14 sm:gap-20">
-                <span className="text-xs sm:text-sm md:text-[15px] tracking-[0.3em] sm:tracking-[0.45em] text-brown-deep/80 uppercase font-black hover:text-orange-glow transition-colors duration-700 cursor-default">
+                <span className="text-xs sm:text-sm md:text-body tracking-eyebrow sm:tracking-luxe text-brown-deep/80 uppercase font-bold hover:text-orange-glow transition-colors duration-700 cursor-default">
                   {line}
                 </span>
                 <span className="text-orange-glow/70 text-xl sm:text-2xl font-serif leading-none">✦</span>

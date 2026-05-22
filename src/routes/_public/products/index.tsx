@@ -56,17 +56,17 @@ function ProductsRoute() {
           >
             <div className="mb-3 sm:mb-4 flex items-center gap-3 sm:gap-4">
               <span className="block h-px w-5 sm:w-6 bg-brown/20" />
-              <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] text-orange-glow uppercase font-bold">
+              <span className="font-mono text-micro-sm sm:text-micro-md tracking-luxe sm:tracking-editorial text-orange-glow uppercase font-bold">
                 THE COLLECTION
               </span>
             </div>
             <h1
-              className="mb-3 sm:mb-4 font-display text-brown-deep tracking-tight leading-[1.05]"
+              className="mb-3 sm:mb-4 font-display text-brown-deep tracking-tight leading-hero"
               style={{ fontSize: "clamp(2.25rem, 9vw, 4.5rem)" }}
             >
               Shop all
             </h1>
-            <p className="text-[13px] sm:text-sm md:text-base text-brown/70 font-light italic">
+            <p className="text-body-xs sm:text-sm md:text-base text-ink-soft font-light italic">
               {products.length} {products.length === 1 ? "piece" : "pieces"} thoughtfully engineered for movement.
             </p>
           </motion.div>
@@ -85,7 +85,7 @@ function ProductsRoute() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="bg-white/10 border border-brown/5 rounded-2xl sm:rounded-[2rem] p-5 sm:p-6 backdrop-blur-md shadow-sm h-fit"
+            className="bg-surface-panel border border-line-hairline rounded-2xl sm:rounded-panel-sm p-5 sm:p-6 backdrop-blur-medium shadow-sm h-fit"
           >
             <FilterSidebar
               category={search.category}
@@ -102,7 +102,7 @@ function ProductsRoute() {
             transition={{ duration: 1, delay: 0.4 }}
           >
             {!isLoading && products.length === 0 ? (
-              <div className="bg-white/10 border border-brown/5 rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-10 backdrop-blur-md">
+              <div className="bg-surface-panel border border-line-hairline rounded-2xl sm:rounded-panel p-6 sm:p-10 backdrop-blur-medium">
                 <EmptyState
                   title="Nothing matches yet"
                   description="Try clearing a filter or browsing all categories."

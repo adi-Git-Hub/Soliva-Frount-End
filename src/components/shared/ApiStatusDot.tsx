@@ -31,7 +31,7 @@ function Inner() {
 
   return (
     <div
-      className="flex items-center gap-1.5 rounded-full border border-border/40 bg-card/60 px-2.5 py-1 text-[10px] text-muted-foreground"
+      className="flex items-center gap-1.5 rounded-full border border-border/40 bg-card/60 px-2.5 py-1 text-micro-md text-muted-foreground"
       title={label}
       aria-label={label}
     >

@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { SolivaLogo } from "./SolivaLogo";
+import { ease } from "@/design-system";
 
 export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,7 +27,7 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
           <motion.div
             initial={{ scale: 1.1, filter: "blur(20px)" }}
             animate={{ scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 2.5, ease: ease.luxe }}
             className="absolute inset-0 bg-top bg-no-repeat mix-blend-multiply opacity-80"
             style={{ scale: bgScale, backgroundImage: "url('/hero-image.jpg')", backgroundSize: "165% auto" }}
           />
@@ -56,17 +57,17 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.4, delay: 1.8 }}
-          className="hidden min-[1440px]:flex absolute left-10 lg:left-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-8 pointer-events-none bg-white/10 border border-brown/10 rounded-[2rem] p-8 backdrop-blur-md shadow-sm"
+          className="hidden min-[1440px]:flex absolute left-10 lg:left-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-8 pointer-events-none bg-surface-panel border border-line-soft rounded-panel-sm p-8 backdrop-blur-medium shadow-sm"
         >
           <div className="flex items-center gap-3">
             <span className="block h-px w-8 bg-brown/30" />
-            <span className="font-mono text-[8px] tracking-[0.45em] text-brown/60 uppercase font-bold">
+            <span className="font-mono text-micro-xs tracking-luxe text-ink-muted uppercase font-bold">
               Dossier 26.01
             </span>
           </div>
           <div className="space-y-6 max-w-[180px]">
             <div className="space-y-1">
-              <span className="block font-mono text-[7px] tracking-[0.5em] text-brown/50 uppercase">
+              <span className="block font-mono text-micro-xs tracking-luxe text-ink-muted uppercase">
                 Edition
               </span>
               <span className="block font-display text-base text-brown-deep italic">
@@ -74,24 +75,24 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
               </span>
             </div>
             <div className="space-y-1">
-              <span className="block font-mono text-[7px] tracking-[0.5em] text-brown/50 uppercase">
+              <span className="block font-mono text-micro-xs tracking-luxe text-ink-muted uppercase">
                 Origin
               </span>
-              <span className="block font-mono text-[10px] tracking-[0.2em] text-brown/80 font-medium">
+              <span className="block font-mono text-micro-md tracking-cta text-ink-soft font-medium">
                 Delhi · IN
               </span>
             </div>
             <div className="space-y-1">
-              <span className="block font-mono text-[7px] tracking-[0.5em] text-brown/50 uppercase">
+              <span className="block font-mono text-micro-xs tracking-luxe text-ink-muted uppercase">
                 Calibrated
               </span>
-              <span className="block font-mono text-[10px] tracking-[0.2em] text-brown/80 font-medium">
+              <span className="block font-mono text-micro-md tracking-cta text-ink-soft font-medium">
                 28.6°N · 77.2°E
               </span>
             </div>
             <div className="pt-2 flex items-center gap-2">
               <span className="block h-1.5 w-1.5 rounded-full bg-orange-glow animate-premium-pulse" />
-              <span className="font-mono text-[8px] tracking-[0.4em] text-brown/60 uppercase font-bold">
+              <span className="font-mono text-micro-xs tracking-luxe text-ink-muted uppercase font-bold">
                 In Atelier
               </span>
             </div>
@@ -103,44 +104,44 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.4, delay: 2 }}
-          className="hidden min-[1440px]:flex absolute right-10 lg:right-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-8 items-end pointer-events-none bg-white/10 border border-brown/10 rounded-[2rem] p-8 backdrop-blur-md shadow-sm"
+          className="hidden min-[1440px]:flex absolute right-10 lg:right-16 top-1/2 -translate-y-1/2 z-20 flex-col gap-8 items-end pointer-events-none bg-surface-panel border border-line-soft rounded-panel-sm p-8 backdrop-blur-medium shadow-sm"
         >
           <div className="flex items-center gap-3">
-            <span className="font-mono text-[8px] tracking-[0.45em] text-brown/60 uppercase font-bold">
+            <span className="font-mono text-micro-xs tracking-luxe text-ink-muted uppercase font-bold">
               Environ · Live
             </span>
             <span className="block h-px w-8 bg-brown/30" />
           </div>
           <div className="space-y-6 text-right max-w-[200px]">
             <div className="space-y-1">
-              <span className="block font-mono text-[7px] tracking-[0.5em] text-brown/50 uppercase">
+              <span className="block font-mono text-micro-xs tracking-luxe text-ink-muted uppercase">
                 UV Index
               </span>
               <div className="flex items-baseline justify-end gap-2">
                 <span className="font-display text-2xl text-brown-deep leading-none">09</span>
-                <span className="font-mono text-[8px] tracking-[0.3em] text-orange-glow uppercase font-bold">
+                <span className="font-mono text-micro-xs tracking-eyebrow text-orange-glow uppercase font-bold">
                   Extreme
                 </span>
               </div>
             </div>
             <div className="space-y-1">
-              <span className="block font-mono text-[7px] tracking-[0.5em] text-brown/50 uppercase">
+              <span className="block font-mono text-micro-xs tracking-luxe text-ink-muted uppercase">
                 Particulate
               </span>
-              <span className="block font-mono text-[10px] tracking-[0.2em] text-brown/80 font-medium">
+              <span className="block font-mono text-micro-md tracking-cta text-ink-soft font-medium">
                 142 μg/m³ · PM2.5
               </span>
             </div>
             <div className="space-y-1">
-              <span className="block font-mono text-[7px] tracking-[0.5em] text-brown/50 uppercase">
+              <span className="block font-mono text-micro-xs tracking-luxe text-ink-muted uppercase">
                 Ambient
               </span>
-              <span className="block font-mono text-[10px] tracking-[0.2em] text-brown/80 font-medium">
+              <span className="block font-mono text-micro-md tracking-cta text-ink-soft font-medium">
                 41°C · 18% RH
               </span>
             </div>
             <div className="pt-2 flex justify-end items-center gap-2">
-              <span className="font-mono text-[8px] tracking-[0.4em] text-brown/60 uppercase font-bold">
+              <span className="font-mono text-micro-xs tracking-luxe text-ink-muted uppercase font-bold">
                 Threshold
               </span>
               <span className="block h-px w-10 bg-gradient-to-r from-transparent via-orange-glow/40 to-orange-glow" />
@@ -156,57 +157,56 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 2, delay: 0.3, ease: ease.luxe }}
             className="flex w-full flex-col items-center"
           >
-            {/* Logo Mark */}
+            {/* Logo Mark — gentler float for a quieter cadence */}
             <motion.div
-              animate={{ y: [0, -12, 0] }}
+              animate={{ y: [0, -6, 0] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="mb-6 sm:mb-8"
+              className="mb-8 sm:mb-10"
             >
               <SolivaLogo height={56} className="sm:hidden" />
               <SolivaLogo height={80} className="hidden sm:inline-flex" />
             </motion.div>
 
-            {/* Pre-title editorial marker */}
+            {/* Pre-title editorial marker — bare hairlines + label, no pill */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.4, delay: 0.6 }}
-              className="mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4 bg-white/20 px-4 sm:px-6 py-2 rounded-full backdrop-blur-md border border-brown/10"
+              className="mb-8 sm:mb-12 flex items-center gap-4 sm:gap-6"
             >
-              <span className="block h-px w-5 sm:w-6 bg-brown/30" />
-              <span className="font-mono text-[7px] sm:text-[8px] tracking-[0.4em] sm:tracking-[0.6em] text-brown-deep uppercase font-bold">
+              <span className="block h-px w-10 sm:w-16 bg-brown/30" />
+              <span className="font-mono text-micro-xs sm:text-micro-md tracking-luxe sm:tracking-editorial text-brown-deep uppercase font-bold">
                 SS / 26 — Volume 01
               </span>
-              <span className="block h-px w-5 sm:w-6 bg-brown/30" />
+              <span className="block h-px w-10 sm:w-16 bg-brown/30" />
             </motion.div>
 
-            {/* Brand Title with Cinematic Reveal */}
-            <div className="mb-8 sm:mb-10 w-full overflow-hidden">
+            {/* Brand Title with Cinematic Reveal — single confident tracking */}
+            <div className="mb-10 sm:mb-14 w-full overflow-hidden">
               <motion.h1
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
-                transition={{ duration: 1.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display tracking-[0.18em] sm:tracking-[0.22em] lg:tracking-[0.28em] xl:tracking-[0.3em] uppercase font-light leading-none text-brown-deep drop-shadow-xl"
-                style={{ fontSize: "clamp(2.5rem, 11vw, 10rem)" }}
+                transition={{ duration: 1.8, delay: 0.8, ease: ease.luxe }}
+                className="font-display tracking-eyebrow uppercase font-light leading-none text-brown-deep drop-shadow-xl text-display-hero"
               >
                 SOLIVA
               </motion.h1>
             </div>
 
-            {/* Sub-title editorial counterweight */}
+            {/* Sub-title editorial counterweight — muted-tier label row */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.4, delay: 1.4 }}
-              className="mb-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:gap-x-6 font-mono text-[7px] sm:text-[8px] tracking-[0.3em] sm:tracking-[0.5em] text-brown/70 uppercase font-bold"
+              className="mb-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:gap-x-6 font-mono text-micro-xs sm:text-micro-xs tracking-eyebrow sm:tracking-luxe text-ink-muted uppercase font-bold"
             >
               <span>Sunwrap</span>
-              <span className="block h-1.5 w-1.5 rounded-full bg-orange-glow/60" />
+              <span className="block h-1.5 w-1.5 rounded-full bg-accent-soft" />
               <span>UPF 50+</span>
-              <span className="block h-1.5 w-1.5 rounded-full bg-orange-glow/60" />
+              <span className="block h-1.5 w-1.5 rounded-full bg-accent-soft" />
               <span>Engineered in India</span>
             </motion.div>
 
@@ -217,14 +217,14 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
               transition={{ duration: 2, delay: 1.6 }}
               className="space-y-8 sm:space-y-10"
             >
-              <p className="font-body text-[9px] sm:text-[10px] md:text-[11px] font-bold tracking-[0.8em] sm:tracking-[1.4em] text-orange-glow uppercase italic">
+              <p className="font-mono text-micro-md sm:text-micro-lg font-black tracking-editorial sm:tracking-runway text-orange-glow uppercase">
                 Coming Soon
               </p>
 
-              {/* Mission Statement */}
-              <div className="mx-auto max-w-2xl border-t border-brown/20 pt-8 sm:pt-10">
-                <p className="font-body text-[10px] sm:text-[11px] md:text-sm font-light tracking-[0.18em] sm:tracking-[0.25em] text-brown-deep leading-relaxed uppercase italic drop-shadow-sm">
-                  Redefining urban movement <br className="hidden md:block" /> through advanced
+              {/* Mission Statement — brand voice (Cormorant italic, mixed case) */}
+              <div className="mx-auto max-w-2xl border-t border-line-strong pt-8 sm:pt-10">
+                <p className="font-display text-lg sm:text-xl md:text-2xl font-light tracking-soft text-brown-deep leading-snug italic drop-shadow-sm">
+                  Redefining urban movement<br className="hidden md:block" /> through advanced
                   textile architecture.
                 </p>
               </div>
@@ -240,7 +240,7 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
             transition={{ duration: 1, delay: 2.2 }}
             className="hidden sm:flex flex-col gap-3"
           >
-            <span className="font-mono text-[8px] tracking-[0.4em] sm:tracking-[0.5em] text-brown/60 uppercase font-bold">
+            <span className="font-mono text-micro-xs tracking-luxe sm:tracking-luxe text-ink-muted uppercase font-bold">
               SYSTEM ARCHIVE // 26.01
             </span>
             <div className="w-16 h-[2px] bg-brown/20" />
@@ -250,9 +250,9 @@ export function Hero({ isRevealed = false }: { isRevealed?: boolean }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 2.2 }}
-            className="flex items-center gap-4 bg-white/10 px-4 py-2 sm:gap-6 sm:px-6 rounded-full backdrop-blur-sm border border-brown/5"
+            className="flex items-center gap-4 bg-surface-panel px-4 py-2 sm:gap-6 sm:px-6 rounded-full backdrop-blur-subtle border border-line-hairline"
           >
-            <span className="font-mono text-[7px] sm:text-[8px] tracking-[0.35em] sm:tracking-[0.5em] text-brown-deep uppercase font-bold">
+            <span className="font-mono text-micro-xs sm:text-micro-xs tracking-eyebrow sm:tracking-luxe text-brown-deep uppercase font-bold">
               SCROLL TO EXPLORE
             </span>
             <motion.div
